@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import NavBar from "../Shared/NavBar/NavBar";
 
 const RootLayout = () => {
   return (
-    <div>
-      <h1>This is the root</h1>
+    <div className="font-quickSand">
+      <NavBar></NavBar>
       <div>
         <Outlet></Outlet>
       </div>

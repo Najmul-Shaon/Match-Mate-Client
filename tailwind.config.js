@@ -6,7 +6,12 @@ export default {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        dancing_script: ["Dancing Script", "serif"],
+        quickSand: ["Quicksand", "serif"],
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };

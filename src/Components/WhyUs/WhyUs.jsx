@@ -1,13 +1,9 @@
 import Lottie from "lottie-react";
 import whyImg from "../../assets/whyUs.json";
-import SectionTitle from "../SectionTitle/SectionTitle";
 import NormalButton from "../Buttons/NormalButton";
 
 const WhyUs = () => {
   return (
-    // <div className="">
-
-    // </div>
     <div className="flex flex-col-reverse md:flex-row justify-center items-center max-w-screen-xl mx-auto px-4">
       <div className="w-full md:w-1/2 p-4 bg-white  rounded-lg sm:p-8">
         <h5 className="mb-4 text-3xl font-bold text-gray-500 dark:text-gray-400">

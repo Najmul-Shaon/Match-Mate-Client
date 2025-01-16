@@ -1,3 +1,4 @@
+import Commuinity from "../../../Components/Commuinity/Commuinity";
 import HowWorks from "../../../Components/HowWorks/HowWorks";
 import PremiumProfile from "../../../Components/Premium Profile/PremiumProfile";
 import SuccessStory from "../../../Components/SuccessStory/SuccessStory";
@@ -10,6 +11,7 @@ const Home = () => {
       <PremiumProfile></PremiumProfile>
       <HowWorks></HowWorks>
       <WhyUs></WhyUs>
+      <Commuinity></Commuinity>
       <SuccessStory></SuccessStory>
     </div>
   );

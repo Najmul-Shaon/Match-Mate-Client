@@ -1,6 +1,5 @@
 import Lottie from "lottie-react";
 import whyImg from "../../assets/whyUs.json";
-import NormalButton from "../Buttons/NormalButton";
 
 const WhyUs = () => {
   return (
@@ -67,7 +66,7 @@ const WhyUs = () => {
             </span>
           </li>
         </ul>
-        <NormalButton btnText={"Find Your Partner Now"}></NormalButton>
+        <button className="btn-normal">Find Your Partner Now</button>
       </div>
       {/* lottie aniation  */}
       <div className="md:w-1/2 w-full">

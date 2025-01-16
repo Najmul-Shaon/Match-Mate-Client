@@ -1,8 +1,9 @@
-import NormalButton from "../../Buttons/NormalButton";
+import { Link } from "react-router-dom";
+
 const PremiumCard = ({ cardInfo }) => {
   console.log(cardInfo);
   return (
-    <div className="card bg-primary shadow-xl rounded-md border-dashed border-2 flex flex-col">
+    <div className="card bg-primary shadow-xl rounded-md border-dashed border-2 flex flex-col items-center justify-center">
       <figure className=" py-3 px-2 flex justify-center">
         <img
           src={cardInfo?.ProfileImage}
@@ -16,7 +17,7 @@ const PremiumCard = ({ cardInfo }) => {
       <p className="text-base font-normal text-center mb-2 px-4">
         Biodata Id: {cardInfo?.BiodataId}
       </p>
-      <div className="flex justify-between gap-4 mt-2 px-4 grow">
+      <div className="flex justify-evenly gap-4 mt-2 px-4 grow">
         <div>
           <p className="text-sm">Gender: {cardInfo?.BiodataType}</p>
           <p className="text-sm">Age: {cardInfo?.Age}</p>
@@ -28,7 +29,9 @@ const PremiumCard = ({ cardInfo }) => {
       </div>
       {/* card action  */}
       <div className="flex items-center justify-center my-4">
-        <NormalButton btnText={"View Profile"}></NormalButton>
+        <Link to={`/biodata/${cardInfo?.BiodataId}`}>
+          <button className="btn-normal">View Profile</button>
+        </Link>
       </div>
     </div>
   );

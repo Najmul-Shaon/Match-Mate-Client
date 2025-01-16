@@ -1,4 +1,4 @@
-import NormalButton from "../Buttons/NormalButton";
+import { Link } from "react-router-dom";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import PremiumCard from "./PremiumCard/PremiumCard";
 
@@ -18,7 +18,9 @@ const PremiumProfile = () => {
         <PremiumCard></PremiumCard>
       </div>
       <div className="flex justify-center mt-12">
-        <NormalButton btnText={"View All"}></NormalButton>
+        <Link to="/biodatas">
+          <button className="btn-normal">View All</button>
+        </Link>
       </div>
     </div>
   );

@@ -1,20 +1,19 @@
 import { Rating } from "@smastrom/react-rating";
-import successImg1 from "../../assets/SuccessStory/1.jpg";
 import successImg2 from "../../assets/SuccessStory/2.jpg";
 import "@smastrom/react-rating/style.css";
 import { SiComma } from "react-icons/si";
 const SuccessStoryCard = () => {
   return (
     <div className="flex justify-center">
-      <div className="flex bg-primary shadow-xl p-8 rounded-xl border border-dashed w-[1000px] justify-center items-center gap-6">
-        <figure className="w-5/12">
+      <div className="flex flex-col md:flex-row bg-primary shadow-xl p-8 rounded-xl border border-dashed w-[1000px] justify-center items-center gap-6">
+        <figure className="w-full md:w-5/12">
           <img
             className="w-full h-full rounded-xl"
             src={successImg2}
             alt="Success image"
           />
         </figure>
-        <div className="w-7/12 text-center space-y-2">
+        <div className="w-full md:w-7/12 text-center space-y-2">
           <div className="flex">
             <SiComma className="rotate-180"></SiComma>
             <SiComma className="rotate-180"></SiComma>

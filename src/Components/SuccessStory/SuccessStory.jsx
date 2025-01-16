@@ -39,9 +39,12 @@ const SuccessStory = () => {
     ]
   );
   return (
-    <div>
+    <div className="px-4 mt-24">
       <div className="mb-8">
-        <SectionTitle header={"Our Success Story"}></SectionTitle>
+        <SectionTitle
+          header={"Our Success Story"}
+          subHeader={"Where Matches Blossom into Love"}
+        ></SectionTitle>
       </div>
       <div ref={sliderRef} className="keen-slider">
         <div className="keen-slider__slide number-slide1">

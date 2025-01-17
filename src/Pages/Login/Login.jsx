@@ -1,16 +1,34 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const { signIn, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    signIn(data?.email, data?.password).then((result) => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: '"Hello, 🎉 Great to see you again.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      reset();
+      navigate(from, { replace: true });
+    });
   };
 
   return (

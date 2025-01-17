@@ -87,26 +87,25 @@ const NavBar = () => {
               </button>
             </>
           ) : (
-            <>
+            <div className="space-x-2">
               <Link to="/login">
                 <button
                   type="button"
-                  className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  className="focus:outline-none text-white bg-accent hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-lg"
                 >
                   Login
                 </button>
               </Link>
-            </>
+              <Link to="/signup">
+                <button
+                  type="button"
+                  className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                >
+                  Sign Up
+                </button>
+              </Link>
+            </div>
           )}
-
-          <Link to="/signup">
-            <button
-              type="button"
-              className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-            >
-              Sign Up
-            </button>
-          </Link>
 
           <button
             data-collapse-toggle="navbar-sticky"

@@ -4,6 +4,8 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Biodatas from "../Pages/Biodatas/Biodatas";
 import BiodataDetails from "../Pages/Biodatas/BiodataDetails";
+import Login from "../Pages/Login/Login";
+import Signup from "../Pages/Signup/Signup";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +23,14 @@ const Router = createBrowserRouter([
       {
         path: "/biodata/:id",
         element: <BiodataDetails></BiodataDetails>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <Signup></Signup>,
       },
     ],
   },

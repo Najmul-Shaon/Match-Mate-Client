@@ -1,7 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_without_bg.png";
+import useAuth from "../../Hooks/useAuth";
 
 const NavBar = () => {
+  const { user } = useAuth();
+
   const navLinks = (
     <>
       <li>
@@ -67,13 +70,34 @@ const NavBar = () => {
           >
             Get started
           </button> */}
+          {user ? (
+            <>
+              <button
+                type="button"
+                className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                >
+                  Login
+                </button>
+              </Link>
+            </>
+          )}
 
-          <Link to="/login">
+          <Link to="/signup">
             <button
               type="button"
               className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
-              Login
+              Sign Up
             </button>
           </Link>
 

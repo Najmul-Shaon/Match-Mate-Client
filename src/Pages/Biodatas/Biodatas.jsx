@@ -15,7 +15,6 @@ const Biodatas = () => {
     },
   });
 
-  // console.log(biodatas);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-24">

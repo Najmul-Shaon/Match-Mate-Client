@@ -1,16 +1,182 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+
+const imageHostingKey = import.meta.env.VITE_IMGBB_KEY;
+const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const Signup = () => {
+  const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const imgFile = { image: data.file[0] };
+    // create user
+    createUser(data.email, data.password)
+      //   if user dosent exits with this mail then
+      .then(async (createUserResponse) => {
+        const user = createUserResponse.user;
+        //   image send to imgbb server
+        const res = await axiosPublic.post(imageHostingApi, imgFile, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        const userInfo = {
+          userName: data?.name,
+          userEmail: data?.email,
+          userPhoto: res?.data?.data?.display_url,
+          userRole: "user",
+        };
+        //   if image uploaded to the imgBb
+        if (res.data.success) {
+          updateUserProfile(data?.name, res?.data?.data?.display_url)
+            .then(() => {
+              axiosPublic
+                .post("/user", userInfo)
+                .then((userPostRes) => {
+                  if (userPostRes.data.insertedId) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Welcome to Match Mate!!",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    reset();
+                    navigate("/");
+                  }
+                })
+                .catch((err) => {
+                  toast.error("Error occured!", {
+                    style: {
+                      border: "1px solid #713200",
+                      padding: "16px",
+                      color: "#713200",
+                    },
+                    iconTheme: {
+                      error: "#f5f2f2",
+                      secondary: "#FFFAEE",
+                    },
+                  });
+                });
+            })
+            .catch((err) => {
+              toast.error("Error occured!", {
+                style: {
+                  border: "1px solid #713200",
+                  padding: "16px",
+                  color: "#713200",
+                },
+                iconTheme: {
+                  error: "#f5f2f2",
+                  secondary: "#FFFAEE",
+                },
+              });
+            });
+        }
+
+      })
+      // .if user exits with this mail then
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            toast.error("Already have an account with this email", {
+              style: {
+                border: "1px solid #713200",
+                padding: "16px",
+                color: "#713200",
+              },
+              iconTheme: {
+                error: "#f5f2f2",
+                secondary: "#FFFAEE",
+              },
+            });
+            break;
+          case "auth/invalid-email":
+            toast.error("The email address is invalid", {
+              style: {
+                border: "1px solid #713200",
+                padding: "16px",
+                color: "#713200",
+              },
+              iconTheme: {
+                error: "#f5f2f2",
+                secondary: "#FFFAEE",
+              },
+            });
+            break;
+          case "auth/weak-password":
+            toast.error(
+              "The password is too weak. Please use at least 6 characters",
+              {
+                style: {
+                  border: "1px solid #713200",
+                  padding: "16px",
+                  color: "#713200",
+                },
+                iconTheme: {
+                  error: "#f5f2f2",
+                  secondary: "#FFFAEE",
+                },
+              }
+            );
+            break;
+          case "auth/operation-not-allowed":
+            toast.error(
+              "Sign-up is currently disabled. Please contact support",
+              {
+                style: {
+                  border: "1px solid #713200",
+                  padding: "16px",
+                  color: "#713200",
+                },
+                iconTheme: {
+                  error: "#f5f2f2",
+                  secondary: "#FFFAEE",
+                },
+              }
+            );
+          case "auth/too-many-requests":
+            toast.error("Too many requests. Please try again later", {
+              style: {
+                border: "1px solid #713200",
+                padding: "16px",
+                color: "#713200",
+              },
+              iconTheme: {
+                error: "#f5f2f2",
+                secondary: "#FFFAEE",
+              },
+            });
+            break;
+          default:
+            toast.error("An unknown error occurred. Please try again", {
+              style: {
+                border: "1px solid #713200",
+                padding: "16px",
+                color: "#713200",
+              },
+              iconTheme: {
+                error: "#f5f2f2",
+                secondary: "#FFFAEE",
+              },
+            });
+        }
+      });
+  };
   return (
     <div className="dark:bg-gray-900 mt-20">
       <Helmet>
@@ -37,7 +203,7 @@ const Signup = () => {
                   name="name"
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Your name--"
+                  placeholder="Your name"
                   {...register("name", { required: "Name is required" })}
                 />
                 {errors.name && (
@@ -67,7 +233,7 @@ const Signup = () => {
                   Choose your photo
                 </label>
                 <input
-                  class="block w-full mb-2 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  className="block w-full mb-2 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   id="small_size"
                   type="file"
                   {...register("file", {
@@ -140,7 +306,7 @@ const Signup = () => {
               >
                 <svg
                   className="w-4 h-4 me-2"
-                  ariaHidden="true"
+                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 18 19"
@@ -148,7 +314,7 @@ const Signup = () => {
                   <path
                     fillRule="evenodd"
                     d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
                 Sign in with Google

@@ -24,7 +24,7 @@ const RootLayout = () => {
         }}
       />
       <NavBar></NavBar>
-      <div>
+      <div className="min-h-[calc(100vh-340px)]">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>

@@ -1,28 +1,25 @@
 import { Parallax } from "react-parallax";
-import coverImg from "../../assets/BidataCover.jpg";
+// import coverImg from "../../assets/BidataCover.jpg";
 
-const Cover = () => {
+const Cover = ({ coverImg, coverTitle }) => {
   return (
     <Parallax
-      blur={{ min: -100, max: 100 }}
+      blur={{ min: -15, max: 15 }}
       bgImage={coverImg}
       bgImageAlt="parallax background"
       strength={-200}
     >
-      <div className="relative h-[400px] flex items-center justify-center bg-black bg-opacity-10">
+      <div className="relative h-[350px] flex items-center justify-center bg-black bg-opacity-10">
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         {/* Content */}
         <div className="relative z-10 text-white text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold uppercase">
-              This is ther title
-            </h1>
-            <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+          <div className="max-w-lg">
+            <h1 className="mb-5 text-5xl font-bold uppercase">{coverTitle}</h1>
+            {/* <p>
+              Unveiling Username : A Life of Integrity, Ambitions, and Heartfelt
+              Connections
+            </p> */}
           </div>
         </div>
       </div>

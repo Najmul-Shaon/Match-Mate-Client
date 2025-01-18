@@ -2,7 +2,7 @@ import { Puff } from "react-loader-spinner";
 
 const LoadingSpinner = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center h-[400px]">
       <Puff
         visible={true}
         height="80"

@@ -3,6 +3,8 @@ import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
+import coverImg from "../../assets/BidataCover.jpg";
+import Cover from "../../Shared/Cover/Cover";
 
 const Biodatas = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,13 +17,12 @@ const Biodatas = () => {
     },
   });
 
-
   return (
-    <div className="max-w-screen-xl mx-auto px-4 mt-24">
+    <div className="max-w-screen-xl mx-auto px-4">
       <Helmet>
         <title>Match Mate || Biodatas</title>
       </Helmet>
-      {/* <Cover></Cover> */}
+      <Cover coverImg={coverImg} coverTitle={"Discover Profiles"}></Cover>
       <div className="mt-20 text-center">
         <SectionTitle header={"Explore Genuine Connections"}></SectionTitle>
       </div>

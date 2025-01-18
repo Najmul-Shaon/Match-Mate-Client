@@ -9,7 +9,7 @@ const Cover = ({ coverImg, coverTitle }) => {
       bgImageAlt="parallax background"
       strength={-200}
     >
-      <div className="relative h-[350px] flex items-center justify-center bg-black bg-opacity-10">
+      <div className="relative h-[300px] flex items-center justify-center bg-black bg-opacity-10">
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         {/* Content */}

@@ -1,6 +1,7 @@
 import { CiStar } from "react-icons/ci";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
+import { Link } from "react-router-dom";
 
 const BiodataDetails = () => {
   return (
@@ -60,7 +61,9 @@ const BiodataDetails = () => {
                 <CiStar></CiStar>
               </span>
             </button>
-            <button className="btn-normal">Request for Contact</button>
+            <Link to="/checkout/:1">
+              <button className="btn-normal">Request for Contact</button>
+            </Link>
           </div>
         </div>
         {/* details informations table  */}

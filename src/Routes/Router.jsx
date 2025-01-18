@@ -7,6 +7,7 @@ import BiodataDetails from "../Pages/Biodatas/BiodataDetails";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
+import CheckOut from "../Pages/CheckOut/CheckOut";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,14 @@ const Router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoute>
+            <CheckOut></CheckOut>
+          </PrivateRoute>
+        ),
       },
     ],
   },

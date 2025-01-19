@@ -29,7 +29,7 @@ const BiodataCreateEdit = () => {
         <h3 className="text-center mb-8 text-xl font-bold text-accent border-b">
           Personal Info
         </h3>
-        <div className="flex flex-col md:flex-row justify-between gap-6">
+        <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-4 lg:gap-6">
           {/* name field  */}
           <div className="w-full md:w-1/2">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -69,9 +69,9 @@ const BiodataCreateEdit = () => {
           </div>
         </div>
         {/* ************************************  */}
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid grid-cols-5 gap-3 md:gap-4 lg:gap-6">
           {/* number field  */}
-          <div className="col-span-2">
+          <div className="col-span-5 md:col-span-5 lg:col-span-2">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Phone Number
             </label>
@@ -90,7 +90,7 @@ const BiodataCreateEdit = () => {
             )}
           </div>
           {/* gender field  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Gender
             </label>
@@ -106,7 +106,7 @@ const BiodataCreateEdit = () => {
             </select>
           </div>
           {/* date of birth  */}
-          <div className="">
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Date of Birth
             </label>
@@ -120,7 +120,7 @@ const BiodataCreateEdit = () => {
             />
           </div>
           {/* age field  */}
-          <div className="">
+          <div className="col-span-1 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Age
             </label>
@@ -139,9 +139,9 @@ const BiodataCreateEdit = () => {
         </div>
         {/* ************************************  */}
         {/* ************************************  */}
-        <div className="grid grid-cols-6 gap-6">
+        <div className="grid grid-cols-6 gap-3 md:gap-4 lg:gap-6">
           {/* height field */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Height
             </label>
@@ -171,7 +171,7 @@ const BiodataCreateEdit = () => {
             </div>
           </div>
           {/* weight field  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Weight
             </label>
@@ -188,7 +188,7 @@ const BiodataCreateEdit = () => {
             )}
           </div>
           {/* occupation field  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Occupation
             </label>
@@ -204,7 +204,7 @@ const BiodataCreateEdit = () => {
             </select>
           </div>
           {/* race field  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Race
             </label>
@@ -222,7 +222,7 @@ const BiodataCreateEdit = () => {
             </select>
           </div>
           {/* blood group  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Blood Group
             </label>
@@ -243,7 +243,7 @@ const BiodataCreateEdit = () => {
             </select>
           </div>
           {/* nationality filed  */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Nationality
             </label>
@@ -280,9 +280,11 @@ const BiodataCreateEdit = () => {
           )}
         </div>
         {/* **********actions area ********** */}
-        <button type="submit" className="btn-normal w-full text-lg">
-          Save and Publish
-        </button>
+        <div className="flex flex-col items-center">
+          <button type="submit" className="btn-normal text-lg">
+            Save and Publish
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -9,6 +9,7 @@ const BiodataDetails = () => {
       <div className="grid grid-cols-1 md:grid-cols-9 gap-6">
         {/* profile card  */}
         <div className="p-4 bg-primary text-black rounded-lg shadow-lg col-span-3 border border-accent self-start">
+          {/* personal info  */}
           <div className="flex flex-col items-center">
             {/* Profile Image */}
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4">
@@ -21,6 +22,18 @@ const BiodataDetails = () => {
 
             {/* Details */}
             <div className="w-full">
+              {/* action area  */}
+              <div className="flex flex-col lg:flex-row justify-center my-4 gap-4">
+                <button className="btn-normal mx-auto flex items-center gap-2">
+                  Whislist{" "}
+                  <span className="text-2xl font-bold">
+                    <CiStar></CiStar>
+                  </span>
+                </button>
+                <Link to="/checkout/:1">
+                  <button className="btn-normal">Request for Contact</button>
+                </Link>
+              </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Biodata Type</span>
                 <span>Female</span>
@@ -42,9 +55,14 @@ const BiodataDetails = () => {
                 <span>47 KG</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
+                <span>Religion</span>
+                <span>Islam</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-accent">
                 <span>Occupation</span>
                 <span>Student</span>
               </div>
+
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Blood Group</span>
                 <span>A+</span>
@@ -54,17 +72,6 @@ const BiodataDetails = () => {
                 <span>Bangladeshi</span>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col lg:flex-row justify-center my-4 gap-4">
-            <button className="btn-normal mx-auto flex items-center gap-2">
-              Whislist{" "}
-              <span className="text-2xl font-bold">
-                <CiStar></CiStar>
-              </span>
-            </button>
-            <Link to="/checkout/:1">
-              <button className="btn-normal">Request for Contact</button>
-            </Link>
           </div>
         </div>
         {/* details informations table  */}

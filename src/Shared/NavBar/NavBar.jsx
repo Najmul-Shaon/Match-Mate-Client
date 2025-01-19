@@ -1,15 +1,53 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_without_bg.png";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import useLogout from "../../Hooks/useLogout";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
+  const handleLogout = useLogout();
 
-  const handleLogout = () => {
-    logOut()
-      .then(() => {})
-      .catch((err) => {});
-  };
+  console.log(handleLogout);
+  // const handleLogout = () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You will be logged out of your account.",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, log out!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       logOut()
+  //         .then(() => {
+  //           Swal.fire({
+  //             position: "center",
+  //             icon: "success",
+  //             title: "You have been successfully logged out.",
+  //             showConfirmButton: false,
+  //             timer: 1500,
+  //           });
+  //         })
+  //         .catch(() => {
+  //           Swal.fire({
+  //             position: "center",
+  //             icon: "error",
+  //             title: "Something went wrong. Please try again.",
+  //             showConfirmButton: false,
+  //             timer: 1500,
+  //           });
+  //         });
+  //     }
+  //   });
+
+  //   // logOut()
+  //   //   .then((res) => {
+  //   //     console.log(res);
+  //   //   })
+  //   //   .catch((err) => {});
+  // };
 
   const navLinks = (
     <>
@@ -46,14 +84,16 @@ const NavBar = () => {
           Contact Us
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className="block text-lg font-bold py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard"
+            className="block text-lg font-bold py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
 

@@ -8,7 +8,7 @@ import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import CheckOut from "../Pages/CheckOut/CheckOut";
-import Dashboard from "../Dashboard/Dashboard/Dashboard";
+import Dashboard from "../Layouts/Dashboard";
 const Router = createBrowserRouter([
   {
     path: "/",

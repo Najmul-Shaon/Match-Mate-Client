@@ -1,61 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_without_bg.png";
 import useAuth from "../../Hooks/useAuth";
-import Swal from "sweetalert2";
 import useLogout from "../../Hooks/useLogout";
 
 const NavBar = () => {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
   const handleLogout = useLogout();
-
-  console.log(handleLogout);
-  // const handleLogout = () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You will be logged out of your account.",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, log out!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       logOut()
-  //         .then(() => {
-  //           Swal.fire({
-  //             position: "center",
-  //             icon: "success",
-  //             title: "You have been successfully logged out.",
-  //             showConfirmButton: false,
-  //             timer: 1500,
-  //           });
-  //         })
-  //         .catch(() => {
-  //           Swal.fire({
-  //             position: "center",
-  //             icon: "error",
-  //             title: "Something went wrong. Please try again.",
-  //             showConfirmButton: false,
-  //             timer: 1500,
-  //           });
-  //         });
-  //     }
-  //   });
-
-  //   // logOut()
-  //   //   .then((res) => {
-  //   //     console.log(res);
-  //   //   })
-  //   //   .catch((err) => {});
-  // };
 
   const navLinks = (
     <>
       <li>
         <NavLink
           to="/"
-          className="block text-lg font-bold py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-          aria-current="page"
+          className={({ isActive }) =>
+            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              isActive
+                ? "bg-[#AC0404] text-white shadow-md"
+                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+            }`
+          }
         >
           Home
         </NavLink>
@@ -63,7 +26,13 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/biodatas"
-          className="block text-lg font-bold py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          className={({ isActive }) =>
+            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              isActive
+                ? "bg-[#AC0404] text-white shadow-md"
+                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+            }`
+          }
         >
           Biodatas
         </NavLink>
@@ -71,7 +40,13 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/about"
-          className="block text-lg font-bold py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          className={({ isActive }) =>
+            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              isActive
+                ? "bg-[#AC0404] text-white shadow-md"
+                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+            }`
+          }
         >
           About Us
         </NavLink>
@@ -79,7 +54,13 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/contact"
-          className="block text-lg font-bold py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+          className={({ isActive }) =>
+            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              isActive
+                ? "bg-[#AC0404] text-white shadow-md"
+                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+            }`
+          }
         >
           Contact Us
         </NavLink>
@@ -88,7 +69,13 @@ const NavBar = () => {
         <li>
           <NavLink
             to="/dashboard"
-            className="block text-lg font-bold py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            className={({ isActive }) =>
+              `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+                isActive
+                  ? "bg-[#AC0404] text-white shadow-md"
+                  : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+              }`
+            }
           >
             Dashboard
           </NavLink>
@@ -110,12 +97,6 @@ const NavBar = () => {
           </span>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {/* <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Get started
-          </button> */}
           {user ? (
             <>
               <button

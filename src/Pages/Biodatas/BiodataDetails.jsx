@@ -8,15 +8,16 @@ const BiodataDetails = () => {
     <div className="max-w-screen-xl mx-auto px-4 mt-20">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-6">
         {/* profile card  */}
-        <div className="p-6 bg-primary text-black rounded-lg shadow-lg col-span-3 border border-accent self-start">
+        <div className="p-4 bg-primary text-black rounded-lg shadow-lg col-span-3 border border-accent self-start">
           <div className="flex flex-col items-center">
             {/* Profile Image */}
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4">
               <img src="" alt="" />
             </div>
 
+            <h2 className="text-xl font-bold">Name </h2>
             {/* Biodata Number */}
-            <h2 className="text-xl font-bold mb-4">Biodata ID: 504</h2>
+            <p className="text-lg mb-4">Biodata ID: 504</p>
 
             {/* Details */}
             <div className="w-full">

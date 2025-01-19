@@ -9,6 +9,9 @@ import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import CheckOut from "../Pages/CheckOut/CheckOut";
 import Dashboard from "../Layouts/Dashboard";
+import BiodataCreateEdit from "../Dashboard/BiodataCreateEdit/BiodataCreateEdit";
+import Contact from "../Pages/Contact/Contact";
+import About from "../Pages/About/About";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +25,14 @@ const Router = createBrowserRouter([
       {
         path: "biodatas",
         element: <Biodatas></Biodatas>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/biodata/:id",
@@ -58,7 +69,24 @@ const Router = createBrowserRouter([
       </PrivateRoute>
     ),
     errorElement: <ErrorPage></ErrorPage>,
-    children: [],
+    children: [
+      {
+        path: "viewBiodata",
+        element: <h3>My biodata</h3>,
+      },
+      {
+        path: "editBiodata",
+        element: <BiodataCreateEdit></BiodataCreateEdit>,
+      },
+      {
+        path: "myRequested",
+        element: <h3>My myRequested</h3>,
+      },
+      {
+        path: "myFavorites",
+        element: <h3>My myFavorites</h3>,
+      },
+    ],
   },
 ]);
 

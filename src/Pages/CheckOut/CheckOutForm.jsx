@@ -63,38 +63,57 @@ const CheckOutForm = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4 border border-gray-200"
+    >
+      {/* Card Input */}
+      <div className="space-y-2">
+        <label
+          htmlFor="card-element"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Card Details
+        </label>
+        <div
+          className="bg-gray-50 border border-gray-300 rounded-lg p-4 
+                 focus-within:ring-2 focus-within:ring-green-500 
+                 focus-within:border-green-500 transition-all"
+        >
+          <CardElement
+            id="card-element"
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  fontFamily: '"Inter", sans-serif',
+                  "::placeholder": {
+                    color: "#aab7c4",
+                    fontStyle: "italic",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                  iconColor: "#9e2146",
+                },
               },
-            },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
+            }}
+          />
+        </div>
+        {error && <p className="text-sm text-red-600">{error}</p>}
+      </div>
+
+      {/* Pay Button */}
       <button
-        className="px-3 py-2 my-4 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent focus:ring-4 focus:outline-none focus:ring-blue-300"
+        className={`w-full px-5 py-3 text-sm font-medium text-white bg-accent rounded-lg 
+                hover:bg-accent-dark focus:ring-4 focus:outline-none 
+                focus:ring-green-300 transition disabled:opacity-50`}
         type="submit"
         disabled={!stripe || !clientSecret}
       >
         Pay
       </button>
-      <p className="text-red-600">{error}</p>
-      {/* <button
-        type="button"
-        className="px-3 py-2 my-4 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent focus:ring-4 focus:outline-none focus:ring-blue-300"
-        disabled={!stripe}
-      >
-        Pay
-      </button> */}
     </form>
   );
 };

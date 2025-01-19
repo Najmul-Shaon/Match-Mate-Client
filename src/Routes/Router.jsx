@@ -8,6 +8,7 @@ import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import CheckOut from "../Pages/CheckOut/CheckOut";
+import Dashboard from "../Dashboard/Dashboard/Dashboard";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +48,17 @@ const Router = createBrowserRouter([
         ),
       },
     ],
+  },
+  // dashboard page
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [],
   },
 ]);
 

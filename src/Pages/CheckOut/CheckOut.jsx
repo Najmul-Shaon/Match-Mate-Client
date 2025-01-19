@@ -36,6 +36,16 @@ const CheckOut = () => {
                     scope="row"
                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
+                    Order by
+                  </th>
+                  <td class="px-6 py-4">example@gmail.com</td>
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
                     Biodata Id
                   </th>
                   <td class="px-6 py-4">150</td>

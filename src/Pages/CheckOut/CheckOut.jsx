@@ -6,22 +6,65 @@ import CheckOutForm from "./CheckOutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PK_STRIPE);
 const CheckOut = () => {
-
-
-
   return (
     <div className="max-w-screen-xl mx-auto px-4">
       <Cover
         coverImg={paymentImg}
         coverTitle={"Pay to Unite, Pay for Love"}
       ></Cover>
-      <div>
-        <h3 className="text-center mt-12 mb-6 text-xl font-semibold">Pay Now</h3>
+      {/* order and details container  */}
+      <div className="flex flex-col md:flex-row justify-around mt-12 gap-6 px-4">
+        {/* order details area  */}
+        <div className="w-full md:w-1/2">
+          <h3 className="text-center text-xl font-semibold">Order Details</h3>
+          {/* table start  */}
+
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <tbody>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Order for
+                  </th>
+                  <td class="px-6 py-4">Contact Details</td>
+                </tr>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Biodata Id
+                  </th>
+                  <td class="px-6 py-4">150</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Need to Pay
+                  </th>
+                  <td class="px-6 py-4">$5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* table end  */}
+        </div>
         {/* payment area  */}
-        <div>
-          <Elements stripe={stripePromise}>
-            <CheckOutForm></CheckOutForm>
-          </Elements>
+        <div className="w-full md:w-1/2">
+          <h3 className="text-center text-xl font-semibold">Pay Now</h3>
+          <div className="mt-6"></div>
+          {/* payment area  */}
+          <div className="mt-6">
+            <Elements stripe={stripePromise}>
+              <CheckOutForm></CheckOutForm>
+            </Elements>
+          </div>
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@ const CheckOutForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4 border border-gray-200"
+      className="mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4 border border-gray-200"
     >
       {/* Card Input */}
       <div className="space-y-2">

@@ -147,7 +147,7 @@ const Dashboard = () => {
                 end
                 className={({ isActive }) =>
                   `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                    isActive ? "bg-accent text-white dark:bg-gray-700" : ""
+                    isActive ? "bg-accent text-white" : ""
                   }`
                 }
               >
@@ -161,8 +161,8 @@ const Dashboard = () => {
               <NavLink
                 to="/dashboard/viewBiodata"
                 className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
-                    isActive ? "bg-gray-100 dark:bg-gray-700" : ""
+                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                    isActive ? "bg-accent text-white" : ""
                   }`
                 }
               >
@@ -176,8 +176,8 @@ const Dashboard = () => {
               <NavLink
                 to="/dashboard/editBiodata"
                 className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
-                    isActive ? "bg-gray-100 dark:bg-gray-700" : ""
+                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                    isActive ? "bg-accent text-white" : ""
                   }`
                 }
               >
@@ -191,8 +191,8 @@ const Dashboard = () => {
               <NavLink
                 to="/dashboard/myRequested"
                 className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
-                    isActive ? "bg-gray-100 dark:bg-gray-700" : ""
+                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                    isActive ? "bg-accent text-white" : ""
                   }`
                 }
               >
@@ -206,8 +206,8 @@ const Dashboard = () => {
               <NavLink
                 to="/dashboard/myFavorites"
                 className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
-                    isActive ? "bg-gray-100 dark:bg-gray-700" : ""
+                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                    isActive ? "bg-accent text-white" : ""
                   }`
                 }
               >
@@ -220,7 +220,7 @@ const Dashboard = () => {
             <li>
               <NavLink
                 onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group  dark:bg-gray-700"
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
               >
                 <span className="me-3 text-xl">
                   <IoIosLogOut />

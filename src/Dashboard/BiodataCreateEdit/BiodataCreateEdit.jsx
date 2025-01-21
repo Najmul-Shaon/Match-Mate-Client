@@ -7,6 +7,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 // img bb hosting keys
@@ -139,6 +140,9 @@ const BiodataCreateEdit = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Match Mate || Edit</title>
+      </Helmet>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* personal info  */}
 

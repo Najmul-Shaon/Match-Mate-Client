@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyBiodata = () => {
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { data: myBiodata = [] } = useQuery({
@@ -12,18 +16,39 @@ const MyBiodata = () => {
       return res.data;
     },
   });
-  console.log(myBiodata[0]);
-  console.log(myBiodata[0]?.personalInfo?.address);
+
+  const handleMakePremium = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Submitted!",
+          icon: "success",
+        });
+        navigate("/dashboard");
+      }
+    });
+  };
+
   return (
     <div className="">
       {/* <div className="max-w-screen-xl mx-auto px-4 mt-20"> */}
+      <Helmet>
+        <title>Match Mate || View</title>
+      </Helmet>
 
       <div className="p-4 space-y-8">
         <div className="flex justify-center">
           <figure className="p-1 bg-accent/40 rounded-full">
             <img
               className="rounded-full w-16 h-16 md:w-28 md:h-28 lg:w-36 lg:h-36"
-              src={myBiodata[0]?.biodataPhoto}
+              src={myBiodata?.biodataPhoto}
               alt="image description"
             />
           </figure>
@@ -42,12 +67,12 @@ const MyBiodata = () => {
                     Name
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.name}
+                    {myBiodata?.personalInfo?.name}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Id
                   </td>
-                  <td className="px-4 py-2">{myBiodata[0]?.biodataId}</td>
+                  <td className="px-4 py-2">{myBiodata?.biodataId}</td>
                 </tr>
                 {/* Row 2 */}
                 <tr className="border-b border-purple-300">
@@ -55,13 +80,13 @@ const MyBiodata = () => {
                     Gender
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.biodataType}
+                    {myBiodata?.personalInfo?.biodataType}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Status
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.status}
+                    {myBiodata?.personalInfo?.status}
                   </td>
                 </tr>
                 {/* Row 3 */}
@@ -70,13 +95,13 @@ const MyBiodata = () => {
                     Date of Birth
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.dateOfBirth}
+                    {myBiodata?.personalInfo?.dateOfBirth}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Age
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.age}
+                    {myBiodata?.personalInfo?.age}
                   </td>
                 </tr>
                 {/* Row 2 */}
@@ -85,13 +110,13 @@ const MyBiodata = () => {
                     Height
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.height}
+                    {myBiodata?.personalInfo?.height}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Weight
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.weight} KG
+                    {myBiodata?.personalInfo?.weight} KG
                   </td>
                 </tr>
                 {/* Row 2 */}
@@ -100,13 +125,13 @@ const MyBiodata = () => {
                     Religion
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.religion}
+                    {myBiodata?.personalInfo?.religion}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Occupation
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.occupation}
+                    {myBiodata?.personalInfo?.occupation}
                   </td>
                 </tr>
                 {/* Row 2 */}
@@ -115,7 +140,7 @@ const MyBiodata = () => {
                     Blood group
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.blood}
+                    {myBiodata?.personalInfo?.blood}
                   </td>
                 </tr>
               </tbody>
@@ -136,12 +161,12 @@ const MyBiodata = () => {
                     Phone Number
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.userPhone}
+                    {myBiodata?.personalInfo?.userPhone}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Email
                   </td>
-                  <td className="px-4 py-2">{myBiodata[0]?.userEmail}</td>
+                  <td className="px-4 py-2">{myBiodata?.userEmail}</td>
                 </tr>
                 {/* Row 2 */}
                 <tr className="border-b border-purple-300">
@@ -149,13 +174,13 @@ const MyBiodata = () => {
                     Father's Phone
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.fatherInfo?.fNumber}
+                    {myBiodata?.familyInfo?.fatherInfo?.fNumber}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Mother's Phone
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.motherInfo?.mNumber}
+                    {myBiodata?.familyInfo?.motherInfo?.mNumber}
                   </td>
                 </tr>
               </tbody>
@@ -176,19 +201,19 @@ const MyBiodata = () => {
                     Present Address
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.address?.present?.street},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.present?.city},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.present?.division},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.present?.country}
+                    {myBiodata?.personalInfo?.address?.present?.street},{" "}
+                    {myBiodata?.personalInfo?.address?.present?.city},{" "}
+                    {myBiodata?.personalInfo?.address?.present?.division},{" "}
+                    {myBiodata?.personalInfo?.address?.present?.country}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Permanent Address
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.personalInfo?.address?.permanent?.street},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.permanent?.city},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.permanent?.division},{" "}
-                    {myBiodata[0]?.personalInfo?.address?.permanent?.country}
+                    {myBiodata?.personalInfo?.address?.permanent?.street},{" "}
+                    {myBiodata?.personalInfo?.address?.permanent?.city},{" "}
+                    {myBiodata?.personalInfo?.address?.permanent?.division},{" "}
+                    {myBiodata?.personalInfo?.address?.permanent?.country}
                   </td>
                 </tr>
               </tbody>
@@ -209,13 +234,13 @@ const MyBiodata = () => {
                     Age
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.expectedPartner?.eAge} Year
+                    {myBiodata?.expectedPartner?.eAge} Year
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Height
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.expectedPartner?.eHeight}
+                    {myBiodata?.expectedPartner?.eHeight}
                   </td>
                 </tr>
 
@@ -226,7 +251,7 @@ const MyBiodata = () => {
                   </td>
 
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.expectedPartner?.eWeight} KG
+                    {myBiodata?.expectedPartner?.eWeight} KG
                   </td>
                 </tr>
               </tbody>
@@ -247,13 +272,13 @@ const MyBiodata = () => {
                     Father's Name
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.fatherInfo.fName}
+                    {myBiodata?.familyInfo?.fatherInfo.fName}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Father's Occupation
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.fatherInfo.fOccupation}
+                    {myBiodata?.familyInfo?.fatherInfo.fOccupation}
                   </td>
                 </tr>
 
@@ -263,14 +288,14 @@ const MyBiodata = () => {
                     Mother's Name
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.motherInfo.mName}
+                    {myBiodata?.familyInfo?.motherInfo.mName}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Mother's Occupation
                   </td>
                   <td className="px-4 py-2">
                     {" "}
-                    {myBiodata[0]?.familyInfo?.motherInfo.mOccupation}
+                    {myBiodata?.familyInfo?.motherInfo.mOccupation}
                   </td>
                 </tr>
 
@@ -280,19 +305,29 @@ const MyBiodata = () => {
                     Brother's (except me)
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.siblings?.brothers}
+                    {myBiodata?.familyInfo?.siblings?.brothers}
                   </td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Sister's (except me)
                   </td>
                   <td className="px-4 py-2">
-                    {myBiodata[0]?.familyInfo?.siblings?.sisters}
+                    {myBiodata?.familyInfo?.siblings?.sisters}
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+      </div>
+      {/* btn action  */}
+      <div className="flex justify-center mt-12 mb-6">
+        <button
+          onClick={handleMakePremium}
+          type="button"
+          className="btn-normal"
+        >
+          Make Premium
+        </button>
       </div>
     </div>
   );

@@ -2,14 +2,17 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ bId, uEmail }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [trsxId, setTrsxId] = useState("");
+  const navigate = useNavigate();
 
   const price = 5;
 
@@ -57,7 +60,85 @@ const CheckOutForm = () => {
     } else {
       console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("trx", paymentIntent.id);
+        const requestInfo = {
+          biodataId: bId,
+          userEmail: uEmail,
+          requestStatus: "pending",
+        };
+        const paymentInfo = {
+          biodataId: bId,
+          userEmail: uEmail,
+          amount: paymentIntent.amount,
+          trxId: paymentIntent.id,
+          paymentVia: paymentIntent.payment_method_types[0],
+          status: paymentIntent.status,
+          paymentTime: new Date(),
+        };
+        axiosSecure
+          .post("/makePayment", paymentInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.message === "Alredy Paid") {
+              return Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Already Paid",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+            if (res.data.insertedId) {
+              axiosSecure
+                .post("/contactRequest", requestInfo)
+                .then((res) => {
+                  console.log(res.data.message);
+                  if (
+                    res.data.message ===
+                    "You have already paid for this biodada"
+                  ) {
+                    return Swal.fire({
+                      position: "center",
+                      icon: "error",
+                      title: "You have already paid for this biodada",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                  }
+                  if (res.data.insertedId) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Payment Complete!!",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    navigate("/dashboard/myRequested");
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                  Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Payment Failed!!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Payment Failed!!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+
+        console.log(paymentIntent);
         setTrsxId(paymentIntent.id);
       }
     }

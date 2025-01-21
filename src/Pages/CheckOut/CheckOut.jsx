@@ -3,9 +3,23 @@ import Cover from "../../Shared/Cover/Cover";
 import paymentImg from "../../assets/payment.jpg";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "./CheckOutForm";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PK_STRIPE);
 const CheckOut = () => {
+  const { biodataId } = useParams();
+  const { user } = useAuth();
+  // const axiosSecure = useAxiosSecure();
+
+  // const { data: biodataID = [] } = useQuery({
+  //   queryKey: ['biodataID'], queryFn: async () => {
+  //     const res = await axiosSecure.get(``)
+  //   }
+  // })
+  console.log(biodataId);
   return (
     <div className="max-w-screen-xl mx-auto px-4">
       <Cover
@@ -38,7 +52,7 @@ const CheckOut = () => {
                   >
                     Order by
                   </th>
-                  <td class="px-6 py-4">example@gmail.com</td>
+                  <td class="px-6 py-4">{user?.email}</td>
                 </tr>
 
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -48,7 +62,7 @@ const CheckOut = () => {
                   >
                     Biodata Id
                   </th>
-                  <td class="px-6 py-4">150</td>
+                  <td class="px-6 py-4">{biodataId}</td>
                 </tr>
                 <tr class="bg-white dark:bg-gray-800">
                   <th
@@ -72,7 +86,10 @@ const CheckOut = () => {
           {/* payment area  */}
           <div className="mt-6">
             <Elements stripe={stripePromise}>
-              <CheckOutForm></CheckOutForm>
+              <CheckOutForm
+                bId={biodataId}
+                uEmail={user?.email}
+              ></CheckOutForm>
             </Elements>
           </div>
         </div>

@@ -8,12 +8,16 @@ import { CiStar } from "react-icons/ci";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { FiUserCheck } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
   return (
     <div className="">
+      <Helmet>
+        <title>Match Mate || Dashboard</title>
+      </Helmet>
       {/* nav bar section start */}
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -146,7 +150,7 @@ const Dashboard = () => {
                 to="/dashboard"
                 end
                 className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
                     isActive ? "bg-accent text-white" : ""
                   }`
                 }

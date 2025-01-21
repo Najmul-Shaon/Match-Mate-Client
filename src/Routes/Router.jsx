@@ -13,6 +13,7 @@ import BiodataCreateEdit from "../Dashboard/BiodataCreateEdit/BiodataCreateEdit"
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
 import MyBiodata from "../Dashboard/MyBiodata/MyBiodata";
+import MyRequestedContact from "../Dashboard/MyRequestedContact/MyRequestedContact";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -52,7 +53,7 @@ const Router = createBrowserRouter([
         element: <Signup></Signup>,
       },
       {
-        path: "/checkout/:id",
+        path: "/checkout/:biodataId",
         element: (
           <PrivateRoute>
             <CheckOut></CheckOut>
@@ -85,7 +86,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "myRequested",
-        element: <h3>My myRequested</h3>,
+        element: (
+          <PrivateRoute>
+            <MyRequestedContact></MyRequestedContact>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myFavorites",

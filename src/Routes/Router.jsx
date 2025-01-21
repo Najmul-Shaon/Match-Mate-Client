@@ -12,6 +12,7 @@ import Dashboard from "../Layouts/Dashboard";
 import BiodataCreateEdit from "../Dashboard/BiodataCreateEdit/BiodataCreateEdit";
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
+import MyBiodata from "../Dashboard/MyBiodata/MyBiodata";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -72,7 +73,11 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "viewBiodata",
-        element: <h3>My biodata</h3>,
+        element: (
+          <PrivateRoute>
+            <MyBiodata></MyBiodata>
+          </PrivateRoute>
+        ),
       },
       {
         path: "editBiodata",

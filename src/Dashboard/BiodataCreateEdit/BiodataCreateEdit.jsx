@@ -53,6 +53,7 @@ const BiodataCreateEdit = () => {
         personalInfo: {
           name: formData.name,
           userPhone: formData.phoneNumber,
+          status: formData.status,
           religion: formData.religion,
           biodataType: formData.gender,
           dateOfBirth: formateDate,
@@ -210,6 +211,30 @@ const BiodataCreateEdit = () => {
                 <span className="text-red-600">
                   {errors.phoneNumber.message}
                 </span>
+              )}
+            </div>
+            {/* Status field  */}
+            <div className="col-span-2 lg:col-span-1">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Status
+              </label>
+              <select
+                name="status"
+                defaultValue={"--Status--"}
+                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                {...register("status", {
+                  required: "Required",
+                  validate: (value) => value !== "--Status--" || "Required",
+                })}
+              >
+                <option disabled>--Status--</option>
+                <option value="Unmarried">Unmarried</option>
+                <option value="Married">Married</option>
+                <option value="Widow">Widow</option>
+                <option value="Divorced">Divorced</option>
+              </select>
+              {errors.status && (
+                <span className="text-red-600">{errors.status.message}</span>
               )}
             </div>
             {/* Religion field  */}

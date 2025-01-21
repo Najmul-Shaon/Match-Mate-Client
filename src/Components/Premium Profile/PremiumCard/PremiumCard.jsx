@@ -19,7 +19,9 @@ const PremiumCard = ({ cardInfo }) => {
       </p>
       <div className="flex justify-evenly gap-4 mt-2 px-4 grow">
         <div>
-          <p className="text-sm">Gender: {cardInfo?.personalInfo?.biodataType}</p>
+          <p className="text-sm">
+            Gender: {cardInfo?.personalInfo?.biodataType}
+          </p>
           <p className="text-sm">Age: {cardInfo?.personalInfo?.age}</p>
         </div>
         <div>
@@ -33,7 +35,7 @@ const PremiumCard = ({ cardInfo }) => {
       </div>
       {/* card action  */}
       <div className="flex items-center justify-center my-4">
-        <Link to={`/biodata/${cardInfo?.BiodataId}`}>
+        <Link to={`/biodata/details/${cardInfo?.biodataId}`}>
           <button className="btn-normal">View Profile</button>
         </Link>
       </div>

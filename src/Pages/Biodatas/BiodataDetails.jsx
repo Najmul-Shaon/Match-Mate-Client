@@ -1,13 +1,21 @@
 import { CiStar } from "react-icons/ci";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
-import { Link } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const BiodataDetails = () => {
-  
-
+  const { biodataId } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const { data: biodataDetails = [] } = useQuery({
+    queryKey: ["biodataDetails"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/biodata/details/${biodataId}`);
+      return res.data;
+    },
+  });
+  console.log(biodataDetails[0]);
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-20">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-6">
@@ -16,13 +24,21 @@ const BiodataDetails = () => {
           {/* personal info  */}
           <div className="flex flex-col items-center">
             {/* Profile Image */}
-            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4">
-              <img src="" alt="" />
+            <div className="p-1 bg-accent/40 rounded-full flex items-center justify-center mb-4">
+              <img
+                className="w-24 h-24 rounded-full"
+                src={biodataDetails[0]?.biodataPhoto}
+                alt=""
+              />
             </div>
 
-            <h2 className="text-xl font-bold">Name</h2>
+            <h2 className="text-xl font-bold">
+              {biodataDetails[0]?.personalInfo?.name}
+            </h2>
             {/* Biodata Number */}
-            <p className="text-lg mb-4">Biodata ID: 504</p>
+            <p className="text-lg mb-4">
+              Biodata ID: {biodataDetails[0]?.biodataId}
+            </p>
 
             {/* Details */}
             <div className="w-full">
@@ -40,40 +56,40 @@ const BiodataDetails = () => {
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Biodata Type</span>
-                <span>Female</span>
+                <span>{biodataDetails[0]?.personalInfo?.biodataType}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Status</span>
-                <span>Unmarried</span>
+                <span>{biodataDetails[0]?.personalInfo?.status}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Date of Birth</span>
-                <span>July, 2002</span>
+                <span>{biodataDetails[0]?.personalInfo?.dateOfBirth}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Height</span>
-                <span>5' 5"</span>
+                <span>{biodataDetails[0]?.personalInfo?.height}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Weight</span>
-                <span>47 KG</span>
+                <span>{biodataDetails[0]?.personalInfo?.weight} KG</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Religion</span>
-                <span>Islam</span>
+                <span>{biodataDetails[0]?.personalInfo?.religion}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Occupation</span>
-                <span>Student</span>
+                <span>{biodataDetails[0]?.personalInfo?.occupation}</span>
               </div>
 
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Blood Group</span>
-                <span>A+</span>
+                <span>{biodataDetails[0]?.personalInfo?.blood}</span>
               </div>
               <div className="flex justify-between py-1">
                 <span>Nationality</span>
-                <span>Bangladeshi</span>
+                <span>{biodataDetails[0]?.personalInfo?.nationality}</span>
               </div>
             </div>
           </div>
@@ -94,28 +110,36 @@ const BiodataDetails = () => {
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Phone Number
                     </td>
-                    <td className="px-4 py-2">01721933810</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.personalInfo?.userPhone}
+                    </td>
                   </tr>
                   {/* Row 2 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Email
                     </td>
-                    <td className="px-4 py-2">example@gmail.com</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.userEmail}
+                    </td>
                   </tr>
                   {/* Row 3 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Father's Phone
                     </td>
-                    <td className="px-4 py-2">01721933810</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.fatherInfo?.fNumber}
+                    </td>
                   </tr>
                   {/* Row 2 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Mother's Phone
                     </td>
-                    <td className="px-4 py-2">01721933810</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.motherInfo?.mNumber}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -135,7 +159,21 @@ const BiodataDetails = () => {
                       Present Address
                     </td>
                     <td className="px-4 py-2">
-                      মেহেন্দিগঞ্জ, বরিশাল, বাংলাদেশ
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.present
+                          ?.street
+                      }
+                      ,{" "}
+                      {biodataDetails[0]?.personalInfo?.address?.present?.city},{" "}
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.present
+                          ?.division
+                      }
+                      ,{" "}
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.present
+                          ?.country
+                      }
                     </td>
                   </tr>
                   {/* Row 2 */}
@@ -144,7 +182,25 @@ const BiodataDetails = () => {
                       Permanent Address
                     </td>
                     <td className="px-4 py-2">
-                      ঢাকা উত্তর সিটি কর্পোরেশন, ঢাকা, বাংলাদেশ
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.permanent
+                          ?.street
+                      }
+                      ,{" "}
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.permanent
+                          ?.city
+                      }
+                      ,{" "}
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.permanent
+                          ?.division
+                      }
+                      ,{" "}
+                      {
+                        biodataDetails[0]?.personalInfo?.address?.permanent
+                          ?.country
+                      }
                     </td>
                   </tr>
                 </tbody>
@@ -164,21 +220,27 @@ const BiodataDetails = () => {
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Age
                     </td>
-                    <td className="px-4 py-2">18-24</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.expectedPartner?.eAge} Year
+                    </td>
                   </tr>
                   {/* Row 2 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Height
                     </td>
-                    <td className="px-4 py-2">5' 10"</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.expectedPartner?.eHeight}
+                    </td>
                   </tr>
                   {/* Row 3 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Weight
                     </td>
-                    <td className="px-4 py-2">60 kg - 70 kg</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.expectedPartner?.eWeight} KG
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -197,42 +259,46 @@ const BiodataDetails = () => {
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Father's Name
                     </td>
-                    <td className="px-4 py-2">Abul Hasan</td>
-                  </tr>
-                  {/* Row 2 */}
-                  <tr className="border-b border-purple-300">
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.fatherInfo?.fName}
+                    </td>
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Father's Occupation
                     </td>
-                    <td className="px-4 py-2">Retired</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.fatherInfo?.fOccupation}
+                    </td>
                   </tr>
+
                   {/* Row 3 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Mother's Name
                     </td>
-                    <td className="px-4 py-2">Begum</td>
-                  </tr>
-                  {/* Row 4 */}
-                  <tr className="border-b border-purple-300">
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.motherInfo?.mName}
+                    </td>
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Mother's Occupation
                     </td>
-                    <td className="px-4 py-2">Retired</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.motherInfo?.mOccupation}
+                    </td>
                   </tr>
                   {/* Row 5 */}
                   <tr className="border-b border-purple-300">
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Brother's (except me)
                     </td>
-                    <td className="px-4 py-2">1</td>
-                  </tr>
-                  {/* Row 6 */}
-                  <tr className="border-b border-purple-300">
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.siblings?.brothers}
+                    </td>
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Sister's (except me)
                     </td>
-                    <td className="px-4 py-2">1</td>
+                    <td className="px-4 py-2">
+                      {biodataDetails[0]?.familyInfo?.siblings?.sisters}
+                    </td>
                   </tr>
                 </tbody>
               </table>

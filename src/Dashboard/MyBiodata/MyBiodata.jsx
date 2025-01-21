@@ -19,6 +19,15 @@ const MyBiodata = () => {
       {/* <div className="max-w-screen-xl mx-auto px-4 mt-20"> */}
 
       <div className="p-4 space-y-8">
+        <div className="flex justify-center">
+          <figure className="p-1 bg-accent/40 rounded-full">
+            <img
+              className="rounded-full w-16 h-16 md:w-28 md:h-28 lg:w-36 lg:h-36"
+              src={myBiodata[0]?.biodataPhoto}
+              alt="image description"
+            />
+          </figure>
+        </div>
         {/* Personal info  */}
         <div className="bg-primary rounded-lg shadow-md border-accent border-t-2 py-4">
           <h2 className="text-xl font-bold text-purple-700 text-center mb-4">

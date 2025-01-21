@@ -36,7 +36,7 @@ const Router = createBrowserRouter([
         element: <About></About>,
       },
       {
-        path: "/biodata/:id",
+        path: "/biodata/details/:biodataId",
         element: (
           <PrivateRoute>
             <BiodataDetails></BiodataDetails>

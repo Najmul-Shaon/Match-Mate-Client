@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 
 const PremiumCard = ({ cardInfo }) => {
+  // console.log(cardInfo);
   return (
     <div className="card bg-primary shadow-xl rounded-md border-dashed border-2 flex flex-col items-center justify-center">
       <figure className=" py-3 px-2 flex justify-center">
         <img
-          src={cardInfo?.ProfileImage}
+          src={cardInfo?.biodataPhoto}
           alt="User Profile"
           className="w-40 h-40 rounded-full"
         />
@@ -14,16 +15,20 @@ const PremiumCard = ({ cardInfo }) => {
         {cardInfo?.Name}
       </h2>
       <p className="text-base font-normal text-center mb-2 px-4">
-        Biodata Id: {cardInfo?.BiodataId}
+        Biodata Id: {cardInfo?.biodataId}
       </p>
       <div className="flex justify-evenly gap-4 mt-2 px-4 grow">
         <div>
-          <p className="text-sm">Gender: {cardInfo?.BiodataType}</p>
-          <p className="text-sm">Age: {cardInfo?.Age}</p>
+          <p className="text-sm">Gender: {cardInfo?.personalInfo?.biodataType}</p>
+          <p className="text-sm">Age: {cardInfo?.personalInfo?.age}</p>
         </div>
         <div>
-          <p className="text-sm">Occupation: {cardInfo?.Occupation}</p>
-          <p className="text-sm">Division: {cardInfo?.PermanentDivisionName}</p>
+          <p className="text-sm">
+            Occupation: {cardInfo?.personalInfo?.occupation}
+          </p>
+          <p className="text-sm">
+            Division: {cardInfo?.personalInfo?.address?.permanent?.division}
+          </p>
         </div>
       </div>
       {/* card action  */}

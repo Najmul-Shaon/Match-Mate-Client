@@ -2,8 +2,12 @@ import { CiStar } from "react-icons/ci";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const BiodataDetails = () => {
+  
+
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-20">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-6">
@@ -16,7 +20,7 @@ const BiodataDetails = () => {
               <img src="" alt="" />
             </div>
 
-            <h2 className="text-xl font-bold">Name </h2>
+            <h2 className="text-xl font-bold">Name</h2>
             {/* Biodata Number */}
             <p className="text-lg mb-4">Biodata ID: 504</p>
 

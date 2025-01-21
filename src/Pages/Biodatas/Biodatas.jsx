@@ -1,21 +1,22 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
 import coverImg from "../../assets/BidataCover.jpg";
 import Cover from "../../Shared/Cover/Cover";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Biodatas = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const { data: biodatas = [] } = useQuery({
     queryKey: ["biodatas"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/biodatas");
+      const res = await axiosPublic.get("/biodatas");
       return res.data;
     },
   });
+  console.log(biodatas);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4">
@@ -35,10 +36,7 @@ const Biodatas = () => {
         <div className="col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {biodatas.map((biodata) => (
-              <PremiumCard
-                key={biodata.BiodataId}
-                cardInfo={biodata}
-              ></PremiumCard>
+              <PremiumCard key={biodata._id} cardInfo={biodata}></PremiumCard>
             ))}
           </div>
         </div>

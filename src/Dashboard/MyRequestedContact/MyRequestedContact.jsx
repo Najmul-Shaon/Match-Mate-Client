@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaDeleteLeft } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const MyRequestedContact = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
-  const { data: requestData = [] } = useQuery({
+  // get all requested contact list
+  const { data: requestData = [], refetch } = useQuery({
     queryKey: ["requestData", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/contactRequest?email=${user?.email}`);
@@ -16,8 +17,39 @@ const MyRequestedContact = () => {
   });
   console.log(requestData);
 
+  const handleRequestContactDelete = (biodataId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/contactRequest/${biodataId}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div>
+      <div>
+        <h3 className="text-accent font-bold text-center">
+          My Requested Contact ({requestData.length})
+        </h3>
+      </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="pb-4 bg-white dark:bg-gray-900">
           <label htmlFor="table-search" className="sr-only">
@@ -77,7 +109,10 @@ const MyRequestedContact = () => {
           </thead>
           <tbody>
             {requestData.map((singleRequestData, i) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <tr
+                key={singleRequestData?.biodataId}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -100,9 +135,14 @@ const MyRequestedContact = () => {
                     : singleRequestData?.userEmail}
                 </td>
                 <td className="px-6 py-4">
-                  <span className="text-accent text-3xl cursor-pointer">
+                  <button
+                    onClick={() =>
+                      handleRequestContactDelete(singleRequestData?.biodataId)
+                    }
+                    className="text-accent text-3xl"
+                  >
                     <FaDeleteLeft></FaDeleteLeft>
-                  </span>
+                  </button>
                 </td>
               </tr>
             ))}

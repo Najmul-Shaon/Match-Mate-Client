@@ -33,45 +33,45 @@ const CheckOut = () => {
           <h3 className="text-center text-xl font-semibold">Order Details</h3>
           {/* table start  */}
 
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Order for
                   </th>
-                  <td class="px-6 py-4">Contact Details</td>
+                  <td className="px-6 py-4">Contact Details</td>
                 </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Order by
                   </th>
-                  <td class="px-6 py-4">{user?.email}</td>
+                  <td className="px-6 py-4">{user?.email}</td>
                 </tr>
 
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Biodata Id
                   </th>
-                  <td class="px-6 py-4">{biodataId}</td>
+                  <td className="px-6 py-4">{biodataId}</td>
                 </tr>
-                <tr class="bg-white dark:bg-gray-800">
+                <tr className="bg-white dark:bg-gray-800">
                   <th
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Need to Pay
                   </th>
-                  <td class="px-6 py-4">$5</td>
+                  <td className="px-6 py-4">$5</td>
                 </tr>
               </tbody>
             </table>

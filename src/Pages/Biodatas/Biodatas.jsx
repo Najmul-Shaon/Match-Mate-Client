@@ -16,7 +16,7 @@ const Biodatas = () => {
       return res.data;
     },
   });
-  console.log(biodatas);
+  console.log(typeof biodatas[0]?.biodataId);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4">

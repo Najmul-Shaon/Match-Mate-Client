@@ -17,7 +17,16 @@ const MyBiodata = () => {
     },
   });
 
-  const handleMakePremium = () => {
+  console.log(myBiodata);
+
+  const handleMakePremium = (bId) => {
+    const biodataInfo = {
+      userEmail: user?.email,
+      status: "pending",
+      biodataId: bId,
+      userName: myBiodata?.personalInfo?.name,
+    };
+    console.log(biodataInfo);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -27,11 +36,19 @@ const MyBiodata = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Submitted!",
-          icon: "success",
-        });
-        navigate("/dashboard");
+        axiosSecure
+          .post("/premiumRequest", biodataInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              Swal.fire({
+                title: "Submitted!",
+                icon: "success",
+              });
+              navigate("/dashboard");
+            }
+          })
+          .catch((er) => {});
       }
     });
   };
@@ -66,9 +83,7 @@ const MyBiodata = () => {
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Name
                   </td>
-                  <td className="px-4 py-2">
-                    {myBiodata?.personalInfo?.name}
-                  </td>
+                  <td className="px-4 py-2">{myBiodata?.personalInfo?.name}</td>
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Id
                   </td>
@@ -100,9 +115,7 @@ const MyBiodata = () => {
                   <td className="px-4 py-2 font-semibold text-purple-700">
                     Age
                   </td>
-                  <td className="px-4 py-2">
-                    {myBiodata?.personalInfo?.age}
-                  </td>
+                  <td className="px-4 py-2">{myBiodata?.personalInfo?.age}</td>
                 </tr>
                 {/* Row 2 */}
                 <tr className="border-b border-purple-300">
@@ -321,13 +334,24 @@ const MyBiodata = () => {
       </div>
       {/* btn action  */}
       <div className="flex justify-center mt-12 mb-6">
-        <button
-          onClick={handleMakePremium}
-          type="button"
-          className="btn-normal"
-        >
-          Make Premium
-        </button>
+        {myBiodata?.length === 0 ? (
+          <button
+            disabled
+            type="button"
+            className="btn-normal cursor-not-allowed"
+          >
+            Make Premium
+          </button>
+        ) : (
+          <button
+            disabled={myBiodata?.length === 0}
+            onClick={() => handleMakePremium(myBiodata?.biodataId)}
+            type="button"
+            className="btn-normal"
+          >
+            Make Premium
+          </button>
+        )}
       </div>
     </div>
   );

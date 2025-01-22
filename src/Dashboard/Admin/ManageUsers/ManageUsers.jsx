@@ -17,15 +17,9 @@ const ManageUsers = () => {
       return res.data;
     },
   });
-  //   console.log(totalUsers[0]?.userPhoto);
 
   const handleMakeAdmin = (targetEmail) => {
-    console.log("from make admin", targetEmail);
 
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {});
-    //   *********************
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -39,13 +33,7 @@ const ManageUsers = () => {
           .patch(`/user/role/${targetEmail}?role=admin`)
           .then((res) => {
             console.log(res.data);
-            // if (res.data.message === "Same user") {
-            //   return Swal.fire({
-            //     title: "Hold!",
-            //     text: "You can't delete yourself.",
-            //     icon: "error",
-            //   });
-            // }
+            
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Updated to Admin",
@@ -58,11 +46,10 @@ const ManageUsers = () => {
           .catch((err) => {});
       }
     });
-    //   ******************
+  
   };
 
   const handleMakePremium = (targetEmail) => {
-    console.log("from make premium", targetEmail);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -75,14 +62,6 @@ const ManageUsers = () => {
         axiosSecure
           .patch(`/user/role/${targetEmail}?role=premium`)
           .then((res) => {
-            console.log(res.data);
-            // if (res.data.message === "Same user") {
-            //   return Swal.fire({
-            //     title: "Hold!",
-            //     text: "You can't delete yourself.",
-            //     icon: "error",
-            //   });
-            // }
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Updated to Premium!",
@@ -221,21 +200,31 @@ const ManageUsers = () => {
                     </div>
                   </th>
                   <td className="px-6 py-4">{singleUser?.userEmail}</td>
-                  <td className="px-6 py-4">{singleUser?.userRole}</td>
+                  <td className="px-6 py-4">
+                    {(singleUser?.userRole === "admin" && "Admin") ||
+                      (singleUser?.userRole === "user" && "User") ||
+                      (singleUser?.userRole === "premium" && "Premium")}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="space-x-4">
-                      <button
-                        onClick={() => handleMakeAdmin(singleUser?.userEmail)}
-                        className="text-accent text-3xl"
-                      >
-                        <FaUserGear></FaUserGear>
-                      </button>
-                      <button
-                        onClick={() => handleMakePremium(singleUser?.userEmail)}
-                        className="text-accent text-3xl"
-                      >
-                        <LuBadgeCheck></LuBadgeCheck>
-                      </button>
+                      {singleUser?.userRole !== "admin" && (
+                        <button
+                          onClick={() => handleMakeAdmin(singleUser?.userEmail)}
+                          className="text-accent text-3xl"
+                        >
+                          <FaUserGear></FaUserGear>
+                        </button>
+                      )}
+                      {singleUser?.userRole !== "premium" && (
+                        <button
+                          onClick={() =>
+                            handleMakePremium(singleUser?.userEmail)
+                          }
+                          className="text-accent text-3xl"
+                        >
+                          <LuBadgeCheck></LuBadgeCheck>
+                        </button>
+                      )}
                       <button
                         onClick={() => handleDeleteUser(singleUser?.userEmail)}
                         className="text-accent text-3xl"

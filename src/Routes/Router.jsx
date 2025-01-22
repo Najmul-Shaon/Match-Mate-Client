@@ -16,6 +16,7 @@ import MyBiodata from "../Dashboard/MyBiodata/MyBiodata";
 import MyRequestedContact from "../Dashboard/MyRequestedContact/MyRequestedContact";
 import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
+import ApprovedPremium from "../Dashboard/ApprovedPremium/ApprovedPremium";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -118,7 +119,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "approvedPremium",
-        element: <h3>premium home</h3>,
+        element: <ApprovedPremium></ApprovedPremium>,
       },
       {
         path: "approvedContact",

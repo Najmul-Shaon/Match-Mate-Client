@@ -1,6 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo_without_bg.png";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuBadgeCheck, LuLayoutDashboard, LuUsers } from "react-icons/lu";
 import useLogout from "../Hooks/useLogout";
 import { FaRegEdit } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
@@ -9,10 +9,12 @@ import { MdOutlineContactPhone } from "react-icons/md";
 import { FiUserCheck } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 
 const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
+  const isAdmin = true;
   return (
     <div className="">
       <Helmet>
@@ -145,93 +147,175 @@ const Dashboard = () => {
         <div className="h-full px-3 pb-4 overflow-y-auto bg-primary">
           <ul className="space-y-2 font-medium">
             {/* navigation menu  */}
-            <li>
-              <NavLink
-                to="/dashboard"
-                end
-                className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                    isActive ? "bg-accent text-white" : ""
-                  }`
-                }
-              >
-                <span className="me-3 text-xl">
-                  <LuLayoutDashboard />
-                </span>
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/viewBiodata"
-                className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                    isActive ? "bg-accent text-white" : ""
-                  }`
-                }
-              >
-                <span className="me-3 text-xl">
-                  <FiUserCheck />
-                </span>
-                View Biodata
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/editBiodata"
-                className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                    isActive ? "bg-accent text-white" : ""
-                  }`
-                }
-              >
-                <span className="me-3 text-xl">
-                  <FaRegEdit />
-                </span>
-                Create/Edit Biodata
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/myRequested"
-                className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                    isActive ? "bg-accent text-white" : ""
-                  }`
-                }
-              >
-                <span className="me-3 text-xl">
-                  <MdOutlineContactPhone />
-                </span>
-                Requested Contacts
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/myFavorites"
-                className={({ isActive }) =>
-                  `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                    isActive ? "bg-accent text-white" : ""
-                  }`
-                }
-              >
-                <span className="me-3 text-2xl">
-                  <CiStar />
-                </span>
-                Favorites
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
-              >
-                <span className="me-3 text-xl">
-                  <IoIosLogOut />
-                </span>
-                Log out
-              </NavLink>
-            </li>
+            {isAdmin ? (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/adminHome"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <LuLayoutDashboard />
+                    </span>
+                    Admin Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageUsers"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <LuUsers />
+                    </span>
+                    Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/approvedPremium"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <LuBadgeCheck />
+                    </span>
+                    Approved Premium
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/approvedContact"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <VscGitPullRequestGoToChanges />
+                    </span>
+                    Approved Contact Request
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={handleLogout}
+                    className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
+                  >
+                    <span className="me-3 text-xl">
+                      <IoIosLogOut />
+                    </span>
+                    Log out
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <LuLayoutDashboard />
+                    </span>
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/viewBiodata"
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <FiUserCheck />
+                    </span>
+                    View Biodata
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/editBiodata"
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <FaRegEdit />
+                    </span>
+                    Create/Edit Biodata
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/myRequested"
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-xl">
+                      <MdOutlineContactPhone />
+                    </span>
+                    Requested Contacts
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/myFavorites"
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-2xl">
+                      <CiStar />
+                    </span>
+                    Favorites
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    onClick={handleLogout}
+                    className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
+                  >
+                    <span className="me-3 text-xl">
+                      <IoIosLogOut />
+                    </span>
+                    Log out
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </aside>

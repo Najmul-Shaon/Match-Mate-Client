@@ -26,7 +26,10 @@ const SocialLogin = () => {
           .post("/user", userInfo)
           .then((res) => {
             console.log(res.data);
-            if (res.data.insertedId) {
+            if (
+              res.data.insertedId ||
+              res.data.message === "User already exists"
+            ) {
               Swal.fire({
                 position: "center",
                 icon: "success",

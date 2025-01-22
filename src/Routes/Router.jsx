@@ -15,6 +15,7 @@ import About from "../Pages/About/About";
 import MyBiodata from "../Dashboard/MyBiodata/MyBiodata";
 import MyRequestedContact from "../Dashboard/MyRequestedContact/MyRequestedContact";
 import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
+import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -73,6 +74,7 @@ const Router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      // normal users
       {
         path: "viewBiodata",
         element: (
@@ -104,6 +106,23 @@ const Router = createBrowserRouter([
             <MyFavorites></MyFavorites>
           </PrivateRoute>
         ),
+      },
+      // admin sections
+      {
+        path: "adminHome",
+        element: <h3>Admin home</h3>,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "approvedPremium",
+        element: <h3>premium home</h3>,
+      },
+      {
+        path: "approvedContact",
+        element: <h3>Contact home</h3>,
       },
     ],
   },

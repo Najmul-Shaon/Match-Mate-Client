@@ -81,6 +81,22 @@ const NavBar = () => {
           </NavLink>
         </li>
       )}
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard/adminHome"
+            className={({ isActive }) =>
+              `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+                isActive
+                  ? "bg-[#AC0404] text-white shadow-md"
+                  : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+              }`
+            }
+          >
+            Dashboard Admin
+          </NavLink>
+        </li>
+      )}
     </>
   );
 

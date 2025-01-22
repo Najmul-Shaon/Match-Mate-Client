@@ -4,6 +4,7 @@ import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCar
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const BiodataDetails = () => {
   const { biodataId } = useParams();
@@ -16,7 +17,25 @@ const BiodataDetails = () => {
     },
   });
 
+  const fvrtBiodata = {
+    biodataId: biodataDetails?.biodataId,
+    name: biodataDetails?.personalInfo?.name,
+    permanentAddress: biodataDetails?.personalInfo?.address?.permanent,
+    occupation: biodataDetails?.personalInfo?.occupation,
+    userEmail: biodataDetails?.userEmail,
+  };
 
+  const handleWishList = () => {
+    axiosSecure
+      .post("/favorites", fvrtBiodata)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success("Added to wishlist");
+        }
+      })
+      .catch((err) => {});
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-20">
@@ -46,8 +65,11 @@ const BiodataDetails = () => {
             <div className="w-full">
               {/* action area  */}
               <div className="flex flex-col lg:flex-row justify-center my-4 gap-4">
-                <button className="btn-normal mx-auto flex items-center gap-2">
-                  Whislist{" "}
+                <button
+                  onClick={handleWishList}
+                  className="btn-normal mx-auto flex items-center gap-2"
+                >
+                  Wishlist{" "}
                   <span className="text-2xl font-bold">
                     <CiStar></CiStar>
                   </span>
@@ -121,9 +143,7 @@ const BiodataDetails = () => {
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Email
                     </td>
-                    <td className="px-4 py-2">
-                      {biodataDetails?.userEmail}
-                    </td>
+                    <td className="px-4 py-2">{biodataDetails?.userEmail}</td>
                   </tr>
                   {/* Row 3 */}
                   <tr className="border-b border-purple-300">
@@ -161,21 +181,11 @@ const BiodataDetails = () => {
                       Present Address
                     </td>
                     <td className="px-4 py-2">
-                      {
-                        biodataDetails?.personalInfo?.address?.present
-                          ?.street
-                      }
-                      ,{" "}
+                      {biodataDetails?.personalInfo?.address?.present?.street},{" "}
                       {biodataDetails?.personalInfo?.address?.present?.city},{" "}
-                      {
-                        biodataDetails?.personalInfo?.address?.present
-                          ?.division
-                      }
+                      {biodataDetails?.personalInfo?.address?.present?.division}
                       ,{" "}
-                      {
-                        biodataDetails?.personalInfo?.address?.present
-                          ?.country
-                      }
+                      {biodataDetails?.personalInfo?.address?.present?.country}
                     </td>
                   </tr>
                   {/* Row 2 */}
@@ -184,15 +194,8 @@ const BiodataDetails = () => {
                       Permanent Address
                     </td>
                     <td className="px-4 py-2">
-                      {
-                        biodataDetails?.personalInfo?.address?.permanent
-                          ?.street
-                      }
-                      ,{" "}
-                      {
-                        biodataDetails?.personalInfo?.address?.permanent
-                          ?.city
-                      }
+                      {biodataDetails?.personalInfo?.address?.permanent?.street}
+                      , {biodataDetails?.personalInfo?.address?.permanent?.city}
                       ,{" "}
                       {
                         biodataDetails?.personalInfo?.address?.permanent

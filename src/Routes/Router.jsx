@@ -14,6 +14,7 @@ import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
 import MyBiodata from "../Dashboard/MyBiodata/MyBiodata";
 import MyRequestedContact from "../Dashboard/MyRequestedContact/MyRequestedContact";
+import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -82,7 +83,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "editBiodata",
-        element: <BiodataCreateEdit></BiodataCreateEdit>,
+        element: (
+          <PrivateRoute>
+            <BiodataCreateEdit></BiodataCreateEdit>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myRequested",
@@ -94,7 +99,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "myFavorites",
-        element: <h3>My myFavorites</h3>,
+        element: (
+          <PrivateRoute>
+            <MyFavorites></MyFavorites>
+          </PrivateRoute>
+        ),
       },
     ],
   },

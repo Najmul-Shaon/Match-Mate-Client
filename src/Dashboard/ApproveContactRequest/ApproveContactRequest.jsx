@@ -1,23 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import DashboardTitle from "../../Components/DashboardTitle/DashboardTitle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import DashboardTitle from "../../Components/DashboardTitle/DashboardTitle";
 import { FaDeleteLeft } from "react-icons/fa6";
-import Swal from "sweetalert2";
-import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCheckCircle } from "react-icons/fa";
+import Swal from "sweetalert2";
 
-const ApprovedPremium = () => {
+const ApproveContactRequest = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: approvedPremium = [], refetch } = useQuery({
-    queryKey: ["approvedPremium"],
+  const { data: requestData = [], refetch } = useQuery({
+    queryKey: ["requestData"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/premiumRequest");
+      const res = await axiosSecure.get("/contactRequest");
       return res.data;
     },
   });
-  console.log(approvedPremium);
+  console.log(requestData);
 
-  const handleDeleteApprovedPremium = (id) => {
+  const handleDeleteContactRequest = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -25,30 +24,26 @@ const ApprovedPremium = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete!",
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.delete(`/delete/premiumRequest/${id}`).then((res) => {
-            console.log(res.data);
-
-            if (res.data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Request has been deleted.",
-                icon: "success",
-              });
-              refetch();
-            }
-          });
-        }
-      })
-      .catch((err) => {});
-
-    console.log(id);
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/contactRequest/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Request has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
   };
 
-  const handleAcceptPremiumRequest = (id, email) => {
+  const handleAcceptContactRequest = (id) => {
+    // console.log(id);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -56,37 +51,30 @@ const ApprovedPremium = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes!",
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.patch(`/update/premiumRequest/${id}`).then((res) => {
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/update/contactRequest/${id}`)
+          .then((res) => {
             console.log(res.data);
-
             if (res.data.modifiedCount > 0) {
-              axiosSecure
-                .patch(`/user/role/${email}?role=premium`)
-                .then((res) => {
-                  console.log(res.data);
-                  if (res.data.modifiedCount > 0) {
-                    Swal.fire({
-                      title: "Done!",
-                      text: "Request accepted.",
-                      icon: "success",
-                    });
-                    refetch();
-                  }
-                });
+              Swal.fire({
+                title: "Approved!",
+                icon: "success",
+              });
+              refetch();
             }
-          });
-        }
-      })
-      .catch((err) => {});
+          })
+          .catch((err) => {});
+      }
+    });
   };
+
   return (
     <div>
       <DashboardTitle
-        content={"Approve Premium"}
-        qty={approvedPremium}
+        content={"Contact Request"}
+        qty={requestData}
       ></DashboardTitle>
       <div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -130,10 +118,10 @@ const ApprovedPremium = () => {
                   Name
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Biodata Id
+                  Email
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Email
+                  Biodata Id
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
@@ -141,29 +129,28 @@ const ApprovedPremium = () => {
               </tr>
             </thead>
             <tbody>
-              {approvedPremium.map((singlePremium, i) => (
+              {requestData.map((singleRequestData, i) => (
                 <tr
-                  key={singlePremium?._id}
+                  key={singleRequestData?.biodataId}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <td className="w-4 p-4">
-                    {(i + 1).toString().padStart(2, 0)}
+                    {(i + 1).toString().padStart(2, "0")}
                   </td>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {singlePremium?.userName}
+                    {singleRequestData?.name || "N/A"}
                   </th>
-                  <td className="px-6 py-4">{singlePremium?.biodataId}</td>
-                  <td className="px-6 py-4">{singlePremium?.userEmail}</td>
+                  <td className="px-6 py-4">{singleRequestData?.userEmail}</td>
+                  <td className="px-6 py-4">{singleRequestData?.biodataId}</td>
                   <td className="px-6 py-4">
                     <div className="space-x-3">
                       <button
                         onClick={() =>
-                          handleAcceptPremiumRequest(
-                            singlePremium?.biodataId,
-                            singlePremium?.userEmail
+                          handleAcceptContactRequest(
+                            singleRequestData?.biodataId
                           )
                         }
                         className="text-accent text-3xl"
@@ -172,7 +159,9 @@ const ApprovedPremium = () => {
                       </button>
                       <button
                         onClick={() =>
-                          handleDeleteApprovedPremium(singlePremium?.biodataId)
+                          handleDeleteContactRequest(
+                            singleRequestData?.biodataId
+                          )
                         }
                         className="text-accent text-3xl"
                       >
@@ -190,4 +179,4 @@ const ApprovedPremium = () => {
   );
 };
 
-export default ApprovedPremium;
+export default ApproveContactRequest;

@@ -17,6 +17,7 @@ import MyRequestedContact from "../Dashboard/MyRequestedContact/MyRequestedConta
 import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Dashboard/ApprovedPremium/ApprovedPremium";
+import ApproveContactRequest from "../Dashboard/ApproveContactRequest/ApproveContactRequest";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -123,7 +124,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "approvedContact",
-        element: <h3>Contact home</h3>,
+        element: <ApproveContactRequest></ApproveContactRequest>,
       },
     ],
   },

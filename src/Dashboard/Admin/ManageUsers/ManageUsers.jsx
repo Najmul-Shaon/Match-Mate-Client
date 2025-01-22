@@ -17,7 +17,85 @@ const ManageUsers = () => {
       return res.data;
     },
   });
-  console.log(totalUsers[0]?.userPhoto);
+  //   console.log(totalUsers[0]?.userPhoto);
+
+  const handleMakeAdmin = (targetEmail) => {
+    console.log("from make admin", targetEmail);
+
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {});
+    //   *********************
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/user/role/${targetEmail}?role=admin`)
+          .then((res) => {
+            console.log(res.data);
+            // if (res.data.message === "Same user") {
+            //   return Swal.fire({
+            //     title: "Hold!",
+            //     text: "You can't delete yourself.",
+            //     icon: "error",
+            //   });
+            // }
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                title: "Updated to Admin",
+                text: "User has been updated.",
+                icon: "success",
+              });
+              refetch();
+            }
+          })
+          .catch((err) => {});
+      }
+    });
+    //   ******************
+  };
+
+  const handleMakePremium = (targetEmail) => {
+    console.log("from make premium", targetEmail);
+    Swal.fire({
+      title: "Are you sure?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/user/role/${targetEmail}?role=premium`)
+          .then((res) => {
+            console.log(res.data);
+            // if (res.data.message === "Same user") {
+            //   return Swal.fire({
+            //     title: "Hold!",
+            //     text: "You can't delete yourself.",
+            //     icon: "error",
+            //   });
+            // }
+            if (res.data.modifiedCount > 0) {
+              Swal.fire({
+                title: "Updated to Premium!",
+                text: "User has been updated.",
+                icon: "success",
+              });
+              refetch();
+            }
+          })
+          .catch((err) => {});
+      }
+    });
+  };
 
   const handleDeleteUser = (targetEmail) => {
     Swal.fire({
@@ -28,30 +106,34 @@ const ManageUsers = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete user!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/delete/user?targetEmail=${targetEmail}&user=${user?.email}`)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.message === "Same user") {
-              return Swal.fire({
-                title: "Hold!",
-                text: "You can't delete yourself.",
-                icon: "error",
-              });
-            }
-            if (res.data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "User has been deleted.",
-                icon: "success",
-              });
-              refetch();
-            }
-          });
-      }
-    });
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure
+            .delete(
+              `/delete/user?targetEmail=${targetEmail}&user=${user?.email}`
+            )
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.message === "Same user") {
+                return Swal.fire({
+                  title: "Hold!",
+                  text: "You can't delete yourself.",
+                  icon: "error",
+                });
+              }
+              if (res.data.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "User has been deleted.",
+                  icon: "success",
+                });
+                refetch();
+              }
+            });
+        }
+      })
+      .catch((err) => {});
   };
   return (
     <div>
@@ -112,9 +194,9 @@ const ManageUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {totalUsers.map((user, i) => (
+              {totalUsers.map((singleUser, i) => (
                 <tr
-                  key={user?._id}
+                  key={singleUser?._id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <td className="w-4 p-4">
@@ -126,30 +208,36 @@ const ManageUsers = () => {
                   >
                     <img
                       className="w-10 h-10 rounded-full"
-                      src={user?.userPhoto}
-                      alt={`${user?.userName} image`}
+                      src={singleUser?.userPhoto}
+                      alt={`${singleUser?.userName} image`}
                     />
                     <div className="ps-3">
                       <div className="text-base font-semibold">
-                        {user?.userName}
+                        {singleUser?.userName}
                       </div>
                       <div className="font-normal text-gray-500">
-                        {user?.userEmail}
+                        {singleUser?.userEmail}
                       </div>
                     </div>
                   </th>
-                  <td className="px-6 py-4">{user?.userEmail}</td>
-                  <td className="px-6 py-4">{user?.userRole}</td>
+                  <td className="px-6 py-4">{singleUser?.userEmail}</td>
+                  <td className="px-6 py-4">{singleUser?.userRole}</td>
                   <td className="px-6 py-4">
                     <div className="space-x-4">
-                      <button className="text-accent text-3xl">
+                      <button
+                        onClick={() => handleMakeAdmin(singleUser?.userEmail)}
+                        className="text-accent text-3xl"
+                      >
                         <FaUserGear></FaUserGear>
                       </button>
-                      <button className="text-accent text-3xl">
+                      <button
+                        onClick={() => handleMakePremium(singleUser?.userEmail)}
+                        className="text-accent text-3xl"
+                      >
                         <LuBadgeCheck></LuBadgeCheck>
                       </button>
                       <button
-                        onClick={() => handleDeleteUser(user?.userEmail)}
+                        onClick={() => handleDeleteUser(singleUser?.userEmail)}
                         className="text-accent text-3xl"
                       >
                         <FaDeleteLeft></FaDeleteLeft>

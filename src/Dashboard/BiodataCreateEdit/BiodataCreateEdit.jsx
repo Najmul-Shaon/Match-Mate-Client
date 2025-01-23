@@ -8,6 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 // img bb hosting keys
@@ -23,6 +24,16 @@ const BiodataCreateEdit = () => {
   // get current date for date picker
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
+
+  // get my biodata info
+  const { data: myBiodata = {} } = useQuery({
+    queryKey: ["biodata", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/biodata?email=${user?.email}`);
+      return res.data;
+    },
+  });
+  console.log(myBiodata);
   // from react hook form
   const {
     register,
@@ -47,7 +58,7 @@ const BiodataCreateEdit = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(res.data.data.display_url);
+      // console.log(res.data.data.display_url);
       const biodataInfo = {
         userEmail: user.email,
         biodataPhoto: res.data.data.display_url,
@@ -102,14 +113,19 @@ const BiodataCreateEdit = () => {
           eHeight: formData.expectedHeight,
         },
       };
-      console.log(res.data.success);
+      // console.log(res.data.success);
       // setBioPhoto(res.data.data.display_url);
       if (res.data.success) {
         axiosSecure
           .post("/biodatas", biodataInfo)
           .then((postRes) => {
-            console.log(postRes.data);
-            if (postRes.data.insertedId) {
+            // console.log(postRes.data);
+            if (
+              postRes.data.insertedId ||
+              postRes.data.upsertedCount > 0 ||
+              postRes.data.modifiedCount > 0 ||
+              postRes.data.matchedCount > 0
+            ) {
               Swal.fire({
                 position: "center",
                 icon: "success",
@@ -118,7 +134,7 @@ const BiodataCreateEdit = () => {
                 timer: 1500,
               });
               reset();
-              navigate("/dashboard");
+              navigate("/dashboard/viewBiodata");
             }
           })
           .catch((err) => {
@@ -129,7 +145,7 @@ const BiodataCreateEdit = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-            console.log("error from post", err);
+            // console.log("error from post", err);
           });
       }
     };
@@ -159,6 +175,7 @@ const BiodataCreateEdit = () => {
               <input
                 type="text"
                 name="name"
+                defaultValue={myBiodata?.personalInfo?.name}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-accent focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Your name"
                 {...register("name", { required: "Required" })}
@@ -193,6 +210,7 @@ const BiodataCreateEdit = () => {
               <input
                 type="number"
                 name="phoneNumber"
+                defaultValue={myBiodata?.personalInfo?.userPhone}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Your phone number"
                 {...register("phoneNumber", {
@@ -224,7 +242,7 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="status"
-                defaultValue={"--Status--"}
+                defaultValue={myBiodata?.personalInfo?.status || "--Status--"}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("status", {
                   required: "Required",
@@ -232,8 +250,8 @@ const BiodataCreateEdit = () => {
                 })}
               >
                 <option disabled>--Status--</option>
-                <option value="Unmarried">Unmarried</option>
                 <option value="Married">Married</option>
+                <option value="Unmarried">Unmarried</option>
                 <option value="Widow">Widow</option>
                 <option value="Divorced">Divorced</option>
               </select>
@@ -248,7 +266,9 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="religion"
-                defaultValue={"--Religion--"}
+                defaultValue={
+                  myBiodata?.personalInfo?.religion || "--Religion--"
+                }
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("religion", {
                   required: "Required",
@@ -271,7 +291,9 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="gender"
-                defaultValue={"--Gender--"}
+                defaultValue={
+                  myBiodata?.personalInfo?.biodataType || "--Gender--"
+                }
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("gender", {
                   required: "Required",
@@ -320,6 +342,7 @@ const BiodataCreateEdit = () => {
                 type="number"
                 name="age"
                 id="age"
+                defaultValue={myBiodata?.personalInfo?.age}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Your age"
                 {...register("age", { required: "Required" })}
@@ -340,7 +363,7 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="height"
-                defaultValue={"--Height--"}
+                defaultValue={myBiodata?.personalInfo?.height || "--Height--"}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("height", {
                   required: "Required",
@@ -385,7 +408,7 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="weight"
-                defaultValue={"--Weight--"}
+                defaultValue={myBiodata?.personalInfo?.weight || "--Weight--"}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("weight", {
                   required: "Required",
@@ -446,7 +469,9 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="occupation"
-                defaultValue={"--Occupation--"}
+                defaultValue={
+                  myBiodata?.personalInfo?.occupation || "--Occupation--"
+                }
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("occupation", {
                   required: "Required",
@@ -471,7 +496,7 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="race"
-                defaultValue={"--Race--"}
+                defaultValue={myBiodata?.personalInfo?.race || "--Race--"}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("race", {
                   required: "Required",
@@ -496,7 +521,9 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="blood"
-                defaultValue={"--Blood Group--"}
+                defaultValue={
+                  myBiodata?.personalInfo?.blood || "--Blood Group--"
+                }
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("blood", {
                   required: "Required",
@@ -525,7 +552,9 @@ const BiodataCreateEdit = () => {
               </label>
               <select
                 name="nationality"
-                defaultValue={"--Nationality--"}
+                defaultValue={
+                  myBiodata?.personalInfo?.nationality || "--Nationality--"
+                }
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("nationality", {
                   required: "Required",
@@ -556,11 +585,14 @@ const BiodataCreateEdit = () => {
               {/* present address field  01 */}
               <div className="col-span-5 md:col-span-5 lg:col-span-2">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Address Line
+                  Address Line (house no, road no, area)
                 </label>
                 <input
                   type="text"
                   name="presentAddressLine"
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.present?.street
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your address"
                   {...register("presentAddressLine", {
@@ -581,7 +613,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="presentCity"
-                  defaultValue={"--City--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.present?.city ||
+                    "--City--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("presentCity", {
                     required: "Required",
@@ -611,7 +646,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="presentDivision"
-                  defaultValue={"--Division--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.present?.division ||
+                    "--Division--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("presentDivision", {
                     required: "Required",
@@ -641,7 +679,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="presentCounty"
-                  defaultValue={"--Country--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.present?.country ||
+                    "--Country--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("presentCounty", {
                     required: "Required",
@@ -667,10 +708,13 @@ const BiodataCreateEdit = () => {
               {/* present address field  01 */}
               <div className="col-span-5 md:col-span-5 lg:col-span-2">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Address Line
+                  Address Line (house no, road no, area)
                 </label>
                 <input
                   type="text"
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.permanent?.street
+                  }
                   name="permanentAddressLine"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your address"
@@ -692,7 +736,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="permanantCity"
-                  defaultValue={"--City--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.permanent?.city ||
+                    "--City--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("permanantCity", {
                     required: "Required",
@@ -722,7 +769,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="permanentDivision"
-                  defaultValue={"--Division--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.permanent?.division ||
+                    "--Division--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("permanentDivision", {
                     required: "Required",
@@ -730,9 +780,14 @@ const BiodataCreateEdit = () => {
                   })}
                 >
                   <option disabled>--Division--</option>
+                  <option disabled>--Division--</option>
                   <option value="Dhaka">Dhaka</option>
                   <option value="Barisal">Barisal</option>
                   <option value="Khulna">Khulna</option>
+                  <option value="Chattagram">Chattagram</option>
+                  <option value="Rangpur">Rangpur</option>
+                  <option value="Mymensingh">Mymensingh</option>
+                  <option value="Sylhet">Sylhet</option>
                 </select>
                 {errors.permanentDivision && (
                   <span className="text-red-600">
@@ -748,7 +803,10 @@ const BiodataCreateEdit = () => {
 
                 <select
                   name="permanentCounty"
-                  defaultValue={"--Country--"}
+                  defaultValue={
+                    myBiodata?.personalInfo?.address?.permanent?.country ||
+                    "--Country--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("permanentCounty", {
                     required: "Required",
@@ -803,6 +861,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="text"
                   name="fatherName"
+                  defaultValue={myBiodata?.familyInfo?.fatherInfo?.fName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-accent focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Father's name"
                   {...register("fatherName", {
@@ -823,6 +882,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="number"
                   name="fatherPhoneNumber"
+                  defaultValue={myBiodata?.familyInfo?.fatherInfo?.fNumber}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Father's phone number"
                   {...register("fatherPhoneNumber", {
@@ -854,7 +914,10 @@ const BiodataCreateEdit = () => {
                 </label>
                 <select
                   name="fatherOccupation"
-                  defaultValue={"--Occupation--"}
+                  defaultValue={
+                    myBiodata?.familyInfo?.fatherInfo?.fOccupation ||
+                    "--Occupation--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("fatherOccupation", {
                     required: "Required",
@@ -885,6 +948,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="text"
                   name="motherName"
+                  defaultValue={myBiodata?.familyInfo?.motherInfo?.mName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-accent focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Mother's name"
                   {...register("motherName", {
@@ -905,6 +969,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="number"
                   name="motherPhoneNumber"
+                  defaultValue={myBiodata?.familyInfo?.motherInfo?.mNumber}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your phone number"
                   {...register("motherPhoneNumber", {
@@ -936,7 +1001,10 @@ const BiodataCreateEdit = () => {
                 </label>
                 <select
                   name="motherOccupation"
-                  defaultValue={"--Occupation--"}
+                  defaultValue={
+                    myBiodata?.familyInfo?.motherInfo?.mOccupation ||
+                    "--Occupation--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("motherOccupation", {
                     required: "Required",
@@ -968,6 +1036,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="number"
                   name="brother"
+                  defaultValue={myBiodata?.familyInfo?.siblings?.brothers}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="How many brother you have"
                   {...register("brother", {
@@ -986,6 +1055,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="number"
                   name="sister"
+                  defaultValue={myBiodata?.familyInfo?.siblings?.sisters}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="How many sister you have"
                   {...register("sister", {
@@ -1016,6 +1086,7 @@ const BiodataCreateEdit = () => {
                 <input
                   type="number"
                   name="expectedAge"
+                  defaultValue={myBiodata?.expectedPartner?.eAge}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your age"
                   {...register("expectedAge", {
@@ -1035,7 +1106,9 @@ const BiodataCreateEdit = () => {
                 </label>
                 <select
                   name="expectedWeight"
-                  defaultValue={"--Weight--"}
+                  defaultValue={
+                    myBiodata?.expectedPartner?.eWeight || "--Weight--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("expectedWeight", {
                     required: "Required",
@@ -1098,7 +1171,9 @@ const BiodataCreateEdit = () => {
                 </label>
                 <select
                   name="expectedHeight"
-                  defaultValue={"--Height--"}
+                  defaultValue={
+                    myBiodata?.expectedPartner?.eHeight || "--Height--"
+                  }
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   {...register("expectedHeight", {
                     required: "Required",

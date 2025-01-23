@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 
 const BiodataDetails = () => {
   const { biodataId } = useParams();
@@ -318,6 +319,9 @@ const BiodataDetails = () => {
           <PremiumCard></PremiumCard>
           <PremiumCard></PremiumCard>
           <PremiumCard></PremiumCard>
+          <ProfileCard></ProfileCard>
+          <ProfileCard></ProfileCard>
+          <ProfileCard></ProfileCard>
         </div>
       </div>
     </div>

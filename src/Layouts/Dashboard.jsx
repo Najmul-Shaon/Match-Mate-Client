@@ -15,6 +15,7 @@ const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
   const isAdmin = true;
+  // const isAdmin = false;
   return (
     <div className="">
       <Helmet>

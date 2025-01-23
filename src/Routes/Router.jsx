@@ -18,6 +18,7 @@ import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Dashboard/ApprovedPremium/ApprovedPremium";
 import ApproveContactRequest from "../Dashboard/ApproveContactRequest/ApproveContactRequest";
+import Statistics from "../Dashboard/Admin/Statistics/Statistics";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -112,7 +113,7 @@ const Router = createBrowserRouter([
       // admin sections
       {
         path: "adminHome",
-        element: <h3>Admin home</h3>,
+        element: <Statistics></Statistics>,
       },
       {
         path: "manageUsers",

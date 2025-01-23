@@ -5,6 +5,7 @@ import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCar
 import coverImg from "../../assets/BidataCover.jpg";
 import Cover from "../../Shared/Cover/Cover";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 
 const Biodatas = () => {
   const axiosPublic = useAxiosPublic();
@@ -36,7 +37,7 @@ const Biodatas = () => {
         <div className="col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {biodatas.map((biodata) => (
-              <PremiumCard key={biodata._id} cardInfo={biodata}></PremiumCard>
+              <ProfileCard key={biodata._id} cardInfo={biodata}></ProfileCard>
             ))}
           </div>
         </div>

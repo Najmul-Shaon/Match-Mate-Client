@@ -5,13 +5,18 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 const PremiumProfile = () => {
   const [selectedValue, setSelectedValue] = useState("asc");
   console.log(selectedValue);
 
   const axiosPublic = useAxiosPublic();
-  const { data: premiumProfile = [], refetch } = useQuery({
+  const {
+    data: premiumProfile = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["premiumProfile", selectedValue],
     queryFn: async () => {
       const res = await axiosPublic.get(
@@ -20,6 +25,9 @@ const PremiumProfile = () => {
       return res.data;
     },
   });
+  if (isLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
   const handleChangle = (e) => {
     setSelectedValue(e.target.value);
     refetch();

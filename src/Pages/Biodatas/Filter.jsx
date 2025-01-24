@@ -1,20 +1,6 @@
 import React, { useState } from "react";
 
-const Filter = () => {
-  const [filters, setFilters] = useState({
-    ageRange: { min: "", max: "" },
-    biodataType: { male: false, female: false },
-    divisions: {
-      Dhaka: false,
-      Chattogram: false,
-      Rangpur: false,
-      Barisal: false,
-      Khulna: false,
-      Mymensingh: false,
-      Sylhet: false,
-    },
-  });
-
+const Filter = ({ filters, setFilters, refetch }) => {
   // Handle filter changes
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -42,9 +28,8 @@ const Filter = () => {
       }
     });
   };
-
   // Log filters on every update
-  console.log(filters);
+  //   console.log(filters);
   return (
     <div className="p-4 max-w-sm mx-auto">
       {/* Age Range Filter */}

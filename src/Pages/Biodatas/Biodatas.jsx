@@ -6,6 +6,8 @@ import coverImg from "../../assets/BidataCover.jpg";
 import Cover from "../../Shared/Cover/Cover";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import Filter from "./Filter";
+import { FiFilter } from "react-icons/fi";
 
 const Biodatas = () => {
   const axiosPublic = useAxiosPublic();
@@ -30,9 +32,10 @@ const Biodatas = () => {
       </div>
       {/* layout  */}
       <div className="grid grid-cols-12 mt-8 gap-6">
-        <aside className="col-span-3 border border-green-600 self-start">
-          <h5>Filted by:</h5>
-          <div></div>
+        <aside className="col-span-3  self-start bg-primary p-6 rounded-lg">
+          <h5 className="font-semibold">Filter by:</h5>
+          {/*  <div></div> */}
+          <Filter></Filter>
         </aside>
         <div className="col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaDeleteLeft } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import DashboardTitle from "../../Components/DashboardTitle/DashboardTitle";
 
 const MyRequestedContact = () => {
   const axiosSecure = useAxiosSecure();
@@ -46,9 +47,10 @@ const MyRequestedContact = () => {
   return (
     <div>
       <div>
-        <h3 className="text-accent font-bold text-center">
-          My Requested Contact ({requestData.length})
-        </h3>
+        <DashboardTitle
+          content={"My Requested Contact"}
+          qty={requestData}
+        ></DashboardTitle>
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="pb-4 bg-white dark:bg-gray-900">

@@ -19,6 +19,7 @@ import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Dashboard/ApprovedPremium/ApprovedPremium";
 import ApproveContactRequest from "../Dashboard/ApproveContactRequest/ApproveContactRequest";
 import Statistics from "../Dashboard/Admin/Statistics/Statistics";
+import GotMarried from "../Dashboard/GotMarried/GotMarried";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -107,6 +108,14 @@ const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyFavorites></MyFavorites>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "gotMarried",
+        element: (
+          <PrivateRoute>
+            <GotMarried></GotMarried>
           </PrivateRoute>
         ),
       },

@@ -3,7 +3,7 @@ import logo from "../assets/logo_without_bg.png";
 import { LuBadgeCheck, LuLayoutDashboard, LuUsers } from "react-icons/lu";
 import useLogout from "../Hooks/useLogout";
 import { FaRegEdit } from "react-icons/fa";
-import { IoIosLogOut } from "react-icons/io";
+import { IoIosLogOut, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { CiStar } from "react-icons/ci";
 import { MdOutlineContactPhone } from "react-icons/md";
 import { FiUserCheck } from "react-icons/fi";
@@ -14,8 +14,8 @@ import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
-  const isAdmin = true;
-  // const isAdmin = false;
+  // const isAdmin = true;
+  const isAdmin = false;
   return (
     <div className="">
       <Helmet>
@@ -302,6 +302,21 @@ const Dashboard = () => {
                       <CiStar />
                     </span>
                     Favorites
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/gotMarried"
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
+                  >
+                    <span className="me-3 text-2xl">
+                      <IoMdCheckmarkCircleOutline />
+                    </span>
+                    Got Married
                   </NavLink>
                 </li>
                 <li>

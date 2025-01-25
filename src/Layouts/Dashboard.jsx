@@ -14,8 +14,8 @@ import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
-  // const isAdmin = true;
-  const isAdmin = false;
+  const isAdmin = true;
+  // const isAdmin = false;
   return (
     <div className="">
       <Helmet>
@@ -211,18 +211,23 @@ const Dashboard = () => {
                     <span className="me-3 text-xl">
                       <VscGitPullRequestGoToChanges />
                     </span>
-                    Approved Contact Request
+                    Contact Request
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    onClick={handleLogout}
-                    className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
+                    to="/dashboard/manageSuccessStory"
+                    end
+                    className={({ isActive }) =>
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
+                        isActive ? "bg-accent text-white" : ""
+                      }`
+                    }
                   >
                     <span className="me-3 text-xl">
-                      <IoIosLogOut />
+                      <VscGitPullRequestGoToChanges />
                     </span>
-                    Log out
+                    Success Story
                   </NavLink>
                 </li>
               </>
@@ -319,19 +324,19 @@ const Dashboard = () => {
                     Got Married
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    onClick={handleLogout}
-                    className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
-                  >
-                    <span className="me-3 text-xl">
-                      <IoIosLogOut />
-                    </span>
-                    Log out
-                  </NavLink>
-                </li>
               </>
             )}
+            <li>
+              <NavLink
+                onClick={handleLogout}
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
+              >
+                <span className="me-3 text-xl">
+                  <IoIosLogOut />
+                </span>
+                Log out
+              </NavLink>
+            </li>
           </ul>
         </div>
       </aside>

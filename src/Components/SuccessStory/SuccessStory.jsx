@@ -68,21 +68,7 @@ const SuccessStory = () => {
             <SuccessStoryCard singleSuccessStory={singleSuccessStory}></SuccessStoryCard>
           </div>
         ))}
-        {/* <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div>
-        <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div>
-        <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div>
-        <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div>
-        <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div> */}
+      
       </div>
     </div>
   );

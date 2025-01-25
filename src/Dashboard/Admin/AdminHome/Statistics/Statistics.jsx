@@ -1,15 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-
-const Statistics = () => {
-  const axiosSecure = useAxiosSecure();
-  const { data: dashboardStats = {} } = useQuery({
-    queryKey: ["dashboardStats"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/biodataCount");
-      return res.data;
-    },
-  });
+const Statistics = ({ dashboardStats }) => {
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6">

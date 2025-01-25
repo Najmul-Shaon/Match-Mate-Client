@@ -6,6 +6,7 @@ import Router from "./Routes/Router.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ModalContainer } from "reoverlay";
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")).render(
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
-          <RouterProvider router={Router}></RouterProvider>
+          {/* <ModalContainer> */}
+            <RouterProvider router={Router}></RouterProvider>
+          {/* </ModalContainer> */}
         </HelmetProvider>
       </QueryClientProvider>
     </AuthProvider>

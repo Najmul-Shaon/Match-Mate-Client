@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 
 // img bb hosting keys
 const imageHostingKey = import.meta.env.VITE_IMGBB_KEY;
@@ -15,6 +17,7 @@ const GotMarried = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [ratingValue, setRatingValue] = useState(0);
   // get current date for date picker
   const [startDate, setStartDate] = useState(new Date());
 
@@ -43,6 +46,7 @@ const GotMarried = () => {
       status: "married",
       marriageDate: data.marriageDate,
       coupleImgUrl: res.data.data.display_url,
+      rating: ratingValue,
     };
 
     if (res.data.success) {
@@ -74,7 +78,7 @@ const GotMarried = () => {
       <DashboardTitle content={"Share Your Sweet Story"}></DashboardTitle>
       <div className="mt-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-6">
+          <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6">
             <div>
               <label
                 htmlFor="first_name"
@@ -115,31 +119,10 @@ const GotMarried = () => {
                 <span className="text-red-600">{errors.partnerId.message}</span>
               )}
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-6">
-            <div>
-              <label
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                htmlFor="successImg"
-              >
-                Upload file
-              </label>
-              <input
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="successImg"
-                type="file"
-                {...register("successImg", { required: "Required" })}
-              />
-              {errors.successImg && (
-                <span className="text-red-600">
-                  {errors.successImg.message}
-                </span>
-              )}
-            </div>
-            {/* date of birth  */}
+            {/* date of marriage  */}
             <div className="col-span-2 lg:col-span-1">
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Date of Birth
+                Date of Marriege
               </label>
               <Controller
                 name="marriageDate"
@@ -159,6 +142,41 @@ const GotMarried = () => {
                   />
                 )}
               ></Controller>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6">
+            <div>
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="successImg"
+              >
+                Upload file
+              </label>
+              <input
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="successImg"
+                type="file"
+                {...register("successImg", { required: "Required" })}
+              />
+              {errors.successImg && (
+                <span className="text-red-600">
+                  {errors.successImg.message}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="successImg"
+              >
+                Rating
+              </label>
+              <Rating
+                style={{ maxWidth: 180 }}
+                value={ratingValue}
+                onChange={(selectedValue) => setRatingValue(selectedValue)}
+              />
             </div>
           </div>
           <div>

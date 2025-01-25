@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const PremiumCard = ({ cardInfo }) => {
-  // console.log(cardInfo);
   return (
     <div className="card bg-primary shadow-xl rounded-md border-dashed border-2 flex flex-col items-center justify-center">
       <figure className=" py-3 px-2 flex justify-center">

@@ -12,7 +12,6 @@ const ManageUsers = () => {
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
-  console.log(searchValue);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -41,7 +40,6 @@ const ManageUsers = () => {
         axiosSecure
           .patch(`/user/role/${targetEmail}?role=admin`)
           .then((res) => {
-            console.log(res.data);
 
             if (res.data.modifiedCount > 0) {
               Swal.fire({
@@ -101,7 +99,6 @@ const ManageUsers = () => {
               `/delete/user?targetEmail=${targetEmail}&user=${user?.email}`
             )
             .then((res) => {
-              console.log(res.data);
               if (res.data.message === "Same user") {
                 return Swal.fire({
                   title: "Hold!",

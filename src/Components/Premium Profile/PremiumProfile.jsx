@@ -9,7 +9,6 @@ import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 const PremiumProfile = () => {
   const [selectedValue, setSelectedValue] = useState("asc");
-  console.log(selectedValue);
 
   const axiosPublic = useAxiosPublic();
   const {
@@ -32,7 +31,6 @@ const PremiumProfile = () => {
     setSelectedValue(e.target.value);
     refetch();
   };
-  console.log(premiumProfile);
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-24">
       <SectionTitle

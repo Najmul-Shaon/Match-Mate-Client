@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const ProfileCard = ({ cardInfo }) => {
-  // console.log(cardInfo);
   return (
     <div className="bg-primary rounded-lg shadow-lg flex flex-col">
       <div className="flex gap-2 p-4 flex-1">

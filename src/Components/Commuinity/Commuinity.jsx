@@ -11,7 +11,6 @@ const Commuinity = () => {
       return res.data;
     },
   });
-  // console.log(commuinityStats);
   return (
     <div className="max-w-screen-xl mx-auto px-4 mt-24">
       <SectionTitle

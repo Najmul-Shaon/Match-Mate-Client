@@ -2,7 +2,20 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SuccessStoryCard from "./SuccessStoryCard";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 const SuccessStory = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const { data: successStory = [] } = useQuery({
+    queryKey: ["successStory"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/successStory");
+      return res.data;
+    },
+  });
+  console.log(successStory);
+
   const [sliderRef] = useKeenSlider(
     {
       loop: true,
@@ -47,7 +60,15 @@ const SuccessStory = () => {
         ></SectionTitle>
       </div>
       <div ref={sliderRef} className="keen-slider">
-        <div className="keen-slider__slide number-slide1">
+        {successStory.map((singleSuccessStory) => (
+          <div
+            key={singleSuccessStory?._id}
+            className="keen-slider__slide number-slide1"
+          >
+            <SuccessStoryCard singleSuccessStory={singleSuccessStory}></SuccessStoryCard>
+          </div>
+        ))}
+        {/* <div className="keen-slider__slide number-slide1">
           <SuccessStoryCard></SuccessStoryCard>
         </div>
         <div className="keen-slider__slide number-slide1">
@@ -61,10 +82,7 @@ const SuccessStory = () => {
         </div>
         <div className="keen-slider__slide number-slide1">
           <SuccessStoryCard></SuccessStoryCard>
-        </div>
-        <div className="keen-slider__slide number-slide1">
-          <SuccessStoryCard></SuccessStoryCard>
-        </div>
+        </div> */}
       </div>
     </div>
   );

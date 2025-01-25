@@ -105,6 +105,7 @@ const Biodatas = () => {
         </aside>
         <div className="col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {biodatas.length === 0 && <h3>No biodata found</h3>}
             {biodatas.map((biodata) => (
               <ProfileCard key={biodata._id} cardInfo={biodata}></ProfileCard>
             ))}

@@ -5,21 +5,30 @@ import { FaDeleteLeft, FaUserGear } from "react-icons/fa6";
 import { LuBadgeCheck } from "react-icons/lu";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import { useEffect, useState } from "react";
 
 const ManageUsers = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+  console.log(searchValue);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const { data: totalUsers = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?search=${searchValue}`);
       return res.data;
     },
   });
 
-  const handleMakeAdmin = (targetEmail) => {
+  useEffect(() => {
+    refetch();
+  }, [searchValue]);
 
+  const handleMakeAdmin = (targetEmail) => {
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -33,7 +42,7 @@ const ManageUsers = () => {
           .patch(`/user/role/${targetEmail}?role=admin`)
           .then((res) => {
             console.log(res.data);
-            
+
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Updated to Admin",
@@ -46,7 +55,6 @@ const ManageUsers = () => {
           .catch((err) => {});
       }
     });
-  
   };
 
   const handleMakePremium = (targetEmail) => {
@@ -145,6 +153,7 @@ const ManageUsers = () => {
                 </svg>
               </div>
               <input
+                onKeyUp={handleChange}
                 type="text"
                 id="table-search-users"
                 className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

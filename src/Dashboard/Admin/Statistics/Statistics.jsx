@@ -13,7 +13,7 @@ const Statistics = () => {
   console.log(dashboardStats);
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6">
         {/* total biodata  */}
 
         <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
@@ -43,13 +43,22 @@ const Statistics = () => {
             Female Biodata
           </p>
         </div>
-        {/* Total marriege*/}
+        {/* Total premium*/}
         <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
           <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
             <span> {dashboardStats?.totalPremiumBiodata}</span>
           </h3>
           <p className="font-normal text-gray-900 dark:text-white text-lg">
             Premium Biodata
+          </p>
+        </div>
+        {/* Total Revenue*/}
+        <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
+          <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
+            <span> {dashboardStats?.amount}</span>
+          </h3>
+          <p className="font-normal text-gray-900 dark:text-white text-lg">
+            Revenue
           </p>
         </div>
       </div>

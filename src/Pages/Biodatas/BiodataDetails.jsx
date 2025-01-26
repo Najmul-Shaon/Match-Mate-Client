@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import SimillerBiodata from "./SimillerBiodata";
 
 const BiodataDetails = () => {
   const { biodataId } = useParams();
@@ -312,17 +313,9 @@ const BiodataDetails = () => {
         </div>
       </div>
       {/* similler profile  */}
-      <div className="mt-24">
-        <SectionTitle header={"Similler biodata"}></SectionTitle>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-          <PremiumCard></PremiumCard>
-          <PremiumCard></PremiumCard>
-          <PremiumCard></PremiumCard>
-          <ProfileCard></ProfileCard>
-          <ProfileCard></ProfileCard>
-          <ProfileCard></ProfileCard>
-        </div>
-      </div>
+      <SimillerBiodata
+        biodataType={biodataDetails?.personalInfo?.biodataType}
+      ></SimillerBiodata>
     </div>
   );
 };

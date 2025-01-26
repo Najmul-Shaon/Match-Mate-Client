@@ -15,20 +15,6 @@ const Biodatas = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
 
-  // get total biodata count from the db
-  const { data: biodatasCount = {} } = useQuery({
-    queryKey: ["biodatasCount"],
-    queryFn: async () => {
-      const res = await axiosPublic.get("/biodataCounts");
-      return res.data;
-    },
-  });
-
-  const numberOfPage = Math.ceil(biodatasCount?.count / itemsPerPage);
-  const pagesCount = !isNaN(numberOfPage)
-    ? [...Array(numberOfPage).keys()]
-    : [];
-
   const [filters, setFilters] = useState({
     ageRange: { min: "", max: "" },
     biodataType: { male: false, female: false },
@@ -83,12 +69,32 @@ const Biodatas = () => {
   // transorm filters into query string
   const queryString = transformToQuery(filters);
 
+  // get total biodata count from the db
+  const { data: biodatasCount = {} } = useQuery({
+    queryKey: ["biodatasCount", queryString],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/biodataCounts?${queryString}`);
+      return res.data;
+    },
+  });
+  console.log(biodatasCount);
+  console.log("biodata count ", biodatasCount?.count);
+  console.log("item per page", itemsPerPage);
+
+  const numberOfPage = Math.ceil(biodatasCount?.count / itemsPerPage);
+  const pagesCount = !isNaN(numberOfPage)
+    ? [...Array(numberOfPage).keys()]
+    : [];
+
+  console.log("number of page:", numberOfPage);
+  console.log("page count", pagesCount);
+
   const {
     data: biodatas = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["biodatas"],
+    queryKey: ["biodatas", queryString],
     queryFn: async () => {
       const res = await axiosPublic.get(`/biodatas?${queryString}`);
       return res.data;
@@ -146,7 +152,7 @@ const Biodatas = () => {
             refetch={refetch}
           ></Filter>
         </aside>
-        <div className="col-span-9">
+        <div className="col-span-9 flex flex-col justify-between">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {biodatas.length === 0 && <h3>No biodata found</h3>}
             {biodatas.map((biodata) => (

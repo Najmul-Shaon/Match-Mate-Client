@@ -77,17 +77,11 @@ const Biodatas = () => {
       return res.data;
     },
   });
-  console.log(biodatasCount);
-  console.log("biodata count ", biodatasCount?.count);
-  console.log("item per page", itemsPerPage);
 
   const numberOfPage = Math.ceil(biodatasCount?.count / itemsPerPage);
   const pagesCount = !isNaN(numberOfPage)
     ? [...Array(numberOfPage).keys()]
     : [];
-
-  console.log("number of page:", numberOfPage);
-  console.log("page count", pagesCount);
 
   const {
     data: biodatas = [],

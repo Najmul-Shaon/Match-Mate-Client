@@ -33,7 +33,6 @@ const BiodataCreateEdit = () => {
       return res.data;
     },
   });
-  console.log(myBiodata);
   // from react hook form
   const {
     register,
@@ -58,7 +57,6 @@ const BiodataCreateEdit = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      // console.log(res.data.data.display_url);
       const biodataInfo = {
         userEmail: user.email,
         biodataPhoto: res.data.data.display_url,
@@ -113,13 +111,11 @@ const BiodataCreateEdit = () => {
           eHeight: formData.expectedHeight,
         },
       };
-      // console.log(res.data.success);
       // setBioPhoto(res.data.data.display_url);
       if (res.data.success) {
         axiosSecure
           .post("/biodatas", biodataInfo)
           .then((postRes) => {
-            // console.log(postRes.data);
             if (
               postRes.data.insertedId ||
               postRes.data.upsertedCount > 0 ||
@@ -145,11 +141,9 @@ const BiodataCreateEdit = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-            // console.log("error from post", err);
           });
       }
     };
-    // console.log(biodataInfo);
     // console
     await imgBbResponse();
   };

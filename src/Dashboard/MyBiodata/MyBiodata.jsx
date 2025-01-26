@@ -17,8 +17,6 @@ const MyBiodata = () => {
     },
   });
 
-  console.log(Object.keys(myBiodata).length);
-
   const handleMakePremium = (bId) => {
     const biodataInfo = {
       userEmail: user?.email,
@@ -26,7 +24,6 @@ const MyBiodata = () => {
       biodataId: bId,
       userName: myBiodata?.personalInfo?.name,
     };
-    console.log(biodataInfo);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -39,7 +36,6 @@ const MyBiodata = () => {
         axiosSecure
           .post("/premiumRequest", biodataInfo)
           .then((res) => {
-            console.log(res.data);
             if (res.data.insertedId) {
               Swal.fire({
                 title: "Submitted!",
@@ -368,7 +364,7 @@ const MyBiodata = () => {
           <Link to="/dashboard/editBiodata">
             <button
               type="button"
-              class="px-3 py-2 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent/85 focus:ring-4 focus:outline-none"
+              className="px-3 py-2 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent/85 focus:ring-4 focus:outline-none"
             >
               Update Now
             </button>

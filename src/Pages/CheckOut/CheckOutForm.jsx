@@ -19,7 +19,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
-      console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
   }, [axiosSecure, price]);
@@ -38,10 +37,8 @@ const CheckOutForm = ({ bId, uEmail }) => {
       card,
     });
     if (error) {
-      console.log("payment error", error);
       setError(error.message);
     } else {
-      console.log("Payment mathod", paymentMethod);
       setError("");
     }
     //   confirm payment
@@ -56,9 +53,7 @@ const CheckOutForm = ({ bId, uEmail }) => {
         },
       });
     if (cardConfirmError) {
-      console.log("confimr error ", cardConfirmError);
     } else {
-      console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         const requestInfo = {
           biodataId: bId,
@@ -77,7 +72,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
         axiosSecure
           .post("/makePayment", paymentInfo)
           .then((res) => {
-            console.log(res.data);
             if (res.data.message === "Alredy Paid") {
               return Swal.fire({
                 position: "center",
@@ -91,7 +85,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
               axiosSecure
                 .post("/contactRequest", requestInfo)
                 .then((res) => {
-                  console.log(res.data.message);
                   if (
                     res.data.message ===
                     "You have already paid for this biodada"
@@ -116,7 +109,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
                   }
                 })
                 .catch((err) => {
-                  console.log(err);
                   Swal.fire({
                     position: "center",
                     icon: "error",
@@ -128,7 +120,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
             }
           })
           .catch((err) => {
-            console.log(err);
             Swal.fire({
               position: "center",
               icon: "error",
@@ -138,7 +129,6 @@ const CheckOutForm = ({ bId, uEmail }) => {
             });
           });
 
-        console.log(paymentIntent);
         setTrsxId(paymentIntent.id);
       }
     }

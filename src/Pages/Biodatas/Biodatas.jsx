@@ -57,7 +57,6 @@ const Biodatas = () => {
 
   // transorm filters into query string
   const queryString = transformToQuery(filters);
-  // console.log(queryString);
 
   const axiosPublic = useAxiosPublic();
 
@@ -72,8 +71,6 @@ const Biodatas = () => {
       return res.data;
     },
   });
-  console.log(biodatas);
-  // console.log(filters);
 
   useEffect(() => {
     refetch();

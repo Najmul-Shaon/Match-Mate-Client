@@ -9,7 +9,6 @@ const SuccessStoryCard = ({ singleSuccessStory }) => {
     month: "long",
     year: "numeric",
   });
-  console.log(formateDate);
   return (
     <div className="flex justify-center">
       <div className="flex flex-col md:flex-row bg-primary shadow-xl p-8 rounded-xl border border-dashed w-[1000px] justify-center items-center gap-6">

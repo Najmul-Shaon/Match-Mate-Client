@@ -12,14 +12,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PK_STRIPE);
 const CheckOut = () => {
   const { biodataId } = useParams();
   const { user } = useAuth();
-  // const axiosSecure = useAxiosSecure();
 
-  // const { data: biodataID = [] } = useQuery({
-  //   queryKey: ['biodataID'], queryFn: async () => {
-  //     const res = await axiosSecure.get(``)
-  //   }
-  // })
-  console.log(biodataId);
   return (
     <div className="max-w-screen-xl mx-auto px-4">
       <Cover

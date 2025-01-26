@@ -22,6 +22,7 @@ import Statistics from "../Dashboard/Admin/AdminHome/Statistics/Statistics";
 import GotMarried from "../Dashboard/GotMarried/GotMarried";
 import AdminHome from "../Dashboard/Admin/AdminHome/AdminHome";
 import ManageSuccessStory from "../Dashboard/Admin/ManageSuccessStory/ManageSuccessStory";
+import AdminRoute from "../Layouts/AdminRoute";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -124,23 +125,43 @@ const Router = createBrowserRouter([
       // admin sections
       {
         path: "adminHome",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "approvedPremium",
-        element: <ApprovedPremium></ApprovedPremium>,
+        element: (
+          <AdminRoute>
+            <ApprovedPremium></ApprovedPremium>
+          </AdminRoute>
+        ),
       },
       {
         path: "approvedContact",
-        element: <ApproveContactRequest></ApproveContactRequest>,
+        element: (
+          <AdminRoute>
+            <ApproveContactRequest></ApproveContactRequest>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageSuccessStory",
-        element: <ManageSuccessStory></ManageSuccessStory>,
+        element: (
+          <AdminRoute>
+            <ManageSuccessStory></ManageSuccessStory>
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -15,7 +15,6 @@ const ApprovedPremium = () => {
       return res.data;
     },
   });
-  console.log(approvedPremium);
 
   const handleDeleteApprovedPremium = (id) => {
     Swal.fire({
@@ -30,7 +29,6 @@ const ApprovedPremium = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axiosSecure.delete(`/delete/premiumRequest/${id}`).then((res) => {
-            console.log(res.data);
 
             if (res.data.deletedCount > 0) {
               Swal.fire({
@@ -45,7 +43,6 @@ const ApprovedPremium = () => {
       })
       .catch((err) => {});
 
-    console.log(id);
   };
 
   const handleAcceptPremiumRequest = (id, email) => {
@@ -60,13 +57,11 @@ const ApprovedPremium = () => {
       .then((result) => {
         if (result.isConfirmed) {
           axiosSecure.patch(`/update/premiumRequest/${id}`).then((res) => {
-            console.log(res.data);
 
             if (res.data.modifiedCount > 0) {
               axiosSecure
                 .patch(`/user/role/${email}?role=premium`)
                 .then((res) => {
-                  console.log(res.data);
                   if (res.data.modifiedCount > 0) {
                     Swal.fire({
                       title: "Done!",

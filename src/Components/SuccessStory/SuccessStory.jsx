@@ -14,7 +14,6 @@ const SuccessStory = () => {
       return res.data;
     },
   });
-  console.log(successStory);
 
   const [sliderRef] = useKeenSlider(
     {

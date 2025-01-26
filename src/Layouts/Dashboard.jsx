@@ -10,12 +10,12 @@ import { FiUserCheck } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const handleLogout = useLogout();
   const { user } = useAuth();
-  const isAdmin = true;
-  // const isAdmin = false;
+  const [isAdmin] = useAdmin();
   return (
     <div className="">
       <Helmet>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                 <span className="sr-only">Open sidebar</span>
                 <svg
                   className="w-6 h-6"
-                  aria-hidden="true"
+                  // aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"

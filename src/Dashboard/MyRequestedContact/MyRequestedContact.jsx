@@ -16,7 +16,6 @@ const MyRequestedContact = () => {
       return res.data;
     },
   });
-  console.log(requestData);
 
   const handleRequestContactDelete = (biodataId) => {
     Swal.fire({
@@ -30,7 +29,7 @@ const MyRequestedContact = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/contactRequest/${biodataId}`).then((res) => {
-          console.log(res.data);
+
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",

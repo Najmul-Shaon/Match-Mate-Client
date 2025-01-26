@@ -14,10 +14,8 @@ const ManageSuccessStory = () => {
       return res.data;
     },
   });
-  console.log(successStory);
 
   const handleViewStory = (successStory) => {
-    console.log(successStory);
     Swal.fire({
       text: successStory?.story,
       imageUrl: successStory?.coupleImgUrl,
@@ -41,7 +39,6 @@ const ManageSuccessStory = () => {
         axiosSecure
           .delete(`/successStory/${id}`)
           .then((res) => {
-            console.log(res.data.deletedCount);
             if (res.data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
@@ -54,7 +51,6 @@ const ManageSuccessStory = () => {
           .catch((er) => {});
       }
     });
-    console.log(id);
   };
 
   return (

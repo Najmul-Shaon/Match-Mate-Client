@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_without_bg.png";
 import useAuth from "../../Hooks/useAuth";
 import useLogout from "../../Hooks/useLogout";
+import useAdmin from "../../Hooks/useAdmin";
 
 const NavBar = () => {
   const { user } = useAuth();
   const handleLogout = useLogout();
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
 
   const navLinks = (
     <>
@@ -65,7 +68,7 @@ const NavBar = () => {
           Contact Us
         </NavLink>
       </li>
-      {user && (
+      {user && !isAdmin && (
         <li>
           <NavLink
             to="/dashboard"
@@ -81,7 +84,7 @@ const NavBar = () => {
           </NavLink>
         </li>
       )}
-      {user && (
+      {user && isAdmin && (
         <li>
           <NavLink
             to="/dashboard/adminHome"
@@ -93,7 +96,7 @@ const NavBar = () => {
               }`
             }
           >
-            Dashboard Admin
+            Dashboard
           </NavLink>
         </li>
       )}

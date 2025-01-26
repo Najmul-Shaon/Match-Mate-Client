@@ -53,7 +53,6 @@ const GotMarried = () => {
       axiosSecure
         .post("/successStory", successInfo)
         .then((res) => {
-          console.log(res.data);
           if (res.data.insertedId) {
             Swal.fire({
               position: "center",
@@ -68,10 +67,7 @@ const GotMarried = () => {
         })
         .catch((err) => {});
     }
-    // };
-    // await imgBbResponse();
-    // console.log(res.data.data.display_url);
-    // console.log(successInfo);
+
   };
   return (
     <div>

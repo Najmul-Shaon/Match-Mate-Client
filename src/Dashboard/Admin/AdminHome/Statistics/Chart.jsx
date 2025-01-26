@@ -39,11 +39,7 @@ const Chart = ({ dashboardStats }) => {
 
   const maleBio = dashboardStats?.totalMaleBiodata;
   const femaleBio = dashboardStats?.totalFemaleBiodata;
-  const totalBio = dashboardStats?.totalBiodata;
-  const premiumBio = dashboardStats?.totalPremiumBiodata;
-  console.log(maleBio, femaleBio, totalBio, premiumBio);
-  // });
-  // const data=[name: 'a']
+
   const data = [
     { name: "Male biodata", value: maleBio },
     { name: "Female biodata", value: femaleBio },

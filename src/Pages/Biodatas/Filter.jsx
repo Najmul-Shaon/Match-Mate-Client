@@ -28,8 +28,7 @@ const Filter = ({ filters, setFilters, refetch }) => {
       }
     });
   };
-  // Log filters on every update
-  //   console.log(filters);
+
   return (
     <div className="p-4 max-w-sm mx-auto">
       {/* Age Range Filter */}

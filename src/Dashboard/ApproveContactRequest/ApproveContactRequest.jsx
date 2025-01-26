@@ -14,7 +14,6 @@ const ApproveContactRequest = () => {
       return res.data;
     },
   });
-  console.log(requestData);
 
   const handleDeleteContactRequest = (id) => {
     Swal.fire({
@@ -28,7 +27,6 @@ const ApproveContactRequest = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/contactRequest/${id}`).then((res) => {
-          console.log(res.data);
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -43,7 +41,6 @@ const ApproveContactRequest = () => {
   };
 
   const handleAcceptContactRequest = (id) => {
-    // console.log(id);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -56,7 +53,6 @@ const ApproveContactRequest = () => {
         axiosSecure
           .patch(`/update/contactRequest/${id}`)
           .then((res) => {
-            console.log(res.data);
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Approved!",

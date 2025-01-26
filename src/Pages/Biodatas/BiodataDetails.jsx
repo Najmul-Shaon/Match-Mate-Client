@@ -30,7 +30,6 @@ const BiodataDetails = () => {
     axiosSecure
       .post("/favorites", fvrtBiodata)
       .then((res) => {
-        console.log(res.data);
         if (res.data.insertedId) {
           toast.success("Added to wishlist");
         }

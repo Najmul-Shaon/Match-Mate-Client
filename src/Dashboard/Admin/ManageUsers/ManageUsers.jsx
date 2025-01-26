@@ -40,7 +40,6 @@ const ManageUsers = () => {
         axiosSecure
           .patch(`/user/role/${targetEmail}?role=admin`)
           .then((res) => {
-
             if (res.data.modifiedCount > 0) {
               Swal.fire({
                 title: "Updated to Admin",

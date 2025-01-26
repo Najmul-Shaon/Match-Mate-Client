@@ -72,8 +72,8 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
         // remove token
       }
-      console.log("current user from auth provider", currentUser);
-      setLoading(false);
+      // console.log("current user from auth provider", currentUser);
+      // setLoading(false);
     });
     return () => {
       return unsubscribe();

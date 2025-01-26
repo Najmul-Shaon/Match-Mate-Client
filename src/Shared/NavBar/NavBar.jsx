@@ -8,7 +8,6 @@ const NavBar = () => {
   const { user } = useAuth();
   const handleLogout = useLogout();
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
 
   const navLinks = (
     <>

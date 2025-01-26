@@ -144,7 +144,6 @@ const BiodataCreateEdit = () => {
           });
       }
     };
-    // console
     await imgBbResponse();
   };
 

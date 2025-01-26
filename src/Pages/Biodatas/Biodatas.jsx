@@ -8,8 +8,27 @@ import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import Filter from "./Filter";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
+import Pagination from "./Pagination";
 
 const Biodatas = () => {
+  const axiosPublic = useAxiosPublic();
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // get total biodata count from the db
+  const { data: biodatasCount = {} } = useQuery({
+    queryKey: ["biodatasCount"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/biodataCounts");
+      return res.data;
+    },
+  });
+
+  const numberOfPage = Math.ceil(biodatasCount?.count / itemsPerPage);
+  const pagesCount = !isNaN(numberOfPage)
+    ? [...Array(numberOfPage).keys()]
+    : [];
+
   const [filters, setFilters] = useState({
     ageRange: { min: "", max: "" },
     biodataType: { male: false, female: false },
@@ -52,13 +71,17 @@ const Biodatas = () => {
     if (divisions) {
       params.append("divisions", divisions);
     }
+    if (currentPage !== undefined) {
+      params.append("page", currentPage);
+    }
+    if (itemsPerPage !== undefined) {
+      params.append("size", itemsPerPage);
+    }
     return params.toString();
   };
 
   // transorm filters into query string
   const queryString = transformToQuery(filters);
-
-  const axiosPublic = useAxiosPublic();
 
   const {
     data: biodatas = [],
@@ -80,6 +103,11 @@ const Biodatas = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
+  const handleItemsPerPage = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(0);
+  };
+
   return (
     <div className="max-w-screen-xl mx-auto px-4">
       <Helmet>
@@ -92,7 +120,25 @@ const Biodatas = () => {
       {/* layout  */}
       <div className="grid grid-cols-12 mt-8 gap-6">
         <aside className="col-span-3  self-start bg-primary p-6 rounded-lg">
-          <h5 className="font-semibold">Filter by:</h5>
+          <div className="flex items-center justify-between">
+            <h5 className="font-semibold">Filter by:</h5>
+            <p className="text-xs">
+              <span>
+                <select
+                  onChange={handleItemsPerPage}
+                  defaultValue={itemsPerPage}
+                  className="rounded-lg text-sm"
+                  name=""
+                  id=""
+                >
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </span>
+              /page
+            </p>
+          </div>
           {/*  <div></div> */}
           <Filter
             filters={filters}
@@ -106,6 +152,14 @@ const Biodatas = () => {
             {biodatas.map((biodata) => (
               <ProfileCard key={biodata._id} cardInfo={biodata}></ProfileCard>
             ))}
+          </div>
+
+          <div className="flex flex-col justify-center items-center my-8">
+            <Pagination
+              pagesCount={pagesCount}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            ></Pagination>
           </div>
         </div>
       </div>

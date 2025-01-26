@@ -14,18 +14,15 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((res) => {
-        console.log(res.user);
         const userInfo = {
           userEmail: res.user.email,
           userName: res.user.displayName,
           userPhoto: res.user.photoURL,
           userRole: "user",
         };
-        console.log(userInfo);
         axiosPublic
           .post("/user", userInfo)
           .then((res) => {
-            console.log(res.data);
             if (
               res.data.insertedId ||
               res.data.message === "User already exists"

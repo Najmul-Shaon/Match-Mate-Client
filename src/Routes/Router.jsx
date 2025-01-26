@@ -18,7 +18,6 @@ import MyFavorites from "../Dashboard/MyFavorites/MyFavorites";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Dashboard/ApprovedPremium/ApprovedPremium";
 import ApproveContactRequest from "../Dashboard/ApproveContactRequest/ApproveContactRequest";
-import Statistics from "../Dashboard/Admin/AdminHome/Statistics/Statistics";
 import GotMarried from "../Dashboard/GotMarried/GotMarried";
 import AdminHome from "../Dashboard/Admin/AdminHome/AdminHome";
 import ManageSuccessStory from "../Dashboard/Admin/ManageSuccessStory/ManageSuccessStory";

@@ -16,7 +16,7 @@ const Home = () => {
       <HowWorks></HowWorks>
       <WhyUs></WhyUs>
       <Commuinity></Commuinity>
-      <SuccessStory></SuccessStory>
+      <SuccessStory></SuccessStory> 
     </div>
   );
 };

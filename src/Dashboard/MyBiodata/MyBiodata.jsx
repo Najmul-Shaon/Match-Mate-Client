@@ -4,9 +4,11 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import usePremium from "../../Hooks/usePremium";
 
 const MyBiodata = () => {
   const navigate = useNavigate();
+  const [isPremium] = usePremium();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { data: myBiodata = {} } = useQuery({
@@ -336,24 +338,25 @@ const MyBiodata = () => {
           </div>
           {/* btn action  */}
           <div className="flex justify-center mt-12 mb-6">
-            {myBiodata?.length === 0 ? (
-              <button
-                disabled
-                type="button"
-                className="btn-normal cursor-not-allowed"
-              >
-                Make Premium
-              </button>
-            ) : (
-              <button
-                disabled={myBiodata?.length === 0}
-                onClick={() => handleMakePremium(myBiodata?.biodataId)}
-                type="button"
-                className="btn-normal"
-              >
-                Make Premium
-              </button>
-            )}
+            {!isPremium &&
+              (myBiodata?.length === 0 ? (
+                <button
+                  disabled
+                  type="button"
+                  className="btn-normal cursor-not-allowed"
+                >
+                  Make Premium
+                </button>
+              ) : (
+                <button
+                  disabled={myBiodata?.length === 0}
+                  onClick={() => handleMakePremium(myBiodata?.biodataId)}
+                  type="button"
+                  className="btn-normal"
+                >
+                  Make Premium
+                </button>
+              ))}
           </div>
         </>
       )}

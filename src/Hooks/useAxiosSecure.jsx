@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
+  // baseURL: "https://match-mate-server-pink.vercel.app",
   baseURL: "http://localhost:3000",
 });
 
@@ -12,7 +13,10 @@ const useAxiosSecure = () => {
 
   axiosSecure.interceptors.request.use(
     function (config) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("userToken");
+
+      console.log("Interception in the interceptor", token);
+
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },

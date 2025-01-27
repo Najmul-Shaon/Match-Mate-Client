@@ -6,13 +6,18 @@ import toast from "react-hot-toast";
 import SimillerBiodata from "./SimillerBiodata";
 import { FaLock } from "react-icons/fa";
 import usePremium from "../../Hooks/usePremium";
+import useAuth from "../../Hooks/useAuth";
+import { TiTickOutline } from "react-icons/ti";
 
 const BiodataDetails = () => {
+  const { user } = useAuth();
   const [isPremium] = usePremium();
   // const isPremium = true;
-  console.log(isPremium);
+  // console.log(isPremium);
   const { biodataId } = useParams();
   const axiosSecure = useAxiosSecure();
+
+  // fetch specific bidoata informaiton by id
   const { data: biodataDetails = [] } = useQuery({
     queryKey: ["biodataDetails"],
     queryFn: async () => {
@@ -21,12 +26,37 @@ const BiodataDetails = () => {
     },
   });
 
+  // check: already requested for contact information or not
+  const { data: isRequested } = useQuery({
+    queryKey: ["isRequested", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/check/requestContact?id=${biodataId}&email=${user?.email}`
+      );
+      return res.data;
+    },
+  });
+
+  // check: already added into favorite or not
+  const { data: isFavorite } = useQuery({
+    queryKey: ["isFavorite", biodataId],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/check/favorite?id=${biodataId}&email=${user?.email}`
+      );
+      return res.data;
+    },
+  });
+
+  console.log(isFavorite);
+  // console.log(biodataDetails);
+
   const fvrtBiodata = {
     biodataId: biodataDetails?.biodataId,
     name: biodataDetails?.personalInfo?.name,
     permanentAddress: biodataDetails?.personalInfo?.address?.permanent,
     occupation: biodataDetails?.personalInfo?.occupation,
-    userEmail: biodataDetails?.userEmail,
+    userEmail: user?.email,
   };
 
   const handleWishList = () => {
@@ -67,21 +97,42 @@ const BiodataDetails = () => {
             {/* Details */}
             <div className="w-full">
               {/* action area  */}
-              <div className="flex flex-col lg:flex-row justify-center my-4 gap-4">
-                <button
-                  onClick={handleWishList}
-                  className="btn-normal mx-auto flex items-center gap-2"
-                >
-                  Wishlist{" "}
-                  <span className="text-2xl font-bold">
-                    <CiStar></CiStar>
-                  </span>
-                </button>
-                {!isPremium && (
-                  <Link to={`/checkout/${biodataDetails?.biodataId}`}>
-                    <button className="btn-normal">Request for Contact</button>
-                  </Link>
+              <div className="flex flex-col lg:flex-row justify-between items-center my-4 gap-4">
+                {isFavorite?.isFavorite ? (
+                  <button className="btn-normal mx-auto flex items-center gap-2">
+                    Wishlisted{" "}
+                    <span className="text-2xl font-bold">
+                      <TiTickOutline></TiTickOutline>
+                    </span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleWishList}
+                    className="btn-normal mx-auto flex items-center gap-2"
+                  >
+                    Wishlist{" "}
+                    <span className="text-2xl font-bold">
+                      <CiStar></CiStar>
+                    </span>
+                  </button>
                 )}
+
+                {/* ****************************************************************** */}
+
+                {!isPremium &&
+                  (isRequested?.requested ? (
+                    <Link to={"/dashboard/myRequested"}>
+                      <button className="btn-normal">View Contact</button>
+                    </Link>
+                  ) : (
+                    <Link to={`/checkout/${biodataDetails?.biodataId}`}>
+                      <button className="btn-normal">
+                        Request for Contact
+                      </button>
+                    </Link>
+                  ))}
+
+                {/* ****************************************************************** */}
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Biodata Type</span>

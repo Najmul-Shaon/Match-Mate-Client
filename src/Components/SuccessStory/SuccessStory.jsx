@@ -1,9 +1,16 @@
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SuccessStoryCard from "./SuccessStoryCard";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+// import required modules
+import { Navigation } from "swiper/modules";
+
 const SuccessStory = () => {
   const axiosPublic = useAxiosPublic();
 
@@ -15,59 +22,25 @@ const SuccessStory = () => {
     },
   });
 
-  const [sliderRef] = useKeenSlider(
-    {
-      loop: true,
-    },
-    [
-      (slider) => {
-        let timeout;
-        let mouseOver = false;
-        function clearNextTimeout() {
-          clearTimeout(timeout);
-        }
-        function nextTimeout() {
-          clearTimeout(timeout);
-          if (mouseOver) return;
-          timeout = setTimeout(() => {
-            slider.next();
-          }, 3000);
-        }
-        slider.on("created", () => {
-          slider.container.addEventListener("mouseover", () => {
-            mouseOver = true;
-            clearNextTimeout();
-          });
-          slider.container.addEventListener("mouseout", () => {
-            mouseOver = false;
-            nextTimeout();
-          });
-          nextTimeout();
-        });
-        slider.on("dragStarted", clearNextTimeout);
-        slider.on("animationEnded", nextTimeout);
-        slider.on("updated", nextTimeout);
-      },
-    ]
-  );
   return (
-    <div className="px-4 mt-24">
+    <div className="max-w-screen-xl mt-24 mx-auto">
       <div className="mb-8">
         <SectionTitle
           header={"Our Success Story"}
           subHeader={"Where Matches Blossom into Love"}
         ></SectionTitle>
       </div>
-      <div ref={sliderRef} className="keen-slider">
-        {successStory.map((singleSuccessStory) => (
-          <div
-            key={singleSuccessStory?._id}
-            className="keen-slider__slide number-slide1"
-          >
-            <SuccessStoryCard singleSuccessStory={singleSuccessStory}></SuccessStoryCard>
-          </div>
-        ))}
-      
+
+      <div>
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          {successStory.map((singleSuccessStory) => (
+            <SwiperSlide key={singleSuccessStory?._id}>
+              <SuccessStoryCard
+                singleSuccessStory={singleSuccessStory}
+              ></SuccessStoryCard>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

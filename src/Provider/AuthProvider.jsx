@@ -63,14 +63,15 @@ const AuthProvider = ({ children }) => {
         // console.log("current user from current user:", currentUser);
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
-          // console.log("Token from current User", res.data.token);
+          console.log("Token from current User", res.data.token);
+          console.log(currentUser);
           if (res.data.token) {
-            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userToken", res.data.token);
             setLoading(false);
           }
         });
       } else {
-        localStorage.removeItem("token");
+        localStorage.removeItem("userToken");
         setLoading(false);
         // remove token
       }

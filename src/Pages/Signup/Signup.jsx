@@ -178,7 +178,7 @@ const Signup = () => {
       });
   };
   return (
-    <div className="dark:bg-gray-900 mt-20">
+    <div className="dark:bg-gray-900 mt-24">
       <Helmet>
         <title>Match Mate || Sign Up</title>
       </Helmet>

@@ -18,7 +18,6 @@ const SimillerBiodata = ({ biodataType }) => {
       return res.data;
     },
   });
-  console.log(simillerBiodatas);
   return (
     <div className="mt-24">
       <SectionTitle header={"Similler biodata"}></SectionTitle>

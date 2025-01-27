@@ -1,14 +1,16 @@
 import { CiStar } from "react-icons/ci";
-import SectionTitle from "../../Components/SectionTitle/SectionTitle";
-import PremiumCard from "../../Components/Premium Profile/PremiumCard/PremiumCard";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import SimillerBiodata from "./SimillerBiodata";
+import { FaLock } from "react-icons/fa";
+import usePremium from "../../Hooks/usePremium";
 
 const BiodataDetails = () => {
+  const [isPremium] = usePremium();
+  // const isPremium = true;
+  console.log(isPremium);
   const { biodataId } = useParams();
   const axiosSecure = useAxiosSecure();
   const { data: biodataDetails = [] } = useQuery({
@@ -75,9 +77,11 @@ const BiodataDetails = () => {
                     <CiStar></CiStar>
                   </span>
                 </button>
-                <Link to={`/checkout/${biodataDetails?.biodataId}`}>
-                  <button className="btn-normal">Request for Contact</button>
-                </Link>
+                {!isPremium && (
+                  <Link to={`/checkout/${biodataDetails?.biodataId}`}>
+                    <button className="btn-normal">Request for Contact</button>
+                  </Link>
+                )}
               </div>
               <div className="flex justify-between py-1 border-b border-accent">
                 <span>Biodata Type</span>
@@ -136,7 +140,11 @@ const BiodataDetails = () => {
                       Phone Number
                     </td>
                     <td className="px-4 py-2">
-                      {biodataDetails?.personalInfo?.userPhone}
+                      {isPremium ? (
+                        biodataDetails?.personalInfo?.userPhone
+                      ) : (
+                        <FaLock></FaLock>
+                      )}
                     </td>
                   </tr>
                   {/* Row 2 */}
@@ -144,7 +152,13 @@ const BiodataDetails = () => {
                     <td className="px-4 py-2 font-semibold text-purple-700">
                       Email
                     </td>
-                    <td className="px-4 py-2">{biodataDetails?.userEmail}</td>
+                    <td className="px-4 py-2">
+                      {isPremium ? (
+                        biodataDetails?.userEmail
+                      ) : (
+                        <FaLock></FaLock>
+                      )}
+                    </td>
                   </tr>
                   {/* Row 3 */}
                   <tr className="border-b border-purple-300">
@@ -152,7 +166,11 @@ const BiodataDetails = () => {
                       Father's Phone
                     </td>
                     <td className="px-4 py-2">
-                      {biodataDetails?.familyInfo?.fatherInfo?.fNumber}
+                      {isPremium ? (
+                        biodataDetails?.familyInfo?.fatherInfo?.fNumber
+                      ) : (
+                        <FaLock></FaLock>
+                      )}
                     </td>
                   </tr>
                   {/* Row 2 */}
@@ -161,7 +179,11 @@ const BiodataDetails = () => {
                       Mother's Phone
                     </td>
                     <td className="px-4 py-2">
-                      {biodataDetails?.familyInfo?.motherInfo?.mNumber}
+                      {isPremium ? (
+                        biodataDetails?.familyInfo?.motherInfo?.mNumber
+                      ) : (
+                        <FaLock></FaLock>
+                      )}
                     </td>
                   </tr>
                 </tbody>

@@ -82,7 +82,7 @@ const Router = createBrowserRouter([
     children: [
       // normal users
       {
-        path: "viewBiodata",
+        path: "/dashboard",
         element: (
           <PrivateRoute>
             <MyBiodata></MyBiodata>

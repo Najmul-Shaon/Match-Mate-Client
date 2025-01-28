@@ -27,7 +27,6 @@ const BiodataCreateEdit = () => {
     },
   });
 
-  console.log(myBiodata?.personalInfo?.dateOfBirth);
 
   // from react hook form
   const {
@@ -38,12 +37,7 @@ const BiodataCreateEdit = () => {
   } = useForm();
 
   const onSubmit = async (formData) => {
-    // const date = new Date(formData.dateOfBirth);
-    // const formateDate = date.toLocaleDateString("en-GB", {
-    //   day: "2-digit",
-    //   month: "long",
-    //   year: "numeric",
-    // });
+
     const profileImgFile = { image: formData.profileImg[0] };
 
     const imgBbResponse = async () => {

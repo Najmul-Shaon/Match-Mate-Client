@@ -3,19 +3,25 @@ import logo from "../../assets/logo_without_bg.png";
 import useAuth from "../../Hooks/useAuth";
 import useLogout from "../../Hooks/useLogout";
 import useAdmin from "../../Hooks/useAdmin";
+import { RiMenuLine } from "react-icons/ri";
+import { useState } from "react";
 
 const NavBar = () => {
   const { user } = useAuth();
   const handleLogout = useLogout();
   const [isAdmin] = useAdmin();
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuToggle = () => {
+    setIsMenuOpen((prevState) => !prevState); // Toggle menu open/close
+  };
   const navLinks = (
+    // text-xs lg:text-lg px-1.5 py-1 lg:px-2 lg:py-1
     <>
       <li>
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
               isActive
                 ? "bg-[#AC0404] text-white shadow-md"
                 : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -29,7 +35,7 @@ const NavBar = () => {
         <NavLink
           to="/biodatas"
           className={({ isActive }) =>
-            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
               isActive
                 ? "bg-[#AC0404] text-white shadow-md"
                 : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -43,7 +49,7 @@ const NavBar = () => {
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
               isActive
                 ? "bg-[#AC0404] text-white shadow-md"
                 : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -57,7 +63,7 @@ const NavBar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
               isActive
                 ? "bg-[#AC0404] text-white shadow-md"
                 : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -72,7 +78,7 @@ const NavBar = () => {
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
                 isActive
                   ? "bg-[#AC0404] text-white shadow-md"
                   : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -88,7 +94,7 @@ const NavBar = () => {
           <NavLink
             to="/dashboard/adminHome"
             className={({ isActive }) =>
-              `block text-lg font-bold py-1 px-3 rounded-md transition duration-200 ${
+              `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
                 isActive
                   ? "bg-[#AC0404] text-white shadow-md"
                   : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
@@ -120,17 +126,17 @@ const NavBar = () => {
               <button
                 onClick={handleLogout}
                 type="button"
-                className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs lg:text-lg py-1 px-1.5 lg:px-2 lg:py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
               >
                 Log out
               </button>
             </>
           ) : (
-            <div className="space-x-2">
+            <div className="space-x-1 lg:space-x-2">
               <Link to="/login">
                 <button
                   type="button"
-                  className="focus:outline-none text-white bg-accent hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-4 py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-lg"
+                  className="focus:outline-none text-white bg-accent hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-1.5 py-1 lg:px-2 lg:py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-xs lg:text-lg"
                 >
                   Login
                 </button>
@@ -138,7 +144,8 @@ const NavBar = () => {
               <Link to="/signup">
                 <button
                   type="button"
-                  className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-lg px-4 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  // className="text-black bg-primary border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-base px-1 py-0.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                  className="focus:outline-none text-black border bg-primary hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-1.5 py-1 lg:px-2 lg:py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-xs lg:text-lg hover:text-white"
                 >
                   Sign Up
                 </button>
@@ -154,28 +161,16 @@ const NavBar = () => {
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
+            <span className="text-2xl">
+              <RiMenuLine></RiMenuLine>
+            </span>
           </button>
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {/* navlinks from variable  */}
             {navLinks}
           </ul>

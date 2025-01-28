@@ -7,8 +7,9 @@ const Pagination = ({ pagesCount, setCurrentPage, currentPage }) => {
     }
   };
 
+
   const handleNextPage = () => {
-    if (currentPage < pagesCount.length) {
+    if (currentPage + 1 < pagesCount.length) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -27,7 +28,7 @@ const Pagination = ({ pagesCount, setCurrentPage, currentPage }) => {
                 currentPage === page && "bg-accent text-white"
               }`}
             >
-              {page+1}
+              {page + 1}
             </Link>
           </li>
         ))}

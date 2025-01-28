@@ -14,8 +14,7 @@ const BiodataDetails = () => {
   const { user } = useAuth();
   const [isPremium] = usePremium();
   const [isAdmin] = useAdmin();
-  // const isPremium = true;
-  // console.log(isPremium);
+
   const { biodataId } = useParams();
   const axiosSecure = useAxiosSecure();
 
@@ -50,8 +49,7 @@ const BiodataDetails = () => {
     },
   });
 
-  // console.log(isFavorite);
-  // console.log(biodataDetails);
+
 
   const fvrtBiodata = {
     biodataId: biodataDetails?.biodataId,

@@ -152,7 +152,7 @@ const Dashboard = () => {
               <>
                 <li>
                   <NavLink
-                    to="/dashboard/adminHome"
+                    to="/dashboard"
                     end
                     className={({ isActive }) =>
                       `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
@@ -244,21 +244,6 @@ const Dashboard = () => {
                     }
                   >
                     <span className="me-3 text-xl">
-                      <LuLayoutDashboard />
-                    </span>
-                    Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/viewBiodata"
-                    className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
-                      }`
-                    }
-                  >
-                    <span className="me-3 text-xl">
                       <FiUserCheck />
                     </span>
                     View Biodata
@@ -268,7 +253,7 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/editBiodata"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
                         isActive ? "bg-accent text-white" : ""
                       }`
                     }
@@ -283,7 +268,7 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/myRequested"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
                         isActive ? "bg-accent text-white" : ""
                       }`
                     }
@@ -298,7 +283,7 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/myFavorites"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
                         isActive ? "bg-accent text-white" : ""
                       }`
                     }
@@ -313,7 +298,7 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/gotMarried"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent group hover:text-white ${
+                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
                         isActive ? "bg-accent text-white" : ""
                       }`
                     }
@@ -329,7 +314,7 @@ const Dashboard = () => {
             <li>
               <NavLink
                 onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent hover:text-white group"
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 hover:text-white group"
               >
                 <span className="me-3 text-xl">
                   <IoIosLogOut />

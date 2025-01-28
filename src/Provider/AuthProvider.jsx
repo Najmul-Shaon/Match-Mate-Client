@@ -62,20 +62,16 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
-          // console.log("Token from current User/from jwt", res.data.token);
-          // console.log(currentUser);
           if (res.data.token) {
             localStorage.setItem("userToken", res.data.token);
             setLoading(false);
           }
         });
       } else {
-        // remove token after login 
+        // remove token after login
         localStorage.removeItem("userToken");
         setLoading(false);
       }
-      // console.log("current user from auth provider", currentUser);
-      // setLoading(false);
     });
     return () => {
       return unsubscribe();

@@ -10,7 +10,6 @@ const usePremium = () => {
     // enabled: !loading,
     enabled: !!user?.email,
     queryFn: async () => {
-      // console.log("check is admin", user);
 
       const res = await axiosSecure.get(`/user/premium/${user?.email}`);
       return res.data?.isPremium;

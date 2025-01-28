@@ -23,7 +23,7 @@ const SuccessStory = () => {
   });
 
   return (
-    <div className="max-w-screen-xl mt-24 mx-auto">
+    <div className="max-w-screen-xl mt-24 mx-auto px-4">
       <div className="mb-8">
         <SectionTitle
           header={"Our Success Story"}

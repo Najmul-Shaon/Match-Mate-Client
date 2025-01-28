@@ -27,7 +27,7 @@ Welcome to MatchMate, the ultimate marriage media application designed to help y
 
 - Access a wide array of user-created biodatas.
 - Detailed biodata available upon login.
-- ** Suggested Biodatas: **  Get recommendations for other users based on the gender of the biodata you are viewing.
+- ** Suggested Biodatas: ** Get recommendations for other users based on the gender of the biodata you are viewing.
 
 4. **Wishlist Your Favorites**
 
@@ -103,11 +103,11 @@ Welcome to MatchMate, the ultimate marriage media application designed to help y
 
 ## 🎨 Tech Stack
 
-- Frontend: React.js
-- Backend: Node.js, Express.js
-- Database: MongoDB
-- Authentication: JWT/ oAuth(firebase)
-- Payment Gateway: Stripe
+- **Frontend**: React.js, HTML, CSS, JavaScript
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Token), Firebase Authentication
+- **Payment Gateway**: Stripe
 
 ## 🚀 Future Plans
 
@@ -118,7 +118,7 @@ Welcome to MatchMate, the ultimate marriage media application designed to help y
 
 For any queries or issues, reach out to us via:
 
-- Email: najmul.mh.shaon@gmail.com
+- Email: najmul.nh.shaon@gmail.com
 - Phone: +88 01721 933810
 
 ## 🌈 Start your journey to love with MatchMate today!

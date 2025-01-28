@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DashboardTitle from "../../Components/DashboardTitle/DashboardTitle";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import DatePicker from "react-datepicker";
+
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -18,21 +18,17 @@ const GotMarried = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [ratingValue, setRatingValue] = useState(0);
-  // get current date for date picker
-  const [startDate, setStartDate] = useState(new Date());
 
   const {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     const successImg = { image: data.successImg[0] };
 
-    // const imgBbResponse = async () => {
     const res = await axiosPublic.post(imageHostingApi, successImg, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -67,7 +63,6 @@ const GotMarried = () => {
         })
         .catch((err) => {});
     }
-
   };
   return (
     <div>
@@ -116,28 +111,24 @@ const GotMarried = () => {
               )}
             </div>
             {/* date of marriage  */}
-            <div className="col-span-2 lg:col-span-1">
-              <label className="block mb-2 text-sm font-medium text-gray-900">
+
+            <div>
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="successImg"
+              >
                 Date of Marriege
               </label>
-              <Controller
-                name="marriageDate"
-                control={control}
-                rules={{ required: "Required" }}
-                render={({ field }) => (
-                  <DatePicker
-                    {...field}
-                    selected={field.value ? new Date(field.value) : startDate}
-                    onChange={(date) => {
-                      field.onChange(date);
-                      setStartDate(date);
-                    }}
-                    placeholderText="Please choose a date"
-                    style={{ width: "100%" }}
-                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                )}
-              ></Controller>
+              <input
+                className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="date"
+                {...register("marriageDate", { required: "Required" })}
+              />
+              {errors.marriageDate && (
+                <span className="text-red-600">
+                  {errors.marriageDate.message}
+                </span>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-3 gap-3 md:gap-4 lg:gap-6">

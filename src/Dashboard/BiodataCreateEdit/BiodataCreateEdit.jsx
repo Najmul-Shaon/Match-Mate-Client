@@ -1,28 +1,21 @@
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 // img bb hosting keys
 const imageHostingKey = import.meta.env.VITE_IMGBB_KEY;
 const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const BiodataCreateEdit = () => {
-  // const [bioPhoto, setBioPhoto] = useState("");
   const navigate = useNavigate();
   // get axios from hook
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  // get current date for date picker
-  const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
 
   // get my biodata info
@@ -33,22 +26,24 @@ const BiodataCreateEdit = () => {
       return res.data;
     },
   });
+
+  console.log(myBiodata?.personalInfo?.dateOfBirth);
+
   // from react hook form
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (formData) => {
-    const date = new Date(formData.dateOfBirth);
-    const formateDate = date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
+    // const date = new Date(formData.dateOfBirth);
+    // const formateDate = date.toLocaleDateString("en-GB", {
+    //   day: "2-digit",
+    //   month: "long",
+    //   year: "numeric",
+    // });
     const profileImgFile = { image: formData.profileImg[0] };
 
     const imgBbResponse = async () => {
@@ -66,7 +61,8 @@ const BiodataCreateEdit = () => {
           status: formData.status,
           religion: formData.religion,
           biodataType: formData.gender,
-          dateOfBirth: formateDate,
+          // dateOfBirth: formateDate,
+          dateOfBirth: formData.dateOfBirth,
           age: formData.age,
           height: formData.height,
           weight: formData.weight,
@@ -296,36 +292,36 @@ const BiodataCreateEdit = () => {
                 <option disabled>--Gender--</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Others">Others</option>
               </select>
               {errors.gender && (
                 <span className="text-red-600">{errors.gender.message}</span>
               )}
             </div>
             {/* date of birth  */}
-            <div className="col-span-2 lg:col-span-1">
-              <label className="block mb-2 text-sm font-medium text-gray-900">
+
+            <div>
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="successImg"
+              >
                 Date of Birth
               </label>
-              <Controller
-                name="dateOfBirth"
-                control={control}
-                rules={{ required: "Required" }}
-                render={({ field }) => (
-                  <DatePicker
-                    {...field}
-                    selected={field.value ? new Date(field.value) : startDate}
-                    onChange={(date) => {
-                      field.onChange(date);
-                      setStartDate(date);
-                    }}
-                    placeholderText="Please choose a date"
-                    style={{ width: "100%" }}
-                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                )}
-              ></Controller>
+              <input
+                className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="date"
+                defaultValue={myBiodata?.personalInfo?.dateOfBirth}
+                {...register("dateOfBirth", { required: "Required" })}
+              />
+              {errors.dateOfBirth && (
+                <span className="text-red-600">
+                  {errors.dateOfBirth.message}
+                </span>
+              )}
             </div>
+          </div>
+          {/* ************************************  */}
+          {/* ************************************  */}
+          <div className="grid grid-cols-6 gap-3 md:gap-4 lg:gap-6">
             {/* age field  */}
             <div className="col-span-2 lg:col-span-1">
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -344,10 +340,6 @@ const BiodataCreateEdit = () => {
                 <span className="text-red-600">{errors.age.message}</span>
               )}
             </div>
-          </div>
-          {/* ************************************  */}
-          {/* ************************************  */}
-          <div className="grid grid-cols-6 gap-3 md:gap-4 lg:gap-6">
             {/* height field */}
 
             <div className="col-span-3 lg:col-span-1">
@@ -520,11 +512,10 @@ const BiodataCreateEdit = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 {...register("blood", {
                   required: "Required",
-                  validate: (value) =>
-                    value !== "--Blood Group--" || "Required",
+                  validate: (value) => value !== "--Blood--" || "Required",
                 })}
               >
-                <option disabled>--Blood Group--</option>
+                <option disabled>--Blood--</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -536,33 +527,6 @@ const BiodataCreateEdit = () => {
               </select>
               {errors.blood && (
                 <span className="text-red-600">{errors.blood.message}</span>
-              )}
-            </div>
-            {/* nationality filed  */}
-            <div className="col-span-2 lg:col-span-1">
-              <label className="block mb-2 text-sm font-medium text-gray-900">
-                Nationality
-              </label>
-              <select
-                name="nationality"
-                defaultValue={
-                  myBiodata?.personalInfo?.nationality || "--Nationality--"
-                }
-                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                {...register("nationality", {
-                  required: "Required",
-                  validate: (value) =>
-                    value !== "--Nationality--" || "Required",
-                })}
-              >
-                <option disabled>--Nationality--</option>
-                <option value="Bangladesh">Bangladesh</option>
-                <option value="Others">Others</option>
-              </select>
-              {errors.nationality && (
-                <span className="text-red-600">
-                  {errors.nationality.message}
-                </span>
               )}
             </div>
           </div>
@@ -773,7 +737,6 @@ const BiodataCreateEdit = () => {
                   })}
                 >
                   <option disabled>--Division--</option>
-                  <option disabled>--Division--</option>
                   <option value="Dhaka">Dhaka</option>
                   <option value="Barisal">Barisal</option>
                   <option value="Khulna">Khulna</option>
@@ -819,22 +782,53 @@ const BiodataCreateEdit = () => {
             </div>
           </div>
           {/* ******************************************** */}
-          {/* photo url  */}
-          <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Choose your photo
-            </label>
-            <input
-              className="block w-full mb-2 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              id="small_size"
-              type="file"
-              {...register("profileImg", {
-                required: "Please choose your photo",
-              })}
-            />
-            {errors.profileImg && (
-              <span className="text-red-600">{errors.profileImg.message}</span>
-            )}
+          <div className="grid grid-cols-6 gap-3 md:gap-4 lg:gap-6">
+            {/* photo url  */}
+            <div className="col-span-3">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Choose your photo
+              </label>
+              <input
+                className="block w-full mb-2 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="small_size"
+                type="file"
+                {...register("profileImg", {
+                  required: "Please choose your photo",
+                })}
+              />
+              {errors.profileImg && (
+                <span className="text-red-600">
+                  {errors.profileImg.message}
+                </span>
+              )}
+            </div>
+            {/* nationality filed  */}
+            <div className="col-span-1 lg:col-span-1">
+              <label className="block mb-2 text-sm font-medium text-gray-900">
+                Nationality
+              </label>
+              <select
+                name="nationality"
+                defaultValue={
+                  myBiodata?.personalInfo?.nationality || "--Nationality--"
+                }
+                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                {...register("nationality", {
+                  required: "Required",
+                  validate: (value) =>
+                    value !== "--Nationality--" || "Required",
+                })}
+              >
+                <option disabled>--Nationality--</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Others">Others</option>
+              </select>
+              {errors.nationality && (
+                <span className="text-red-600">
+                  {errors.nationality.message}
+                </span>
+              )}
+            </div>
           </div>
         </div>
         {/* family info  */}
@@ -1020,7 +1014,7 @@ const BiodataCreateEdit = () => {
             </div>
 
             {/* siblings area  */}
-            <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-6">
+            <div className="grid grid-cols-6 gap-3 md:gap-4 lg:gap-6">
               {/* Brother count  */}
               <div className="col-span-1 lg:col-span-1">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

@@ -8,10 +8,12 @@ import { FaLock } from "react-icons/fa";
 import usePremium from "../../Hooks/usePremium";
 import useAuth from "../../Hooks/useAuth";
 import { TiTickOutline } from "react-icons/ti";
+import useAdmin from "../../Hooks/useAdmin";
 
 const BiodataDetails = () => {
   const { user } = useAuth();
   const [isPremium] = usePremium();
+  const [isAdmin] = useAdmin();
   // const isPremium = true;
   // console.log(isPremium);
   const { biodataId } = useParams();
@@ -38,7 +40,7 @@ const BiodataDetails = () => {
   });
 
   // check: already added into favorite or not
-  const { data: isFavorite } = useQuery({
+  const { data: isFavorite, refetch } = useQuery({
     queryKey: ["isFavorite", biodataId],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -48,7 +50,7 @@ const BiodataDetails = () => {
     },
   });
 
-  console.log(isFavorite);
+  // console.log(isFavorite);
   // console.log(biodataDetails);
 
   const fvrtBiodata = {
@@ -65,6 +67,7 @@ const BiodataDetails = () => {
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Added to wishlist");
+          refetch();
         }
       })
       .catch((err) => {});
@@ -120,6 +123,7 @@ const BiodataDetails = () => {
                 {/* ****************************************************************** */}
 
                 {!isPremium &&
+                  !isAdmin &&
                   (isRequested?.requested ? (
                     <Link to={"/dashboard/myRequested"}>
                       <button className="btn-normal">View Contact</button>
@@ -191,7 +195,7 @@ const BiodataDetails = () => {
                       Phone Number
                     </td>
                     <td className="px-4 py-2">
-                      {isPremium ? (
+                      {isPremium || isAdmin ? (
                         biodataDetails?.personalInfo?.userPhone
                       ) : (
                         <FaLock></FaLock>
@@ -204,7 +208,7 @@ const BiodataDetails = () => {
                       Email
                     </td>
                     <td className="px-4 py-2">
-                      {isPremium ? (
+                      {isPremium || isAdmin ? (
                         biodataDetails?.userEmail
                       ) : (
                         <FaLock></FaLock>
@@ -217,7 +221,7 @@ const BiodataDetails = () => {
                       Father's Phone
                     </td>
                     <td className="px-4 py-2">
-                      {isPremium ? (
+                      {isPremium || isAdmin ? (
                         biodataDetails?.familyInfo?.fatherInfo?.fNumber
                       ) : (
                         <FaLock></FaLock>
@@ -230,7 +234,7 @@ const BiodataDetails = () => {
                       Mother's Phone
                     </td>
                     <td className="px-4 py-2">
-                      {isPremium ? (
+                      {isPremium || isAdmin ? (
                         biodataDetails?.familyInfo?.motherInfo?.mNumber
                       ) : (
                         <FaLock></FaLock>

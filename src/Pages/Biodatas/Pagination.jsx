@@ -27,7 +27,7 @@ const Pagination = ({ pagesCount, setCurrentPage, currentPage }) => {
                 currentPage === page && "bg-accent text-white"
               }`}
             >
-              {page}
+              {page+1}
             </Link>
           </li>
         ))}

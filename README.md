@@ -2,6 +2,17 @@
 
 Welcome to MatchMate, the ultimate marriage media application designed to help you find your ideal partner and build your dream story. Our platform is user-friendly, feature-rich, and crafted to make your journey to love seamless and memorable.
 
+## 📑 Table of Contents
+
+- [Credintails](#Credintails)
+- [Features](#Features)
+- [Pages](#Pages)
+- [Premium Features](#Premium-Features)
+- [Success Stories](#Success-Stories)
+- [Tech Stack](#Tech-Stack)
+- [ Future Plans](#Future-Plans)
+- [ Future Plans](#Future-Plans)
+
 ## 🔒 Credintails:-
 
 - [Live-Link](https://matchmate-de063.firebaseapp.com)

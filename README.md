@@ -6,6 +6,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 - [Tech Stack](#tech-tack)
 - [Features](#features)
+- [Credintails](#credintails)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
@@ -68,11 +69,10 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## ✨ Features
 
-- **Advanced Matchmaking** – AI-driven algorithms help you find the perfect partner.
 - **Secure Authentication** – Integrated with Firebase for seamless login and user management.
-- **Real-Time Chat** – Communicate with potential matches directly within the app.
 - **Premium Subscription** – Stripe-powered payment integration for premium services.
 - **Interactive UI** – Built with React, Tailwind CSS, and animations via Lottie.
+- **Digital Payment Gateway** – global transactions and real-time processing.
 - **Role Based Dashboard** – Keep track of matches, request, and others things.
 
 ---

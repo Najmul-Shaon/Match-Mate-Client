@@ -108,7 +108,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
    npm install
    ```
 
-3. **Create a `.env/local` file in the root directory and add the following:**
+3. **Create a `.env.local` file in the root directory and add the following:**
 
    ```env
    VITE_apiKey=YOUR_FIREBASE_API_KEY

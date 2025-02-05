@@ -33,7 +33,7 @@ const Banner = () => {
       >
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={cover2}
             alt="cover 2"
           />
@@ -41,7 +41,7 @@ const Banner = () => {
 
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={cover1}
             alt="cover 1"
           />
@@ -49,21 +49,21 @@ const Banner = () => {
 
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={cover3}
             alt="cover 3"
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={cover4}
             alt="cover 4"
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             src={cover5}
             alt="cover 4"
           />

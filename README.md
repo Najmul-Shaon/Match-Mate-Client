@@ -60,7 +60,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 <h4 align="left">Payment Gateway</h4>
 
 <div align="left">
-  <img src="https://img.icons8.com/ios-filled/50/stripe.png" alt="Stripe Logo" height="40" />
+  <img src="https://img.shields.io/badge/Stripe-Payment%20Gateway-FFFFFF?logo=stripe&logoColor=6366F1" alt="Stripe Badge Light" height="40" />
 
 </div>
 

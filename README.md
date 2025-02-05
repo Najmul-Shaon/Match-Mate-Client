@@ -18,7 +18,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 🎨 Tech Stack
 
-🖌️ Frontend**: <img src="https://skillicons.dev/icons?i=html" height="40" alt="html5 logo"  />
+<h3>🖌️  Frontend</h3>: <img src="https://skillicons.dev/icons?i=html" height="40" alt="html5 logo"  />
 <img width="12" />
 <img src="https://skillicons.dev/icons?i=css" height="40" alt="css3 logo"  />
 <img width="12" />
@@ -30,7 +30,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 <img width="12" /> </br>
 🗄️ Backend**: Node.js, Express.js </br>
 🛢️ Database**: MongoDB </br>
-🛡️ Authentication**: JWT (JSON Web Token), Firebase Authentication </br>
+🛡️ Authentication\*\*: JWT (JSON Web Token), Firebase Authentication </br>
 💳 Payment Gateway\*\*: Stripe</br>
 
 ---

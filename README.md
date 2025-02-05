@@ -18,7 +18,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 🎨 Tech Stack
 
-<h3>🖌️  Frontend</h3>
+<h3>🖌️  Frontend</h3></br>
 <img src="https://skillicons.dev/icons?i=html" height="40" alt="html5 logo"  />
 <img width="12" />
 <img src="https://skillicons.dev/icons?i=css" height="40" alt="css3 logo"  />

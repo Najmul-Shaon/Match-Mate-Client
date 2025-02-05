@@ -18,9 +18,9 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 🎨 Tech Stack
 
-<h2 align="left">🖊️  Frontend</h2>
+<h4 align="left">Frontend</h4>
 
-<div align="center">
+<div align="left">
   <img src="https://skillicons.dev/icons?i=html" height="40" alt="html5 logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=css" height="40" alt="css3 logo"  />
@@ -32,6 +32,39 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
   <img src="https://skillicons.dev/icons?i=react" height="40" alt="react logo"  />
   <img width="12" />
 </div>
+
+<h4 align="left">Backend</h4>
+
+<div align="left">
+
+  <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="nodejs logo"  />
+  <img width="12" />
+  <img src="https://skillicons.dev/icons?i=express" height="40" alt="express logo"  />
+  <img width="12" />
+  
+</div>
+<h4 align="left">Database</h4>
+
+<div align="left">
+
+  <img src="https://skillicons.dev/icons?i=mongodb" height="40" alt="mongodb logo"  />
+  
+</div>
+<h4 align="left">Authentication</h4>
+
+<div align="left">
+  <img src="https://skillicons.dev/icons?i=firebase" height="40" alt="firebase logo"  />
+  <img width="12" />
+  <img src="https://img.icons8.com/ios/50/000000/jwt.png" alt="JWT Logo" height="40" />
+</div>
+<h4 align="left">Payment Gateway</h4>
+
+<div align="left">
+  <img src="https://skillicons.dev/icons?i=stripe" height="40" alt="Stripe logo" />
+
+</div>
+
+###
 
 ---
 

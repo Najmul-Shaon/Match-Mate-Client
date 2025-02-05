@@ -4,16 +4,16 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 📌 Table of Contents
 
-- [Tech Stack](#tech-tack)
-- [Features](#features)
-- [Credintails](#credintails)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Dependencies](#dependencies)
-- [Development Dependencies](#development-dependencies)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
+- [Tech Stack](#-tech-tack)
+- [Features](#-features)
+- [Credintails](#-credintails)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Configuration](#-configuration)
+- [Dependencies](#-dependencies)
+- [Development Dependencies](#-development-dependencies)
+- [Troubleshooting](#-troubleshooting)
+- [License](#-license)
 
 ---
 
@@ -92,6 +92,8 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 - **Node.js** (Latest LTS recommended)
 - **npm** or **yarn** installed
 - **Vite** for development
+
+
 
 ### Steps
 

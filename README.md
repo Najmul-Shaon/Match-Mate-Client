@@ -18,11 +18,11 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 🎨 Tech Stack
 
-🖌️ Frontend**: React.js, HTML, Tailwind CSS, JavaScript
-🗄️ Backend**: Node.js, Express.js
-🛢️ Database**: MongoDB
-🛡️ Authentication**: JWT (JSON Web Token), Firebase Authentication
-💳 Payment Gateway**: Stripe
+🖌️ Frontend**: React.js, HTML, Tailwind CSS, JavaScript </br>
+🗄️ Backend**: Node.js, Express.js </br>
+🛢️ Database**: MongoDB </br>
+🛡️ Authentication**: JWT (JSON Web Token), Firebase Authentication </br>
+💳 Payment Gateway\*\*: Stripe</br>
 
 ---
 

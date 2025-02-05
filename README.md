@@ -1,60 +1,73 @@
-Here’s a well-structured README file for **MatchMate** based on the provided information:  
+# MatchMate
+
+Welcome to **MatchMate**, the ultimate marriage media application designed to help you find your ideal partner and build your dream love story. Our platform is **user-friendly, feature-rich**, and crafted to make your journey to love seamless and memorable.
+
+## 📌 Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Development Dependencies](#development-dependencies)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
 
 ---
 
-# MatchMate  
+## 🎨 Tech Stack
 
-Welcome to **MatchMate**, the ultimate marriage media application designed to help you find your ideal partner and build your dream love story. Our platform is **user-friendly, feature-rich**, and crafted to make your journey to love seamless and memorable.  
-
-## 📌 Table of Contents  
-
-- [Features](#features)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Configuration](#configuration)  
-- [Dependencies](#dependencies)  
-- [Development Dependencies](#development-dependencies)  
-- [Troubleshooting](#troubleshooting)  
-- [Contributors](#contributors)  
-- [License](#license)  
+- **Frontend**: React.js, HTML, Tailwind CSS, JavaScript
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Token), Firebase Authentication
+- **Payment Gateway**: Stripe
 
 ---
 
-## ✨ Features  
+## ✨ Features
 
-- **Advanced Matchmaking** – AI-driven algorithms help you find the perfect partner.  
-- **Secure Authentication** – Integrated with Firebase for seamless login and user management.  
-- **Real-Time Chat** – Communicate with potential matches directly within the app.  
-- **Premium Subscription** – Stripe-powered payment integration for premium services.  
-- **Interactive UI** – Built with React, Tailwind CSS, and animations via Lottie.  
-- **Personalized Dashboard** – Keep track of matches, messages, and preferences.  
+- **Advanced Matchmaking** – AI-driven algorithms help you find the perfect partner.
+- **Secure Authentication** – Integrated with Firebase for seamless login and user management.
+- **Real-Time Chat** – Communicate with potential matches directly within the app.
+- **Premium Subscription** – Stripe-powered payment integration for premium services.
+- **Interactive UI** – Built with React, Tailwind CSS, and animations via Lottie.
+- **Role Based Dashboard** – Keep track of matches, request, and others things.
 
 ---
 
-## 🛠️ Installation  
+## 🔒 Credintails:-
 
-### Prerequisites  
+- [Live-Link](https://matchmate-de063.firebaseapp.com)
+- admin email: admin@gmail.com
+- admin pass: Asdf!1
 
-- **Node.js** (Latest LTS recommended)  
-- **npm** or **yarn** installed  
-- **Vite** for development  
+---
 
-### Steps  
+## 🛠️ Installation
 
-1. **Clone the repository:**  
+### Prerequisites
+
+- **Node.js** (Latest LTS recommended)
+- **npm** or **yarn** installed
+- **Vite** for development
+
+### Steps
+
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/yourusername/matchmate.git
    cd matchmate
    ```
 
-2. **Install dependencies:**  
+2. **Install dependencies:**
 
    ```bash
    npm install
    ```
 
-3. **Create a `.env` file in the root directory and add the following:**  
+3. **Create a `.env` file in the root directory and add the following:**
 
    ```env
    VITE_apiKey=YOUR_FIREBASE_API_KEY
@@ -67,45 +80,45 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
    VITE_PK_STRIPE=YOUR_STRIPE_PUBLIC_KEY
    ```
 
-4. **Start the development server:**  
+4. **Start the development server:**
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:5173](http://localhost:5173) in your browser.  
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🚀 Usage  
+## 🚀 Usage
 
-1. **Sign Up or Log In** using Firebase authentication.  
-2. **Create your profile**, upload images via IMGBB, and set preferences.  
-3. **Explore Matches** using AI-powered recommendations.  
-4. **Chat & Interact** with potential partners.  
-5. **Upgrade to Premium** via Stripe for exclusive features.  
-
----
-
-## ⚙️ Configuration  
-
-MatchMate uses **environment variables** to configure Firebase, IMGBB, and Stripe. Make sure to update `.env` with your own credentials.  
+1. **Sign Up or Log In** using Firebase authentication.
+2. **Create your profile**, upload images via IMGBB, and set preferences.
+3. **Explore Matches** using AI-powered recommendations.
+4. **Chat & Interact** with potential partners.
+5. **Upgrade to Premium** via Stripe for exclusive features.
 
 ---
 
-## 📦 Dependencies  
+## ⚙️ Configuration
 
-MatchMate is built using the following technologies:  
+MatchMate uses **environment variables** to configure Firebase, IMGBB, and Stripe. Make sure to update `.env` with your own credentials.
 
-- **Frontend Framework**: [React](https://react.dev/)  
-- **State Management**: [TanStack React Query](https://tanstack.com/query/latest)  
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)  
-- **Animations**: [Lottie React](https://www.npmjs.com/package/lottie-react)  
-- **Authentication & Storage**: [Firebase](https://firebase.google.com/)  
-- **Payments**: [Stripe](https://stripe.com/)  
-- **Data Fetching**: [Axios](https://axios-http.com/)  
+---
 
-### Full List of Dependencies  
+## 📦 Dependencies
+
+MatchMate is built using the following technologies:
+
+- **Frontend Framework**: [React](https://react.dev/)
+- **State Management**: [TanStack React Query](https://tanstack.com/query/latest)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Lottie React](https://www.npmjs.com/package/lottie-react)
+- **Authentication & Storage**: [Firebase](https://firebase.google.com/)
+- **Payments**: [Stripe](https://stripe.com/)
+- **Data Fetching**: [Axios](https://axios-http.com/)
+
+### Full List of Dependencies
 
 ```json
 "dependencies": {
@@ -140,7 +153,7 @@ MatchMate is built using the following technologies:
 
 ---
 
-## 🏗️ Development Dependencies  
+## 🏗️ Development Dependencies
 
 ```json
 "devDependencies": {
@@ -162,36 +175,24 @@ MatchMate is built using the following technologies:
 
 ---
 
-## 🛠️ Troubleshooting  
+## 🛠️ Troubleshooting
 
-- **App doesn't start?** Make sure you've installed all dependencies:  
+- **App doesn't start?** Make sure you've installed all dependencies:
 
   ```bash
   npm install
   ```
 
-- **Environment variables not working?** Ensure you’ve created the `.env` file and restarted the server.  
+- **Environment variables not working?** Ensure you’ve created the `.env` file and restarted the server.
 
-- **Firebase errors?** Verify your Firebase credentials in `.env`.  
+- **Firebase errors?** Verify your Firebase credentials in `.env`.
 
-- **Payment issues?** Confirm that you’re using valid **Stripe API keys**.  
-
----
-
-## 👥 Contributors  
-
-- **[Your Name]** – Founder & Lead Developer  
-- **[Contributor Name]** – UI/UX Designer  
-- **[Contributor Name]** – Backend Developer  
-
-Want to contribute? Feel free to submit a PR! 🚀  
+- **Payment issues?** Confirm that you’re using valid **Stripe API keys**.
 
 ---
 
-## 📜 License  
+## 📜 License
 
-This project is licensed under the **MIT License**.  
+This project is licensed under the **MIT License**.
 
 ---
-
-This README should give a **comprehensive overview** of your project while maintaining clarity and ease of use. Let me know if you'd like to add or modify any section! 🚀

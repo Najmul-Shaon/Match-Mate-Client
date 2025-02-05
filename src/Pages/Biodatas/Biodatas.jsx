@@ -110,7 +110,7 @@ const Biodatas = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-4 relative">
+    <div className="max-w-screen-xl mx-auto px-4 relative mt-20">
       <Helmet>
         <title>Match Mate || Biodatas</title>
       </Helmet>

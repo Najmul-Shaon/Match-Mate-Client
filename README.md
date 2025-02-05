@@ -55,12 +55,12 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 <div align="left">
   <img src="https://skillicons.dev/icons?i=firebase" height="40" alt="firebase logo"  />
   <img width="12" />
-  <img src="https://img.icons8.com/ios/50/000000/jwt.png" alt="JWT Logo" height="40" />
+ <img src="https://img.shields.io/badge/JWT-JSON%20Web%20Token-blue" alt="JWT" height="40" />
 </div>
 <h4 align="left">Payment Gateway</h4>
 
 <div align="left">
-  <img src="https://skillicons.dev/icons?i=stripe" height="40" alt="Stripe logo" />
+  <img src="https://img.icons8.com/ios-filled/50/stripe.png" alt="Stripe Logo" height="40" />
 
 </div>
 

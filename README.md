@@ -98,8 +98,8 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/matchmate.git
-   cd matchmate
+   git clone https://github.com/Najmul-Shaon/Match-Mate-Client.git
+   cd Match-Mate-Client
    ```
 
 2. **Install dependencies:**
@@ -108,7 +108,7 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
    npm install
    ```
 
-3. **Create a `.env` file in the root directory and add the following:**
+3. **Create a `.env/local` file in the root directory and add the following:**
 
    ```env
    VITE_apiKey=YOUR_FIREBASE_API_KEY
@@ -134,16 +134,16 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 ## 🚀 Usage
 
 1. **Sign Up or Log In** using Firebase authentication.
-2. **Create your profile**, upload images via IMGBB, and set preferences.
+2. **Create your profile**, upload image.
 3. **Explore Matches** using AI-powered recommendations.
-4. **Chat & Interact** with potential partners.
+4. **Request & Interact** with potential partners.
 5. **Upgrade to Premium** via Stripe for exclusive features.
 
 ---
 
 ## ⚙️ Configuration
 
-MatchMate uses **environment variables** to configure Firebase, IMGBB, and Stripe. Make sure to update `.env` with your own credentials.
+MatchMate uses **environment variables** to configure Firebase, IMGBB, and Stripe. Make sure to update `.env.local` with your own credentials.
 
 ---
 
@@ -155,7 +155,8 @@ MatchMate is built using the following technologies:
 - **State Management**: [TanStack React Query](https://tanstack.com/query/latest)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Animations**: [Lottie React](https://www.npmjs.com/package/lottie-react)
-- **Authentication & Storage**: [Firebase](https://firebase.google.com/)
+- **Authentication**: [Firebase](https://firebase.google.com/)
+- **Databage**: [MongoDb](https://www.mongodb.com/https://www.mongodb.com/)
 - **Payments**: [Stripe](https://stripe.com/)
 - **Data Fetching**: [Axios](https://axios-http.com/)
 
@@ -224,9 +225,9 @@ MatchMate is built using the following technologies:
   npm install
   ```
 
-- **Environment variables not working?** Ensure you’ve created the `.env` file and restarted the server.
+- **Environment variables not working?** Ensure you’ve created the `.env.local` file and restarted the server.
 
-- **Firebase errors?** Verify your Firebase credentials in `.env`.
+- **Firebase errors?** Verify your Firebase credentials in `.env.local`.
 
 - **Payment issues?** Confirm that you’re using valid **Stripe API keys**.
 

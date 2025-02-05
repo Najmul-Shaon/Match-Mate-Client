@@ -18,9 +18,9 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
 
 ## 🎨 Tech Stack
 
-<h4 align="center">Frontend</h4>
+<h4 align="left">Frontend</h4>
 
-<div align="center">
+<div align="left">
   <img src="https://skillicons.dev/icons?i=html" height="40" alt="html5 logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=css" height="40" alt="css3 logo"  />
@@ -33,9 +33,9 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
   <img width="12" />
 </div>
 
-<h4 align="center">Backend</h4>
+<h4 align="left">Backend</h4>
 
-<div align="center">
+<div align="left">
 
   <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="nodejs logo"  />
   <img width="12" />
@@ -43,23 +43,23 @@ Welcome to **MatchMate**, the ultimate marriage media application designed to he
   <img width="12" />
   
 </div>
-<h4 align="center">Database</h4>
+<h4 align="left">Database</h4>
 
-<div align="center">
+<div align="left">
 
   <img src="https://skillicons.dev/icons?i=mongodb" height="40" alt="mongodb logo"  />
   
 </div>
-<h4 align="center">Authentication</h4>
+<h4 align="left">Authentication</h4>
 
-<div align="center">
+<div align="left">
   <img src="https://skillicons.dev/icons?i=firebase" height="40" alt="firebase logo"  />
   <img width="12" />
  <img src="https://img.shields.io/badge/JWT-JSON%20Web%20Token-blue" alt="JWT" height="40" />
 </div>
-<h4 align="center">Payment Gateway</h4>
+<h4 align="left">Payment Gateway</h4>
 
-<div align="center">
+<div align="left">
   <img src="https://img.shields.io/badge/Stripe-Payment%20Gateway-FFFFFF?logo=stripe&logoColor=6366F1" alt="Stripe Badge Light" height="40" />
 
 </div>

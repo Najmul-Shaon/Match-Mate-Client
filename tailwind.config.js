@@ -12,10 +12,9 @@ export default {
         quickSand: ["Quicksand", "serif"],
       },
       colors: {
-        primary: "#f5f2f2",
-        accent: "#AC0404",
-        charcoal: "#4A4A4A",
-        offWhite: "#FFF8F0",
+        primary: "#f5f2f2",  //as bg color
+        accent: "#AC0404", // as primary 
+        secondary: "#D4AF37", // as accent
       },
     },
   },

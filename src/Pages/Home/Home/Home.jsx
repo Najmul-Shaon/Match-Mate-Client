@@ -6,6 +6,7 @@ import SuccessStory from "../../../Components/SuccessStory/SuccessStory";
 import WhyUs from "../../../Components/WhyUs/WhyUs";
 import Banner from "../Banner/Banner";
 import FAQ from "../FAQ/FAQ";
+import Contact from "../Contact/Contact";
 const Home = () => {
   return (
     <div>
@@ -19,6 +20,7 @@ const Home = () => {
       <Commuinity></Commuinity>
       <SuccessStory></SuccessStory>
       <FAQ />
+      <Contact />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import PremiumProfile from "../../../Components/Premium Profile/PremiumProfile";
 import SuccessStory from "../../../Components/SuccessStory/SuccessStory";
 import WhyUs from "../../../Components/WhyUs/WhyUs";
 import Banner from "../Banner/Banner";
+import FAQ from "../FAQ/FAQ";
 const Home = () => {
   return (
     <div>
@@ -16,7 +17,8 @@ const Home = () => {
       <HowWorks></HowWorks>
       <WhyUs></WhyUs>
       <Commuinity></Commuinity>
-      <SuccessStory></SuccessStory> 
+      <SuccessStory></SuccessStory>
+      <FAQ />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { CiPhone } from "react-icons/ci";
+import { FaFacebookF, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { IoLocationOutline, IoMailUnreadOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 const Contact = () => {
-
   const {
     register,
     handleSubmit,
@@ -24,15 +24,15 @@ const Contact = () => {
     });
   };
   return (
-    <div className="max-w-screen-xl mx-auto mt-24">
-      <div className="flex flex-col md:flex-row items-start justify-between px-6 md:px-16 py-12 bg-primary gap-6">
+    <div className="mt-24 max-w-screen-xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8">
         {/* Left Section: Contact Details */}
         <div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Contact Us</h2>
-          <p className="text-gray-600 mb-6">
+          <h2 className="text-3xl font-bold text-black mb-1">Contact Us</h2>
+          <p className="text-black mb-6">
             Love knows no boundaries, and neither do we. Connect with us today.
           </p>
-          <ul className="space-y-4">
+          <ul className="space-y-2">
             <li className="flex items-center text-gray-600">
               <span className="me-2">
                 <IoMailUnreadOutline></IoMailUnreadOutline>{" "}
@@ -52,10 +52,33 @@ const Contact = () => {
               Basila, Mohammadpur, Dhaka-1208
             </li>
           </ul>
+          {/* Social Media Icons */}
+          <div className="flex justify-start gap-5 text-xl mt-6">
+            {[
+              {
+                icon: FaFacebookF,
+                href: "https://www.facebook.com/najmulshaonnhs",
+              },
+              { icon: FaGithub, href: "https://github.com/Najmul-Shaon" },
+
+              {
+                icon: FaLinkedin,
+                href: "https://www.linkedin.com/in/najmul-shaon",
+              },
+            ].map(({ icon: Icon, href }, index) => (
+              <a
+                key={index}
+                href={href}
+                className="bg-[#D4AF37] p-3 rounded-full text-white hover:bg-[#AC0404] transition duration-300"
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Right Section: Contact Form */}
-        <div className="md:w-1/2 w-full bg-white p-6 rounded-lg shadow-md">
+        <div className="md:w-1/2 w-full p-6 rounded-lg shadow-md bg-primary">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label
@@ -111,10 +134,7 @@ const Contact = () => {
                 <span className="text-red-600">{errors.message.message}</span>
               )}
             </div>
-            <button
-              type="submit"
-              className="w-full bg-accent text-white p-3 rounded-lg font-medium hover:bg-accent/70"
-            >
+            <button type="submit" className="btn-gradient w-full">
               Send Message
             </button>
           </form>

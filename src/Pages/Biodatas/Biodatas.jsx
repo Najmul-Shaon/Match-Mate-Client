@@ -114,7 +114,7 @@ const Biodatas = () => {
       <Helmet>
         <title>Match Mate || Biodatas</title>
       </Helmet>
-      <Cover coverImg={coverImg} coverTitle={"Discover Profiles"}></Cover>
+ 
       <div className="mt-20 text-center">
         <SectionTitle header={"Explore Genuine Connections"}></SectionTitle>
       </div>

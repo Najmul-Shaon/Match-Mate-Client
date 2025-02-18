@@ -2,22 +2,12 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div className="max-w-screen-xl mx-auto mt-24">
-      <div className="bg-primary py-10 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Header Section */}
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Welcome to <span className="text-accent">Match Mate</span>
-          </h1>
-          <p className="text-lg text-gray-600">
-            Where every connection blooms into a lifetime of happiness.
-          </p>
-        </div>
-
+    <div className="mt-16">
+      <div className="py-10 max-w-screen-xl mx-auto px-4">
         {/* Content Section */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Our Story */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-primary shadow-lg hover:shadow-xl rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">
               Our Story
             </h2>
@@ -32,7 +22,7 @@ const About = () => {
           </div>
 
           {/* Mission */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-primary shadow-lg hover:shadow-xl rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">
               Our Mission
             </h2>
@@ -44,7 +34,7 @@ const About = () => {
           </div>
 
           {/* Vision */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-primary shadow-lg hover:shadow-xl rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">
               Our Vision
             </h2>
@@ -56,7 +46,7 @@ const About = () => {
           </div>
 
           {/* CTA */}
-          <div className="bg-white shadow-lg rounded-lg p-6 flex items-center justify-center">
+          <div className="bg-primary shadow-lg hover:shadow-xl rounded-lg p-6 flex items-center justify-center">
             <p className="text-xl font-medium text-gray-800">
               Ready to start your journey? <br />
               <span className="text-accent font-semibold">

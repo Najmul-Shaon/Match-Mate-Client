@@ -5,6 +5,8 @@ import useLogout from "../../Hooks/useLogout";
 import useAdmin from "../../Hooks/useAdmin";
 import { RiMenuLine } from "react-icons/ri";
 import { useState } from "react";
+import { FaAngleDown, FaRegUser } from "react-icons/fa6";
+import { IoExitOutline } from "react-icons/io5";
 
 const NavBar = () => {
   const { user } = useAuth();
@@ -14,17 +16,21 @@ const NavBar = () => {
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState); // Toggle menu open/close
   };
+
+  const [isMenuExpand, setIsMenuExpand] = useState(false);
+
+  // all the nav links declare here as variable
   const navLinks = (
-    // text-xs lg:text-lg px-1.5 py-1 lg:px-2 lg:py-1
+    // py-1 px-1.5 lg:px-2 lg:py-1 rounded-md
     <>
       <li>
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold transition duration-200 ${
               isActive
-                ? "bg-[#AC0404] text-white shadow-md"
-                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                ? "text-[#AC0404]"
+                : "bg-transparent text-black hover:text-[#AC0404]"
             }`
           }
         >
@@ -35,10 +41,10 @@ const NavBar = () => {
         <NavLink
           to="/biodatas"
           className={({ isActive }) =>
-            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold transition duration-200 ${
               isActive
-                ? "bg-[#AC0404] text-white shadow-md"
-                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                ? "text-[#AC0404]"
+                : "bg-transparent text-black hover:text-[#AC0404]"
             }`
           }
         >
@@ -49,10 +55,10 @@ const NavBar = () => {
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold transition duration-200 ${
               isActive
-                ? "bg-[#AC0404] text-white shadow-md"
-                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                ? "text-[#AC0404]"
+                : "bg-transparent text-black hover:text-[#AC0404]"
             }`
           }
         >
@@ -63,10 +69,10 @@ const NavBar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+            `block text-xs lg:text-lg font-bold transition duration-200 ${
               isActive
-                ? "bg-[#AC0404] text-white shadow-md"
-                : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                ? "text-[#AC0404]"
+                : "bg-transparent text-black hover:text-[#AC0404]"
             }`
           }
         >
@@ -78,10 +84,10 @@ const NavBar = () => {
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+              `block text-xs lg:text-lg font-bold transition duration-200 ${
                 isActive
-                  ? "bg-[#AC0404] text-white shadow-md"
-                  : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                  ? "text-[#AC0404]"
+                  : "bg-transparent text-black hover:text-[#AC0404]"
               }`
             }
           >
@@ -94,10 +100,10 @@ const NavBar = () => {
           <NavLink
             to="/dashboard/adminHome"
             className={({ isActive }) =>
-              `block text-xs lg:text-lg font-bold py-1 px-1.5 lg:px-2 lg:py-1 rounded-md transition duration-200 ${
+              `block text-xs lg:text-lg font-bold transition duration-200 ${
                 isActive
-                  ? "bg-[#AC0404] text-white shadow-md"
-                  : "bg-transparent text-black hover:bg-[#AC0404] hover:text-white"
+                  ? "text-[#AC0404]"
+                  : "bg-transparent text-black hover:text-[#AC0404]"
               }`
             }
           >
@@ -109,8 +115,9 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav className="bg-primary dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        {/* site branding: logo and name  */}
         <Link
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -120,17 +127,24 @@ const NavBar = () => {
             Match Mate
           </span>
         </Link>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
           {user ? (
-            <>
-              <button
-                onClick={handleLogout}
-                type="button"
-                className="text-black bg-white border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs lg:text-lg py-1 px-1.5 lg:px-2 lg:py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-              >
-                Log out
-              </button>
-            </>
+            <div
+              onClick={() => setIsMenuExpand(!isMenuExpand)}
+              className="flex items-center gap-4"
+            >
+              <img
+                className="rounded-full w-8"
+                src={user?.photoURL}
+                alt="user"
+              />
+              <span>
+                <FaAngleDown />
+              </span>
+              {/* <button onClick={handleLogout} type="button" className="">
+                <ImExit />
+              </button> */}
+            </div>
           ) : (
             <div className="space-x-1 lg:space-x-2">
               <Link to="/login">
@@ -144,13 +158,47 @@ const NavBar = () => {
               <Link to="/signup">
                 <button
                   type="button"
-                  // className="text-black bg-primary border border-gray-300 focus:outline-none hover:bg-accent hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-base px-1 py-0.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                   className="focus:outline-none text-black border bg-primary hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-1.5 py-1 lg:px-2 lg:py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-xs lg:text-lg hover:text-white"
                 >
                   Sign Up
                 </button>
               </Link>
             </div>
+          )}
+
+          {isMenuExpand && (
+            <ul className="bg-white space-y-2 absolute top-16 right-0 w-48 shadow-lg shadow-primary px-4 py-6 border rounded-lg z-50">
+              <li>
+                <NavLink
+                  to="my-profile"
+                  className={({ isActive }) =>
+                    `block text-xs lg:text-lg font-bold transition duration-200 ${
+                      isActive
+                        ? "text-[#AC0404]"
+                        : "bg-transparent text-black hover:text-[#AC0404]"
+                    }`
+                  }
+                >
+                  <FaRegUser className="inline-flex me-2" />
+                  <span>My Profile</span>
+                </NavLink>
+              </li>
+
+              <li className="block text-xs lg:text-lg font-bold transition duration-200 text-black hover:text-[#AC0404]">
+                <button onClick={handleLogout} type="button" className="">
+                  <IoExitOutline className="inline-flex me-2" />{" "}
+                  <span>Log out</span>
+                </button>
+              </li>
+            </ul>
+          )}
+          {isMenuExpand && (
+            <>
+              <div
+                onClick={() => setIsMenuExpand(false)}
+                className="fixed inset-0 z-30"
+              ></div>
+            </>
           )}
 
           <button
@@ -170,7 +218,7 @@ const NavBar = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {/* navlinks from variable  */}
             {navLinks}
           </ul>

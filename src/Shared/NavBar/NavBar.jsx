@@ -141,9 +141,6 @@ const NavBar = () => {
               <span>
                 <FaAngleDown />
               </span>
-              {/* <button onClick={handleLogout} type="button" className="">
-                <ImExit />
-              </button> */}
             </div>
           ) : (
             <div className="space-x-1 lg:space-x-2">
@@ -152,7 +149,7 @@ const NavBar = () => {
                   type="button"
                   className="focus:outline-none text-white bg-accent hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg px-1.5 py-1 lg:px-2 lg:py-1 dark:bg-accent dark:hover:bg-red-600 dark:focus:ring-red-900 text-xs lg:text-lg"
                 >
-                  Login
+                  Sign In
                 </button>
               </Link>
               <Link to="/signup">
@@ -167,7 +164,7 @@ const NavBar = () => {
           )}
 
           {isMenuExpand && (
-            <ul className="bg-white space-y-2 absolute top-16 right-0 w-48 shadow-lg shadow-primary px-4 py-6 border rounded-lg z-50">
+            <ul className="bg-primary space-y-2 absolute top-16 right-0 w-48 px-4 py-6 border rounded-lg z-50">
               <li>
                 <NavLink
                   to="my-profile"

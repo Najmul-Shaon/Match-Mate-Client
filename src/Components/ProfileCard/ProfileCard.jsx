@@ -4,7 +4,7 @@ const ProfileCard = ({ cardInfo }) => {
   return (
     <div className="bg-primary rounded-lg shadow-lg flex flex-col">
       <div className="flex gap-2 p-4 flex-1">
-        <div className="flex flex-col justify-center items-center w-2/5 space-y-3">
+        <div className="flex flex-col justify-center items-center w-3/5 space-y-3">
           <img
             className="rounded-full object-cover w-16 h-16"
             src={cardInfo?.biodataPhoto}
@@ -15,19 +15,17 @@ const ProfileCard = ({ cardInfo }) => {
               {cardInfo?.personalInfo?.name}
             </h3>
             <p className="text-sm text-gray-500">
-              Biodata Id: {cardInfo?.biodataId}
+              Biodata Id: <span className="text-accent font-semibold">{cardInfo?.biodataId}</span>
             </p>
           </div>
         </div>
         {/* <hr className="my-4" /> */}
-        <div className="w-3/5">
+        <div className="w-2/5">
           <ul className="text-sm text-gray-700 space-y-2 list-disc ms-4">
-            <li>Gender: {cardInfo?.personalInfo?.biodataType}</li>
-            <li>Age: {cardInfo?.personalInfo?.age}</li>
-            <li>Occupation: {cardInfo?.personalInfo?.occupation}</li>
-            <li>
-              Division: {cardInfo?.personalInfo?.address?.permanent?.division}
-            </li>
+            <li>{cardInfo?.personalInfo?.biodataType}</li>
+            <li>{cardInfo?.personalInfo?.age} years</li>
+            <li>{cardInfo?.personalInfo?.occupation}</li>
+            <li>{cardInfo?.personalInfo?.address?.permanent?.division}</li>
           </ul>
         </div>
       </div>

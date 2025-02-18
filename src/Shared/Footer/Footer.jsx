@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-black py-12 mt-16">
+    <footer className="bg-primary text-black py-12 mt-24">
       <div className="max-w-screen-xl mx-auto px-4 text-center">
         <div className="bg-white shadow-lg rounded-2xl border border-secondary p-8">
           {/* Brand Logo */}
@@ -19,7 +19,7 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <nav className="mb-6">
-            <ul className="flex justify-center gap-8 text-lg font-semibold">
+            <ul className="flex flex-col md:flex-row justify-center gap-8 text-lg font-semibold">
               {["Home", "Biodatas", "About", "Contact", "Dashboard"].map(
                 (item) => (
                   <li key={item}>

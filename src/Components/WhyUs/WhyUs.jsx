@@ -66,7 +66,7 @@ const WhyUs = () => {
             </span>
           </li>
         </ul>
-        <button className="btn-normal">Find Your Partner Now</button>
+        <button className="btn-gradient">Find Your Partner Now</button>
       </div>
       {/* lottie aniation  */}
       <div className="md:w-1/2 w-full">

@@ -48,7 +48,9 @@ const PremiumProfile = () => {
             id="countries"
             className="bg-primary border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent/50 focus:border-accent/50 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <option value="asc" className="bg-primary hover:bg-purple-800">Youngest to Oldest</option>
+            <option value="asc" className="bg-primary hover:bg-purple-800">
+              Youngest to Oldest
+            </option>
             <option value="dsc">Oldest to Youngest</option>
           </select>
         </form>
@@ -65,7 +67,7 @@ const PremiumProfile = () => {
       </div>
       <div className="flex justify-center mt-12">
         <Link to="/biodatas">
-          <button className="btn-normal">View All</button>
+          <button className="btn-gradient">View All</button>
         </Link>
       </div>
     </div>

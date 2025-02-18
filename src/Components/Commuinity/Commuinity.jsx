@@ -24,7 +24,7 @@ const Commuinity = () => {
           {/* total biodata  */}
 
           <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
-            <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
+            <h3 className="mb-2 font-bold text-3xl text-secondary dark:text-accent">
               <span>
                 <CountUp end={commuinityStats?.totalBiodata} />
               </span>
@@ -37,7 +37,7 @@ const Commuinity = () => {
 
           {/* Total male biodata  */}
           <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
-            <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
+            <h3 className="mb-2 font-bold text-3xl text-secondary dark:text-accent">
               <span>
                 <CountUp end={commuinityStats?.totalMaleBiodata} />
               </span>
@@ -49,7 +49,7 @@ const Commuinity = () => {
           </div>
           {/* Total female biodata  */}
           <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
-            <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
+            <h3 className="mb-2 font-bold text-3xl text-secondary dark:text-accent">
               <span>
                 <CountUp end={commuinityStats?.totalFemaleBiodata} />
               </span>
@@ -61,7 +61,7 @@ const Commuinity = () => {
           </div>
           {/* Total marriege*/}
           <div className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-center">
-            <h3 className="mb-2 font-bold text-3xl text-accent dark:text-accent">
+            <h3 className="mb-2 font-bold text-3xl text-secondary dark:text-accent">
               <span>
                 <CountUp end={commuinityStats?.totalMarried} />
               </span>

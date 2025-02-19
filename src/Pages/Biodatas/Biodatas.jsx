@@ -16,7 +16,6 @@ const Biodatas = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-  console.log(selectedValue);
   const toggleFilter = () => {
     setIsFilterVisible(!isFilterVisible);
   };
@@ -134,11 +133,6 @@ const Biodatas = () => {
       {/* layout  */}
 
       <div className=" grid grid-cols-12 mt-8 gap-6 relative">
-        {/* Filter Icon Button (visible only on small and medium screens) */}
-        <button onClick={toggleFilter} className="lg:hidden self-start z-10">
-          <CiFilter className="text-2xl"></CiFilter>
-        </button>
-
         <aside
           className={`absolute top-10 left-0 h-auto bg-primary p-6 z-20 transition-transform duration-300 ease-in-out transform ${
             isFilterVisible ? "translate-x-0" : "-translate-x-96"
@@ -173,20 +167,31 @@ const Biodatas = () => {
             {biodatas.length === 0 && <h3>No biodata found</h3>}
             {/* sorting  */}
             {/* **************************************  */}
-            <div className="col-span-full p-4 bg-primary rounded-lg flex justify-end">
-              <form className="max-w-sm">
-                <select
-                  // value={selectedValue}
-                  defaultValue="--Sort by--"
-                  onChange={handleChangle}
-                  id="countries"
-                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent/50 focus:border-accent/50 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            <div className="col-span-full p-4 bg-primary rounded-lg flex justify-between items-center">
+              <div>
+                {/* Filter Icon Button (visible only on small and medium screens) */}
+                <button
+                  onClick={toggleFilter}
+                  className="lg:hidden self-start z-10"
                 >
-                  <option disabled>--Sort by--</option>
-                  <option value="asc">Youngest to Oldest</option>
-                  <option value="dsc">Oldest to Youngest</option>
-                </select>
-              </form>
+                  <CiFilter className="text-2xl"></CiFilter>
+                </button>
+              </div>
+              <div>
+                <form className="max-w-sm">
+                  <select
+                    // value={selectedValue}
+                    defaultValue="--Sort by--"
+                    onChange={handleChangle}
+                    id="countries"
+                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent/50 focus:border-accent/50 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option disabled>--Sort by--</option>
+                    <option value="asc">Youngest to Oldest</option>
+                    <option value="dsc">Oldest to Youngest</option>
+                  </select>
+                </form>
+              </div>
             </div>
             {/* **************************************  */}
             {biodatas.map((biodata) => (

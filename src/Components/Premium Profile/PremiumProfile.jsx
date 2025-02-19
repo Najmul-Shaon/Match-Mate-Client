@@ -5,7 +5,6 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
-import { TbSortDescending } from "react-icons/tb";
 
 const PremiumProfile = () => {
   const [selectedValue, setSelectedValue] = useState("asc");

@@ -367,7 +367,7 @@ const MyBiodata = () => {
           <Link to="/dashboard/editBiodata">
             <button
               type="button"
-              className="px-3 py-2 text-xs font-medium text-center text-white bg-accent rounded-lg hover:bg-accent/85 focus:ring-4 focus:outline-none"
+              className="btn-normal"
             >
               Update Now
             </button>

@@ -2,7 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/logo_without_bg.png";
 import { LuBadgeCheck, LuLayoutDashboard, LuUsers } from "react-icons/lu";
 import useLogout from "../Hooks/useLogout";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaRegStar } from "react-icons/fa";
 import { IoIosLogOut, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { CiStar } from "react-icons/ci";
 import { MdOutlineContactPhone } from "react-icons/md";
@@ -11,6 +11,8 @@ import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import useAdmin from "../Hooks/useAdmin";
+import { AiOutlineProfile } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 
 const Dashboard = () => {
   const handleLogout = useLogout();
@@ -146,21 +148,24 @@ const Dashboard = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-primary">
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-4 font-medium">
             {/* navigation menu  */}
             {isAdmin ? (
+              // if the user is admin
               <>
                 <li>
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/adminHome"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <LuLayoutDashboard />
                     </span>
                     Admin Dashboard
@@ -168,15 +173,35 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/dashboard/manageUsers"
+                    to="/dashboard/my-profile"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
+                      <CgProfile />
+                    </span>
+                    My Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageUsers"
+                    end
+                    className={({ isActive }) =>
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
+                      }`
+                    }
+                  >
+                    <span>
                       <LuUsers />
                     </span>
                     Manage Users
@@ -187,12 +212,14 @@ const Dashboard = () => {
                     to="/dashboard/approvedPremium"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <LuBadgeCheck />
                     </span>
                     Approved Premium
@@ -203,12 +230,14 @@ const Dashboard = () => {
                     to="/dashboard/approvedContact"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <VscGitPullRequestGoToChanges />
                     </span>
                     Contact Request
@@ -219,12 +248,14 @@ const Dashboard = () => {
                     to="/dashboard/manageSuccessStory"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <VscGitPullRequestGoToChanges />
                     </span>
                     Success Story
@@ -232,19 +263,40 @@ const Dashboard = () => {
                 </li>
               </>
             ) : (
+              // if the user is normal user
+
               <>
                 <li>
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/my-profile"
                     end
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
-                      <FiUserCheck />
+                    <span>
+                      <CgProfile />
+                    </span>
+                    My Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/view-biodata"
+                    className={({ isActive }) =>
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
+                      }`
+                    }
+                  >
+                    <span>
+                      <AiOutlineProfile />
                     </span>
                     View Biodata
                   </NavLink>
@@ -253,12 +305,14 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/editBiodata"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <FaRegEdit />
                     </span>
                     Create/Edit Biodata
@@ -268,12 +322,14 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/myRequested"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-xl">
+                    <span>
                       <MdOutlineContactPhone />
                     </span>
                     Requested Contacts
@@ -283,13 +339,15 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/myFavorites"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-2xl">
-                      <CiStar />
+                    <span>
+                      <FaRegStar />
                     </span>
                     Favorites
                   </NavLink>
@@ -298,12 +356,14 @@ const Dashboard = () => {
                   <NavLink
                     to="/dashboard/gotMarried"
                     className={({ isActive }) =>
-                      `flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 group hover:text-white ${
-                        isActive ? "bg-accent text-white" : ""
+                      `transition duration-200 flex items-center gap-2 ${
+                        isActive
+                          ? "text-[#AC0404]"
+                          : "bg-transparent text-black hover:text-[#AC0404]"
                       }`
                     }
                   >
-                    <span className="me-3 text-2xl">
+                    <span>
                       <IoMdCheckmarkCircleOutline />
                     </span>
                     Got Married
@@ -314,9 +374,9 @@ const Dashboard = () => {
             <li>
               <NavLink
                 onClick={handleLogout}
-                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-accent/80 hover:text-white group"
+                className="flex items-center text-black rounded-lg hover:text-accent group gap-2"
               >
-                <span className="me-3 text-xl">
+                <span>
                   <IoIosLogOut />
                 </span>
                 Log out

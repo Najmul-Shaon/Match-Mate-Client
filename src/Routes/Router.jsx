@@ -22,6 +22,7 @@ import GotMarried from "../Dashboard/GotMarried/GotMarried";
 import AdminHome from "../Dashboard/Admin/AdminHome/AdminHome";
 import ManageSuccessStory from "../Dashboard/Admin/ManageSuccessStory/ManageSuccessStory";
 import AdminRoute from "../Layouts/AdminRoute";
+import MyProfile from "../Dashboard/MyProfile/MyProfile";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -82,7 +83,15 @@ const Router = createBrowserRouter([
     children: [
       // normal users
       {
-        path: "/dashboard",
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "view-biodata",
         element: (
           <PrivateRoute>
             <MyBiodata></MyBiodata>
@@ -127,6 +136,14 @@ const Router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "my-profile",
+        element: (
+          <AdminRoute>
+            <MyProfile></MyProfile>
           </AdminRoute>
         ),
       },

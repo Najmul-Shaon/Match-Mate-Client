@@ -82,7 +82,7 @@ const NavBar = () => {
       {user && !isAdmin && (
         <li>
           <NavLink
-            to="/dashboard"
+            to="/dashboard/my-profile"
             className={({ isActive }) =>
               `block text-xs lg:text-lg font-bold transition duration-200 ${
                 isActive
@@ -167,7 +167,7 @@ const NavBar = () => {
             <ul className="bg-primary space-y-2 absolute top-16 right-0 w-48 px-4 py-6 border rounded-lg z-50">
               <li>
                 <NavLink
-                  to="my-profile"
+                  to="/dashboard/my-profile"
                   className={({ isActive }) =>
                     `block text-xs lg:text-lg font-bold transition duration-200 ${
                       isActive

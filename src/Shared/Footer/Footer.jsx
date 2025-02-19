@@ -24,7 +24,8 @@ export default function Footer() {
                 (item) => (
                   <li key={item}>
                     <Link
-                      to={`/${item.toLowerCase()}`}
+                      // to={`/${item.toLowerCase()}`}
+                      to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                       className="hover:text-[#AC0404] transition duration-300"
                     >
                       {item}

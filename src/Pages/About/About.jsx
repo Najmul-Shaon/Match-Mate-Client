@@ -50,7 +50,7 @@ const About = () => {
             <p className="text-xl font-medium text-gray-800">
               Ready to start your journey? <br />
               <span className="text-accent font-semibold">
-                <Link to="/signup" className="underline">
+                <Link to="/signup" className="underline text-secondary">
                   Join
                 </Link>{" "}
                 Match Mate today!

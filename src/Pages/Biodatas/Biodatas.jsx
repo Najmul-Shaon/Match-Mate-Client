@@ -1,8 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import coverImg from "../../assets/BidataCover.jpg";
-import Cover from "../../Shared/Cover/Cover";
+
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import Filter from "./Filter";
@@ -16,6 +15,8 @@ const Biodatas = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState();
+  console.log(selectedValue);
   const toggleFilter = () => {
     setIsFilterVisible(!isFilterVisible);
   };
@@ -36,6 +37,11 @@ const Biodatas = () => {
 
   const transformToQuery = (filters) => {
     const params = new URLSearchParams();
+
+    // add sortby to params
+    if (selectedValue) {
+      params.append("sortBy", selectedValue);
+    }
 
     // add age range to params
     if (filters.ageRange.min) {
@@ -88,6 +94,7 @@ const Biodatas = () => {
     ? [...Array(numberOfPage).keys()]
     : [];
 
+  // get the biodata to show in biodatas section
   const {
     data: biodatas = [],
     isLoading,
@@ -109,12 +116,18 @@ const Biodatas = () => {
     setCurrentPage(0);
   };
 
+  // sorting handler
+  const handleChangle = (e) => {
+    setSelectedValue(e.target.value);
+    refetch();
+  };
+
   return (
     <div className="max-w-screen-xl mx-auto px-4 relative mt-20">
       <Helmet>
         <title>Match Mate || Biodatas</title>
       </Helmet>
- 
+
       <div className="mt-20 text-center">
         <SectionTitle header={"Explore Genuine Connections"}></SectionTitle>
       </div>
@@ -126,7 +139,6 @@ const Biodatas = () => {
           <CiFilter className="text-2xl"></CiFilter>
         </button>
 
-        {/* <aside className="col-span-3  self-start bg-primary p-6 rounded-lg"> */}
         <aside
           className={`absolute top-10 left-0 h-auto bg-primary p-6 z-20 transition-transform duration-300 ease-in-out transform ${
             isFilterVisible ? "translate-x-0" : "-translate-x-96"
@@ -159,6 +171,24 @@ const Biodatas = () => {
           {isLoading && <LoadingSpinner></LoadingSpinner>}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {biodatas.length === 0 && <h3>No biodata found</h3>}
+            {/* sorting  */}
+            {/* **************************************  */}
+            <div className="col-span-full p-4 bg-primary rounded-lg flex justify-end">
+              <form className="max-w-sm">
+                <select
+                  // value={selectedValue}
+                  defaultValue="--Sort by--"
+                  onChange={handleChangle}
+                  id="countries"
+                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-accent/50 focus:border-accent/50 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option disabled>--Sort by--</option>
+                  <option value="asc">Youngest to Oldest</option>
+                  <option value="dsc">Oldest to Youngest</option>
+                </select>
+              </form>
+            </div>
+            {/* **************************************  */}
             {biodatas.map((biodata) => (
               <ProfileCard key={biodata._id} cardInfo={biodata}></ProfileCard>
             ))}
